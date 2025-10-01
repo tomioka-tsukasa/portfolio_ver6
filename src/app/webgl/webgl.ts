@@ -11,7 +11,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 
 // パフォーマンス
-import Stats from 'stats.js'
+// import Stats from 'stats.js'
 import { setFpsManager } from '@/lib/threejs/setFpsManager/setFpsManager'
 
 // ローディング
@@ -24,6 +24,7 @@ import { setSceneGUI } from './gui/setter/scene/setSceneGUI'
 import { setCameraGUI } from './gui/setter/camera/setCameraGUI'
 import { setPostprocessGUI } from './gui/setter/postprocess/setPostprocessGUI'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
+import { metaball } from './metaball/metaball'
 
 /**
  * 【WebGLの初期化】
@@ -45,11 +46,11 @@ const initWebGL: InitWebGL = (
   /**
    * Stats
    */
-  const stats = new Stats()
-  stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-  if (setupMember.gui.stats) {
-    document.body.appendChild(stats.dom)
-  }
+  // const stats = new Stats()
+  // stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+  // if (setupMember.gui.stats) {
+  //   document.body.appendChild(stats.dom)
+  // }
 
   /**
    * FPSマネージャー
@@ -155,9 +156,16 @@ const initWebGL: InitWebGL = (
 
   scene.add(
     camera,
-    sampleMesh,
+    // sampleMesh,
     gridHelper,
   )
+
+  /**
+   * メタボール設定
+   */
+  const metaballController = metaball(scene)
+
+  console.log('scene: ', scene)
 
   /**
    * ポストプロセッシング
@@ -212,7 +220,7 @@ const initWebGL: InitWebGL = (
     /**
      * パフォーマンス管理
      */
-    stats.begin()
+    // stats.begin()
     // const currentTime = performance.now()
     // const delta = (currentTime - prevTime) / 1000 // 秒単位
     // const deltaFPS = delta * targetFPS
@@ -236,6 +244,11 @@ const initWebGL: InitWebGL = (
     sampleMesh.rotation.x += 0.003
 
     /**
+     * メタボールのアニメーション
+     */
+    metaballController.animate(timestamp)
+
+    /**
      * レンダリング
      */
     fpsManager.rendering(timestamp, renderProcess)
@@ -243,7 +256,7 @@ const initWebGL: InitWebGL = (
     /**
      * パフォーマンス
      */
-    stats.end()
+    // stats.end()
   }
   renderer.setAnimationLoop(animate)
 

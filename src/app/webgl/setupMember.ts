@@ -11,7 +11,7 @@ import { GetSpotLight } from './setup/lights/lightsTypes'
 export const setupMember = {
   gui: {
     active: true,
-    stats: true,
+    stats: false,
   },
   renderer: {
     active: true,
@@ -53,7 +53,7 @@ export const setupMember = {
   postprocess: {
     active: true,
     bloomPass: {
-      active: true,
+      active: false,
       strength: 0.3,
       radius: 0.1,
       threshold: 0.85,
