@@ -1,4 +1,4 @@
-import { TabletMqWidthMin } from '@/styles/responsive.config'
+import { SpMqWidth } from '@/styles/responsive.config'
 
 export const fixCamerawork = (
   position: { x: number, y: number, z: number, mobile: { x: number, y: number, z: number } },
@@ -9,7 +9,7 @@ export const fixCamerawork = (
   target: { x: number, y: number, z: number },
   rotation: { x: number, y: number, z: number },
 } => {
-  if (window.innerWidth > TabletMqWidthMin) {
+  if (window.innerWidth > SpMqWidth) {
 
     // PCの場合
     return {

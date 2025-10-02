@@ -103,15 +103,15 @@ export class MetaballGenerator {
       // 変更例: 2.0（2倍速）、0.5（半分の速度）、0.8（ゆったりした動き）
 
       // 【3. 個別係数】- メタボール毎の個性（複雑なパターンを作る）
-      const individualFactorX = 1.03 + 1.5 * Math.cos(0.21 * i)    // X軸の個別係数
+      const individualFactorX = 1.03 + 1.5 * Math.cos(3.21 * i)    // X軸の個別係数
       const individualFactorY = Math.cos(1.22 + 0.1424 * i)        // Y軸の個別係数
-      const individualFactorZ = 1.03 + 1.5 * Math.sin(0.92 + 0.53 * i)    // Z軸の個別係数
+      const individualFactorZ = 1.03 + 1.5 * Math.sin(0.92 + 3.53 * i)    // Z軸の個別係数
       // 変更例: 1.0（固定）、1.0 + 1.0 * Math.cos(0.5 * i)（より大きな個別差）
 
       // 【4. 振幅（Amplitude）】- 動きの範囲
-      const amplitudeX = 0.1             // X軸の振幅（動きの範囲）
-      const amplitudeY = 0.09             // Y軸の振幅（動きの範囲）
-      const amplitudeZ = 0.15             // Z軸の振幅（動きの範囲）
+      const amplitudeX = 0.15             // X軸の振幅（動きの範囲）
+      const amplitudeY = 0.01             // Y軸の振幅（動きの範囲）
+      const amplitudeZ = 0.18             // Z軸の振幅（動きの範囲）
       // 変更例: 0.5（より大きな動き）、0.1（より小さな動き）
 
       // 【5. 中心位置（Center）】- 動きの基準点

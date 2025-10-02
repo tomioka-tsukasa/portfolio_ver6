@@ -31,7 +31,7 @@ export const text = style([
     textAlign: 'center',
     animation: `${blink} 1.2s ease-in-out infinite`,
   },
-  rvw.fontSize(24, 12),
+  rvw.fontSize(24, 14),
   playfairDisplay(),
 ])
 

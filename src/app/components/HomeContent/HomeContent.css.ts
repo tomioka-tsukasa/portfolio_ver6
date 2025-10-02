@@ -26,7 +26,7 @@ export const main = style({
 export const title = style({
   fontWeight: 'bold',
   color: colors.text.white_80,
-  ...rvw.fontSize(96, 36),
+  ...rvw.fontSize(64, 24),
 })
 
 export const subTitle = style({

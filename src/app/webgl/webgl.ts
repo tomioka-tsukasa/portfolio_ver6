@@ -161,14 +161,14 @@ const initWebGL: InitWebGL = (
   /**
    * メタボール
    */
-  // const metaballController = metaball(scene)
+  const metaballController = metaball(scene)
 
   /**
    * シーン追加
    */
   scene.add(
     camera,
-    gridHelper,
+    // gridHelper,
     // mesh,
   )
 
@@ -245,7 +245,7 @@ const initWebGL: InitWebGL = (
     /**
      * メタボールのアニメーション
      */
-    // metaballController.animate(timestamp)
+    metaballController.animate(timestamp)
 
     /**
      * レンダリング

@@ -43,7 +43,7 @@ export const setupMember = {
   controls: {
     enabled: true,
     autoRotate: false,
-    debug: false,
+    debug: true,
   },
   scene: {
     environment: '',

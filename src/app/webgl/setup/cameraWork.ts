@@ -2,11 +2,11 @@ export const cameraWork = {
   default: {
     position: {
       x: 0,
-      y: 90,
+      y: 45,
       z: 0,
       mobile: {
         x: 0,
-        y: 90,
+        y: 60,
         z: 0,
       },
     },
