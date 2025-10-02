@@ -116,7 +116,7 @@ export class MetaballGenerator {
 
       // 【5. 中心位置（Center）】- 動きの基準点
       const centerX = 0.5                 // X軸の中心位置（0.0=左端、0.5=中央、1.0=右端）
-      const centerY = 0.6                 // Y軸の中心位置（0.0=床、1.0=天井）
+      const centerY = 0.5                 // Y軸の中心位置（0.0=床、1.0=天井）
       const centerZ = 0.5                 // Z軸の中心位置（0.0=手前、0.5=中央、1.0=奥）
       // 変更例: 0.2（左寄り）、0.8（右寄り）
 

@@ -29,6 +29,7 @@ export const metaball = (
 ) => {
   const marchingCubesConfig: MarchingCubesConfig = {
     resolution: 58,
+    isolation: 80,
     // material: new THREE.MeshNormalMaterial({
     //   side: THREE.DoubleSide,
     // }),
@@ -60,14 +61,13 @@ export const metaball = (
       blending: THREE.CustomBlending,
       transparent:true,
     }),
-    isolation: 80,
   }
 
   const metaballConfig: MetaballConfig = {
     speed: 1.0,
-    numBlobs: 8,
-    strength: 1.2,
-    subtract: 8,
+    numBlobs: 5,
+    strength: 1.4,
+    subtract: 10,
     enableColors: true,
     showFloor: false,
   }
@@ -152,6 +152,7 @@ function setupGUI(
 
   // メタボール設定フォルダ
   const metaballFolder = gui.addFolder('Metaball Settings')
+  gui.close()
   const config = metaballGenerator.getConfig()
 
   metaballFolder.add(config, 'speed', 0.1, 3.0).name('Animation Speed').onChange((value: number) => {

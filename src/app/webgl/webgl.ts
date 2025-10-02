@@ -115,11 +115,6 @@ const initWebGL: InitWebGL = (
   // カメラの動きをログに出力
   getCameraInfo(camera, controls)
 
-  // カメラをシーンに追加
-  scene.add(
-    camera,
-  )
-
   /**
    * 光源設定
    */
@@ -163,15 +158,19 @@ const initWebGL: InitWebGL = (
   })()
   mesh.position.set(0, 10, 0)
 
+  /**
+   * メタボール
+   */
+  // const metaballController = metaball(scene)
+
+  /**
+   * シーン追加
+   */
   scene.add(
+    camera,
     gridHelper,
     // mesh,
   )
-
-  /**
-   * メタボール設定
-   */
-  const metaballController = metaball(scene)
 
   /**
    * ポストプロセッシング
@@ -246,7 +245,7 @@ const initWebGL: InitWebGL = (
     /**
      * メタボールのアニメーション
      */
-    metaballController.animate(timestamp)
+    // metaballController.animate(timestamp)
 
     /**
      * レンダリング
