@@ -29,9 +29,9 @@ export const metaball = (
 ) => {
   const marchingCubesConfig: MarchingCubesConfig = {
     resolution: 58,
-    material: new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    }),
+    // material: new THREE.MeshNormalMaterial({
+    //   side: THREE.DoubleSide,
+    // }),
     // material: new THREE.MeshPhongMaterial({
     //   color: 0xffffff,
     //   specular: 0xffffff,
@@ -45,27 +45,31 @@ export const metaball = (
     //   wireframe: true,
     //   envMap: webglCtrl.envmaps?.[setupMember.scene.environment],
     // }),
-    // material: new THREE.ShaderMaterial({
-    //   uniforms: {
-    //     uColor: { value: new THREE.Color(0x42a9f1)},// GrowColor
-    //     viewVector: { value: webglCtrl.camera?.position || new THREE.Vector3() },
-    //     // uResolution: { value: new THREE.Vector2() }
-    //   },
-    //   vertexShader: vertexShader,
-    //   fragmentShader: fragmentShader,
-    //   blending: THREE.CustomBlending,
-    //   transparent: true,
-    // }),
+    material: new THREE.ShaderMaterial({
+      uniforms : {
+        viewVector: { value: webglCtrl.camera?.position || new THREE.Vector3() },//initial camera.position
+        uColor: { value: new THREE.Color(0xffffff)},// Default
+        // uColor: { value: new THREE.Color(0x42a9f1)},// Blue
+        // uColor: { value: new THREE.Color(0xF14242)},// Red
+        // uColor: { value: new THREE.Color(0x42F171)},// Green
+        uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        uPos: { value: 0.0 },
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      blending: THREE.CustomBlending,
+      transparent:true,
+    }),
     isolation: 80,
   }
 
   const metaballConfig: MetaballConfig = {
-    numBlobs: 10,
-    speed: 0.7,
+    speed: 1.0,
+    numBlobs: 8,
     strength: 1.2,
-    subtract: 12,
+    subtract: 8,
     enableColors: true,
-    showFloor: true
+    showFloor: false,
   }
 
   const statsConfig: StatsConfig = {

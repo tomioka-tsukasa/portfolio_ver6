@@ -17,7 +17,9 @@ import { setFpsManager } from '@/lib/threejs/setFpsManager/setFpsManager'
 // ローディング
 import { loadingManager } from './loading/loadingManager'
 
-// メッシュ
+// シェーダーのインポート
+import vertexShader from './metaball/shader/vertex.glsl'
+import fragmentShader from './metaball/shader/fragment.glsl'
 
 // GUI
 import { setSceneGUI } from './gui/setter/scene/setSceneGUI'
@@ -141,31 +143,35 @@ const initWebGL: InitWebGL = (
   /**
    * メッシュ設定
    */
-  const sampleMesh = (() => {
-    const geo = new THREE.TorusGeometry( 10, 3, 16, 32 )
-    const mat = new THREE.MeshBasicMaterial({ color: 0xffffff })
-    mat.envMap = loadedAssets.envmaps[setupMember.scene.environment]
+  const gridHelper = new THREE.GridHelper(100, 100)
+  const mesh = (() => {
+    const geo = new THREE.SphereGeometry(10, 32, 32)
+    const mat = new THREE.ShaderMaterial({
+      uniforms : {
+        viewVector: { value: new THREE.Vector3(0, 0, 20)},//initial camera.position
+        uColor: { value: new THREE.Color(0x42a9f1)},// GrowColor
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      blending: THREE.CustomBlending,
+      transparent:true,
+    })
 
     const mesh = new THREE.Mesh(geo, mat)
 
     return mesh
   })()
-  sampleMesh.position.set(0, 16, 0)
-
-  const gridHelper = new THREE.GridHelper(100, 100)
+  mesh.position.set(0, 10, 0)
 
   scene.add(
-    camera,
-    // sampleMesh,
     gridHelper,
+    // mesh,
   )
 
   /**
    * メタボール設定
    */
   const metaballController = metaball(scene)
-
-  console.log('scene: ', scene)
 
   /**
    * ポストプロセッシング
@@ -236,12 +242,6 @@ const initWebGL: InitWebGL = (
     if (setupMember.light.directionalLight.helper) {
       directionalLightHelper.update()
     }
-
-    /**
-     * サンプルメッシュのアニメーション
-     */
-    sampleMesh.rotation.y += 0.003
-    sampleMesh.rotation.x += 0.003
 
     /**
      * メタボールのアニメーション

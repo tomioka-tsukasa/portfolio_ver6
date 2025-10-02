@@ -1,6 +1,7 @@
 import { Color } from 'three'
 import { MarchingCubesManager } from '../marchingCubes/marchingCubesTypes'
 import { MetaballConfig, MetaballState } from './metaballGeneratorTypes'
+import { webglCtrl } from '../../../setupMember'
 
 /**
  * メタボール生成器クラス
@@ -108,8 +109,8 @@ export class MetaballGenerator {
       // 変更例: 1.0（固定）、1.0 + 1.0 * Math.cos(0.5 * i)（より大きな個別差）
 
       // 【4. 振幅（Amplitude）】- 動きの範囲
-      const amplitudeX = 0.15             // X軸の振幅（動きの範囲）
-      const amplitudeY = 0.15             // Y軸の振幅（動きの範囲）
+      const amplitudeX = 0.1             // X軸の振幅（動きの範囲）
+      const amplitudeY = 0.09             // Y軸の振幅（動きの範囲）
       const amplitudeZ = 0.15             // Z軸の振幅（動きの範囲）
       // 変更例: 0.5（より大きな動き）、0.1（より小さな動き）
 
@@ -154,6 +155,17 @@ export class MetaballGenerator {
     // 床を追加（公式と同じ位置）
     if (this.config.showFloor) {
       marchingCubes.addPlaneY(2, 12)
+      marchingCubes.addPlaneX(2, 12)
+      marchingCubes.addPlaneZ(2, 12)
+    }
+
+    // ★Material update - カメラの位置情報をマテリアルに送信してインナーグローを実現
+    if (marchingCubes.material && webglCtrl.camera) {
+      const material = marchingCubes.material as any
+      if (material.uniforms && material.uniforms.viewVector) {
+        material.uniforms.viewVector.value = webglCtrl.camera.position
+        material.uniformsNeedUpdate = true
+      }
     }
 
     // MarchingCubesを更新してメッシュを生成

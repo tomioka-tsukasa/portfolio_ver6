@@ -46,8 +46,8 @@ export const setupMember = {
     debug: false,
   },
   scene: {
-    environment: 'blocky_photo_studio_1k',
-    background: true,
+    environment: '',
+    background: false,
     environmentIntensity: 0.07,
   },
   postprocess: {
