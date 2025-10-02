@@ -28,7 +28,7 @@ export const metaball = (
   scene: THREE.Scene,
 ) => {
   const marchingCubesConfig: MarchingCubesConfig = {
-    resolution: 80,
+    resolution: 50,
     isolation: 60,
     // material: new THREE.MeshNormalMaterial({
     //   side: THREE.DoubleSide,
@@ -66,7 +66,7 @@ export const metaball = (
   const metaballConfig: MetaballConfig = {
     speed: 0.2,
     numBlobs: 5,
-    strength: 1.2,
+    strength: 1.6,
     subtract: 10,
     enableColors: true,
     showFloor: false,
