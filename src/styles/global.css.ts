@@ -1,6 +1,6 @@
 import {  globalStyle } from '@vanilla-extract/css'
 import { colors } from './variables'
-import { zenOldMincho } from './fontUtils'
+import { playfairDisplay } from './fontUtils'
 
 globalStyle('html', {
   fontSize: '62.5%', // 10px = 1rem
@@ -9,9 +9,9 @@ globalStyle('html', {
 
 globalStyle('body', {
   fontSize: '1.6rem',
-  color: colors.base.black,
+  color: colors.base.white,
   backgroundColor: colors.base.bg,
-  ...zenOldMincho()
+  ...playfairDisplay()
 })
 
 globalStyle('article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section', {

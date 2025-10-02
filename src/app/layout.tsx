@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Zen_Old_Mincho } from 'next/font/google'
+import { Playfair_Display, Zen_Old_Mincho } from 'next/font/google'
 import '@/styles/global/globals'
+import '@/styles/global.css'
 import StoreProvider from '@/app/store/provider'
 import { GsapManager } from './components/GsapManager/GsapManager'
 
@@ -10,9 +11,9 @@ const zenOldMincho = Zen_Old_Mincho({
   subsets: ['latin'],
 })
 
-const cormorantGaramond = Cormorant_Garamond({
-  variable: '--font-cormorant-garamond',
-  weight: ['300', '400', '500', '600', '700'],
+const playfairDisplay = Playfair_Display({
+  variable: '--font-playfair-display',
+  weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
 })
 
@@ -51,7 +52,7 @@ export default function RootLayout({
     <StoreProvider>
       <GsapManager />
       <html lang='ja'>
-        <body className={`${zenOldMincho.variable} ${cormorantGaramond.variable}`}>
+        <body className={`${zenOldMincho.variable} ${playfairDisplay.variable}`}>
           {children}
         </body>
       </html>
