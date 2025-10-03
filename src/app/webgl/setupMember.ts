@@ -77,17 +77,7 @@ export const webglCtrl: WebGLCtrl = {
   car: null,
   world: null,
   metaballController: null,
-}
-
-/**
- * ページステータス
- */
-export const pageStatus: PageStatus = {
-  current: 'home',
-}
-
-export type PageStatus = {
-  current: 'home' | 'menu'
+  pageStatus: 'home',
 }
 
 /**

@@ -2,13 +2,18 @@
 
 import * as styles from './HomeContent.css'
 import { ScrollUi } from '../ScrollUi/ScrollUi'
-import { pageStatus, webglCtrl } from '../../webgl/setupMember'
+import { webglCtrl } from '../../webgl/setupMember'
 import { cameraAnimation } from '../../webgl/animation/cameraAnimation/cameraAnimation'
 import { cameraWork } from '../../webgl/setup/cameraWork'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
 import gsap from 'gsap'
+import { setCurrentPage } from '../../store/slice/pageStatus/pageStatus'
+import { useAppDispatch, useAppSelector } from '@/app/store/hook'
 
 export const HomeContent = () => {
+  const dispatch = useAppDispatch()
+  const pageStatus = useAppSelector(selector => selector.pageStatus.currentPage)
+
   const handleMainClick = () => {
     // カメラワーク: ホーム
     const menuCameraWork = fixCamerawork(
@@ -24,7 +29,7 @@ export const HomeContent = () => {
       cameraWork.default.rotation
     )
 
-    if (pageStatus.current === 'home') {
+    if (pageStatus === 'home') {
       // home -> menu アニメーション
       webglCtrl.metaballController?.animateToMenuState(2)
 
@@ -52,9 +57,9 @@ export const HomeContent = () => {
         })
       }
 
-      pageStatus.current = 'menu'
+      dispatch(setCurrentPage('menu'))
 
-    } else if (pageStatus.current === 'menu') {
+    } else if (pageStatus === 'menu') {
 
       // menu -> home アニメーション
       webglCtrl.metaballController?.animateToHomeState(2)
@@ -82,12 +87,12 @@ export const HomeContent = () => {
         })
       }
 
-      pageStatus.current = 'home'
+      dispatch(setCurrentPage('home'))
     }
   }
 
   return <>
-    <div className={styles.root}>
+    <div className={`${styles.root} ${pageStatus === 'home' ? '' : styles.unactive}`}>
       <main className={styles.main} onClick={handleMainClick}>
         <h1 className={styles.title}>
           Tsukasa Tomioka

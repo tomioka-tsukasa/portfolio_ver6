@@ -15,7 +15,7 @@ import gsap from 'gsap'
 import { MarchingCubesConfig } from './modules/marchingCubes/marchingCubesTypes'
 import { MetaballConfig } from './modules/metaballGenerator/metaballGeneratorTypes'
 import { StatsConfig } from './modules/stats/statsTypes'
-import { pageStatus, setupMember, webglCtrl } from '../setupMember'
+import { webglCtrl } from '../setupMember'
 
 /**
  * メタボール実装のメイン関数
@@ -64,27 +64,14 @@ export const metaball = (
     }),
   }
 
-  const metaballConfig: MetaballConfig = (() => {
-    if (pageStatus.current === 'menu') {
-      return {
-        speed: 0.6,
-        numBlobs: 4,
-        strength: 1.6,
-        subtract: 10,
-        enableColors: true,
-        showFloor: false,
-      }
-    }
-
-    return {
-      speed: 0.2,
-      numBlobs: 4,
-      strength: 1.6,
-      subtract: 10,
-      enableColors: true,
-      showFloor: false,
-    }
-  })()
+  const metaballConfig: MetaballConfig = {
+    speed: 0.2,
+    numBlobs: 4,
+    strength: 1.6,
+    subtract: 10,
+    enableColors: true,
+    showFloor: false,
+  }
 
   const statsConfig: StatsConfig = {
     position: { top: '0', left: '0' },

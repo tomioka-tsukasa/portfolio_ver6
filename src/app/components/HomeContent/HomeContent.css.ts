@@ -12,7 +12,12 @@ export const root = style({
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
-  // pointerEvents: 'none',
+  transition: 'opacity 0.6s ease-in-out',
+})
+
+export const unactive = style({
+  opacity: 0,
+  pointerEvents: 'none',
 })
 
 export const main = style({
@@ -30,6 +35,6 @@ export const title = style({
 
 export const subTitle = style({
   color: colors.text.white_60,
-  textAlign: 'left',
+  textAlign: 'center',
   ...rvw.fontSize(16, 10),
 })
