@@ -12,6 +12,7 @@ export const root = style({
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
+  // pointerEvents: 'none',
 })
 
 export const main = style({
@@ -23,11 +24,12 @@ export const main = style({
 export const title = style({
   fontWeight: 'bold',
   color: colors.text.white_80,
-  ...rvw.fontSize(64, 24),
+  letterSpacing: '0.1em',
+  ...rvw.fontSize(48, 20),
 })
 
 export const subTitle = style({
-  color: colors.text.white_50,
+  color: colors.text.white_60,
   textAlign: 'center',
-  ...rvw.fontSize(18, 10),
+  ...rvw.fontSize(16, 10),
 })

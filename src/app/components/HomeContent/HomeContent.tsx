@@ -1,4 +1,5 @@
 import * as styles from './HomeContent.css'
+import { ScrollUi } from '../ScrollUi/ScrollUi'
 
 export const HomeContent = () => {
   return <>
@@ -11,6 +12,7 @@ export const HomeContent = () => {
           Portfolio Site.
         </p>
       </main>
+      <ScrollUi />
     </div>
   </>
 }
