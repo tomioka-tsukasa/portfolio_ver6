@@ -9,12 +9,13 @@ import fragmentShader from './shader/fragment.glsl'
 import { initMarchingCubes, getMaterials, changeMaterial, changeResolution, changeIsolation } from './modules/marchingCubes/marchingCubes'
 import { MetaballGenerator } from './modules/metaballGenerator/metaballGenerator'
 import { initStats, beginStats, endStats, disposeStats } from './modules/stats/stats'
+import gsap from 'gsap'
 
 // 型のインポート
 import { MarchingCubesConfig } from './modules/marchingCubes/marchingCubesTypes'
 import { MetaballConfig } from './modules/metaballGenerator/metaballGeneratorTypes'
 import { StatsConfig } from './modules/stats/statsTypes'
-import { setupMember, webglCtrl } from '../setupMember'
+import { pageStatus, setupMember, webglCtrl } from '../setupMember'
 
 /**
  * メタボール実装のメイン関数
@@ -63,25 +64,27 @@ export const metaball = (
     }),
   }
 
-  // HOME
-  const metaballConfig: MetaballConfig = {
-    speed: 0.2,
-    numBlobs: 4,
-    strength: 1.6,
-    subtract: 10,
-    enableColors: true,
-    showFloor: false,
-  }
+  const metaballConfig: MetaballConfig = (() => {
+    if (pageStatus.current === 'menu') {
+      return {
+        speed: 0.6,
+        numBlobs: 4,
+        strength: 1.6,
+        subtract: 10,
+        enableColors: true,
+        showFloor: false,
+      }
+    }
 
-  // MENU
-  // const metaballConfig: MetaballConfig = {
-  //   speed: 0.6,
-  //   numBlobs: 4,
-  //   strength: 1.6,
-  //   subtract: 10,
-  //   enableColors: true,
-  //   showFloor: false,
-  // }
+    return {
+      speed: 0.2,
+      numBlobs: 4,
+      strength: 1.6,
+      subtract: 10,
+      enableColors: true,
+      showFloor: false,
+    }
+  })()
 
   const statsConfig: StatsConfig = {
     position: { top: '0', left: '0' },
@@ -97,9 +100,6 @@ export const metaball = (
   // 親シーンを設定（解像度変更時に必要）
   marchingCubesManager.parentScene = scene
 
-  // MENU
-  // marchingCubesManager.marchingCubes.position.set(-30, 0, 0)
-
   // MarchingCubesオブジェクトをシーンに追加
   scene.add(marchingCubesManager.marchingCubes)
 
@@ -114,6 +114,12 @@ export const metaball = (
   // アニメーション用の時間管理
   let lastTime = 0
 
+  // 設定アニメーション用の現在値
+  const currentAnimatedConfig = {
+    speed: metaballConfig.speed,
+  }
+  let configAnimationTimeline: gsap.core.Timeline | null = null
+
   // アニメーション関数（外部のアニメーションループから呼び出される）
   const animate = (currentTime: number) => {
     const deltaTime = (currentTime - lastTime) * 0.001
@@ -121,6 +127,9 @@ export const metaball = (
 
     // Stats開始
     beginStats(statsManager)
+
+    // アニメーション中の設定を適用
+    metaballGenerator.updateConfig({ speed: currentAnimatedConfig.speed })
 
     // メタボールの更新
     metaballGenerator.updateMetaballs(marchingCubesManager, deltaTime)
@@ -144,10 +153,70 @@ export const metaball = (
     gui.destroy()
   }
 
-  // animate関数とcleanup関数を返す
+  // アニメーション関数
+  const animateToMenuState = (duration: number = 2) => {
+    // 既存のアニメーションを停止
+    if (configAnimationTimeline) {
+      configAnimationTimeline.kill()
+    }
+
+    // 新しいタイムラインを作成
+    configAnimationTimeline = gsap.timeline()
+
+    // speed を 0.2 から 0.6 にアニメーション
+    configAnimationTimeline.to(currentAnimatedConfig, {
+      speed: 0.6,
+      duration,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        configAnimationTimeline = null
+      }
+    })
+
+    // 振幅もアニメーション
+    metaballGenerator.animateAmplitude({
+      amplitudeX: 0.25,
+      amplitudeY: 0.21,
+      amplitudeZ: 0.28,
+    }, duration)
+  }
+
+  const animateToHomeState = (duration: number = 2) => {
+    // 既存のアニメーションを停止
+    if (configAnimationTimeline) {
+      configAnimationTimeline.kill()
+    }
+
+    // 新しいタイムラインを作成
+    configAnimationTimeline = gsap.timeline()
+
+    // speed を 0.6 から 0.2 にアニメーション
+    configAnimationTimeline.to(currentAnimatedConfig, {
+      speed: 0.2,
+      duration,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        configAnimationTimeline = null
+      }
+    })
+
+    // 振幅もアニメーション
+    metaballGenerator.animateAmplitude({
+      amplitudeX: 0.15,
+      amplitudeY: 0.01,
+      amplitudeZ: 0.18,
+    }, duration)
+  }
+
+  // animate関数とcleanup関数、アニメーション関数、管理オブジェクトを返す
   return {
     animate,
-    cleanup
+    cleanup,
+    animateToMenuState,
+    animateToHomeState,
+    marchingCubesManager,
+    metaballGenerator,
+    statsManager,
   }
 }
 

@@ -268,6 +268,7 @@ const initWebGL: InitWebGL = (
   webglCtrl.envmaps = loadedAssets.envmaps
   webglCtrl.textures = loadedAssets.textures
   webglCtrl.controls = controls
+  webglCtrl.metaballController = metaballController
 
   /**
    * 初期化完了通知

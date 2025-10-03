@@ -41,9 +41,9 @@ export const setupMember = {
   },
   camera: cameraWork,
   controls: {
-    enabled: true,
+    enabled: false,
     autoRotate: false,
-    debug: true,
+    debug: false,
   },
   scene: {
     environment: '',
@@ -76,6 +76,18 @@ export const webglCtrl: WebGLCtrl = {
   controls: null,
   car: null,
   world: null,
+  metaballController: null,
+}
+
+/**
+ * ページステータス
+ */
+export const pageStatus: PageStatus = {
+  current: 'home',
+}
+
+export type PageStatus = {
+  current: 'home' | 'menu'
 }
 
 /**

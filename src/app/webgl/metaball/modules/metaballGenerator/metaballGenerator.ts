@@ -2,6 +2,13 @@ import { Color } from 'three'
 import { MarchingCubesManager } from '../marchingCubes/marchingCubesTypes'
 import { MetaballConfig, MetaballState } from './metaballGeneratorTypes'
 import { webglCtrl } from '../../../setupMember'
+import gsap from 'gsap'
+
+type AmplitudeConfig = {
+  amplitudeX: number
+  amplitudeY: number
+  amplitudeZ: number
+}
 
 /**
  * メタボール生成器クラス
@@ -12,6 +19,12 @@ export class MetaballGenerator {
   private config: MetaballConfig
   private metaballStates: MetaballState[] = []
   private time = 0
+  private currentAmplitude: AmplitudeConfig = {
+    amplitudeX: 0.15,
+    amplitudeY: 0.01,
+    amplitudeZ: 0.18,
+  }
+  private animationTimeline: gsap.core.Timeline | null = null
 
   constructor(config: MetaballConfig) {
     this.config = config
@@ -108,10 +121,10 @@ export class MetaballGenerator {
       const individualFactorZ = 1.03 + 1.5 * Math.sin(0.92 + 3.53 * i)    // Z軸の個別係数
       // 変更例: 1.0（固定）、1.0 + 1.0 * Math.cos(0.5 * i)（より大きな個別差）
 
-      // 【4. 振幅（Amplitude）】- 動きの範囲
-      const amplitudeX = 0.15             // X軸の振幅（動きの範囲）
-      const amplitudeY = 0.01             // Y軸の振幅（動きの範囲）
-      const amplitudeZ = 0.18             // Z軸の振幅（動きの範囲）
+      // 【4. 振幅（Amplitude）】- 動きの範囲（アニメーション対応）
+      const amplitudeX = this.currentAmplitude.amplitudeX
+      const amplitudeY = this.currentAmplitude.amplitudeY
+      const amplitudeZ = this.currentAmplitude.amplitudeZ
       // 変更例: 0.5（より大きな動き）、0.1（より小さな動き）
 
       // 【5. 中心位置（Center）】- 動きの基準点
@@ -194,6 +207,40 @@ export class MetaballGenerator {
   resetTime(): void {
     this.time = 0
     this.initMetaballStates()
+  }
+
+  /**
+   * 振幅をアニメーション付きで変更
+   * @param targetAmplitude - 目標の振幅設定
+   * @param duration - アニメーション時間（秒）
+   */
+  animateAmplitude(targetAmplitude: AmplitudeConfig, duration: number = 2): void {
+    // 既存のアニメーションを停止
+    if (this.animationTimeline) {
+      this.animationTimeline.kill()
+    }
+
+    // 新しいタイムラインを作成
+    this.animationTimeline = gsap.timeline()
+
+    // 振幅をスムーズに変更
+    this.animationTimeline.to(this.currentAmplitude, {
+      amplitudeX: targetAmplitude.amplitudeX,
+      amplitudeY: targetAmplitude.amplitudeY,
+      amplitudeZ: targetAmplitude.amplitudeZ,
+      duration,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        this.animationTimeline = null
+      }
+    })
+  }
+
+  /**
+   * 現在の振幅設定を取得
+   */
+  getCurrentAmplitude(): AmplitudeConfig {
+    return { ...this.currentAmplitude }
   }
 }
 
