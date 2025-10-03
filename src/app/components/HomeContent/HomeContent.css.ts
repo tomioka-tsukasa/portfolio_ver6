@@ -30,6 +30,6 @@ export const title = style({
 
 export const subTitle = style({
   color: colors.text.white_60,
-  textAlign: 'center',
+  textAlign: 'left',
   ...rvw.fontSize(16, 10),
 })

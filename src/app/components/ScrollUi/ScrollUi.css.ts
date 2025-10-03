@@ -1,6 +1,40 @@
 import { rvw } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
-import { style } from '@vanilla-extract/css'
+import { style, keyframes } from '@vanilla-extract/css'
+import { zenOldMincho } from '@/styles/fontUtils'
+
+const lineAnimation = keyframes({
+  '0%': {
+    height: rvw.height(110, 100).height,
+    bottom: '100%',
+  },
+  '80%': {
+    height: '0%',
+    bottom: '-100%',
+  },
+  '100%': {
+    height: '0%',
+    bottom: '-100%',
+  },
+})
+
+const markerOuterAnimation = keyframes({
+  '0%': {
+    width: '10%',
+    height: '10%',
+    opacity: 1,
+  },
+  '50%': {
+    width: '100%',
+    height: '100%',
+    opacity: 0,
+  },
+  '100%': {
+    width: '100%',
+    height: '100%',
+    opacity: 0,
+  },
+})
 
 export const root = style({
   position: 'fixed',
@@ -18,7 +52,18 @@ export const container = style({
 
 export const text = style({
   color: colors.text.white,
-  ...rvw.fontSize(20, 10),
+  ...zenOldMincho(),
+  ...rvw.fontSize(18, 10),
+})
+
+export const lineContainer = style({
+  position: 'absolute',
+  bottom: '0',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  width: '1px',
+  ...rvw.height(110, 100),
+  overflow: 'hidden',
 })
 
 export const line = style({
@@ -26,18 +71,20 @@ export const line = style({
   bottom: '0',
   left: '50%',
   transform: 'translateX(-50%)',
-  width: '1px',
+  width: '100%',
+  height: '100%',
   backgroundColor: colors.text.white_50,
   ...rvw.height(110, 100),
+  animation: `${lineAnimation} 2.4s ease-in-out infinite`,
 })
 
 export const markerContainer = style({
   position: 'absolute',
   left: '50%',
   transform: 'translateX(-50%)',
-  ...rvw.width(80, 60),
-  ...rvw.height(80, 60),
-  ...rvw.bottom(-40, 60),
+  ...rvw.width(120, 60),
+  ...rvw.height(120, 60),
+  ...rvw.bottom(-60, 60),
 })
 
 export const markerInner = style({
@@ -48,21 +95,22 @@ export const markerInner = style({
 
 export const markerItemOuter = style({
   position: 'absolute',
-  top: '0',
-  left: '0',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: '100%',
   height: '100%',
   borderRadius: '50%',
-  border: `1px solid ${colors.text.white_60}`,
+  border: `1px solid ${colors.text.white}`,
+  animation: `${markerOuterAnimation} 2.4s ease-in-out infinite`,
 })
 
 export const markerItem = style({
   position: 'absolute',
   top: '50%',
   left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '24%',
-  height: '24%',
-  borderRadius: '50%',
+  transform: 'translate(-50%, -50%) rotate(45deg)',
+  width: '12%',
+  height: '12%',
   backgroundColor: colors.text.white_80,
 })

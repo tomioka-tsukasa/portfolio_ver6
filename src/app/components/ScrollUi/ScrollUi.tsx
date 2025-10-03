@@ -7,7 +7,9 @@ export const ScrollUi = () => {
         <div className={styles.text}>
           Scroll
         </div>
-        <div className={styles.line} />
+        <div className={styles.lineContainer}>
+          <div className={styles.line} />
+        </div>
         <div className={styles.markerContainer}>
           <div className={styles.markerInner}>
             <div className={styles.markerItemOuter} />
