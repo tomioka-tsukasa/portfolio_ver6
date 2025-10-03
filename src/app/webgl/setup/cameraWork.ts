@@ -31,6 +31,38 @@ export const cameraWork = {
       },
     },
   },
+  menu: {
+    position: {
+      x: 0,
+      y: 106.14058902365646,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 60,
+        z: 0,
+      },
+    },
+    target: {
+      x: 0,
+      y: 0,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+    },
+    rotation: {
+      x: 0,
+      y: 0,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+    },
+  },
 } as const
 
 export type CameraWorkMember = {

@@ -63,14 +63,25 @@ export const metaball = (
     }),
   }
 
+  // HOME
   const metaballConfig: MetaballConfig = {
     speed: 0.2,
-    numBlobs: 5,
+    numBlobs: 4,
     strength: 1.6,
     subtract: 10,
     enableColors: true,
     showFloor: false,
   }
+
+  // MENU
+  // const metaballConfig: MetaballConfig = {
+  //   speed: 0.6,
+  //   numBlobs: 4,
+  //   strength: 1.6,
+  //   subtract: 10,
+  //   enableColors: true,
+  //   showFloor: false,
+  // }
 
   const statsConfig: StatsConfig = {
     position: { top: '0', left: '0' },
@@ -85,6 +96,9 @@ export const metaball = (
 
   // 親シーンを設定（解像度変更時に必要）
   marchingCubesManager.parentScene = scene
+
+  // MENU
+  // marchingCubesManager.marchingCubes.position.set(-30, 0, 0)
 
   // MarchingCubesオブジェクトをシーンに追加
   scene.add(marchingCubesManager.marchingCubes)

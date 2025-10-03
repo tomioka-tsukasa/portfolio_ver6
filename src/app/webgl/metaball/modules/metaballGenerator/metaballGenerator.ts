@@ -196,3 +196,9 @@ export class MetaballGenerator {
     this.initMetaballStates()
   }
 }
+
+// MENU
+// // 【4. 振幅（Amplitude）】- 動きの範囲
+// const amplitudeX = 0.25             // X軸の振幅（動きの範囲）
+// const amplitudeY = 0.21             // Y軸の振幅（動きの範囲）
+// const amplitudeZ = 0.28             // Z軸の振幅（動きの範囲）
