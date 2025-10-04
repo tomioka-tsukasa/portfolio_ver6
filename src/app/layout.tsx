@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Zen_Old_Mincho } from 'next/font/google'
+import { Playfair_Display, Zen_Old_Mincho, Italiana, Bungee_Hairline } from 'next/font/google'
 import '@/styles/global/globals'
 import '@/styles/global.css'
 import StoreProvider from '@/app/store/provider'
@@ -7,6 +7,7 @@ import { GsapManager } from './components/GsapManager/GsapManager'
 import Canvas from './components/Canvas/Canvas'
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen'
 import { Menu } from './components/Menu/Menu'
+import { PageTitleContainer } from './components/PageTitleContainer/PageTitleContainer'
 
 const zenOldMincho = Zen_Old_Mincho({
   variable: '--font-zen-old-mincho',
@@ -17,6 +18,18 @@ const zenOldMincho = Zen_Old_Mincho({
 const playfairDisplay = Playfair_Display({
   variable: '--font-playfair-display',
   weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+})
+
+const italiana = Italiana({
+  variable: '--font-italiana',
+  weight: ['400'],
+  subsets: ['latin'],
+})
+
+const bungeeHairline = Bungee_Hairline({
+  variable: '--font-bungee-hairline',
+  weight: ['400'],
   subsets: ['latin'],
 })
 
@@ -55,10 +68,11 @@ export default function RootLayout({
     <StoreProvider>
       <GsapManager />
       <html lang='ja'>
-        <body className={`${zenOldMincho.variable} ${playfairDisplay.variable}`}>
+        <body className={`${zenOldMincho.variable} ${playfairDisplay.variable} ${italiana.variable} ${bungeeHairline.variable}`}>
           <Canvas />
           <LoadingScreen />
           <Menu />
+          <PageTitleContainer />
           {children}
         </body>
       </html>

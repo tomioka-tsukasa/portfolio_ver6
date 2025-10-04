@@ -1,0 +1,21 @@
+import * as styles from './AboutSentence.css'
+
+export const AboutSentence = () => {
+  return <>
+    <div className={styles.root}>
+      <div className={styles.content}>
+        <div className={styles.textContainer}>
+          <p className={styles.text}>
+            つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、
+          </p>
+          <p className={styles.text}>
+            つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、
+          </p>
+          <p className={styles.text}>
+            つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。つれづれなるまゝに、日暮らし、硯にむかひて、心にうつりゆくよしなし事を、そこはかとなく書きつくれば、
+          </p>
+        </div>
+      </div>
+    </div>
+  </>
+}

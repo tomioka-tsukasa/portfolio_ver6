@@ -27,6 +27,19 @@ export const colors = {
   },
   sub: {
   },
+  bg: {
+    black: '#000000',
+    black_90: 'rgba(0, 0, 0, 0.9)',
+    black_80: 'rgba(0, 0, 0, 0.8)',
+    black_70: 'rgba(0, 0, 0, 0.7)',
+    black_60: 'rgba(0, 0, 0, 0.6)',
+    black_50: 'rgba(0, 0, 0, 0.5)',
+    black_40: 'rgba(0, 0, 0, 0.4)',
+    black_30: 'rgba(0, 0, 0, 0.3)',
+    black_20: 'rgba(0, 0, 0, 0.2)',
+    black_10: 'rgba(0, 0, 0, 0.1)',
+    black_5: 'rgba(0, 0, 0, 0.05)',
+  },
   text: {
     white: '#ffffff',
     white_90: 'rgba(255, 255, 255, 0.9)',
@@ -46,4 +59,4 @@ export const colors = {
  * フォント定義
  */
 
-export { basicFontStyle, zenOldMinchoStyle, playfairDisplayStyle, type SetFontFamily } from './fontUtils'
+export { basicFontStyle, zenOldMinchoStyle, playfairDisplayStyle, italianaStyle, bungeeHairlineStyle, type SetFontFamily } from './fontUtils'

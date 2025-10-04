@@ -83,6 +83,7 @@ export const metaball = (
   const marchingCubesManager = initMarchingCubes(marchingCubesConfig)
   const metaballGenerator = new MetaballGenerator(metaballConfig)
   const statsManager = initStats(statsConfig)
+  statsManager.stats.dom.style.display = 'none'
 
   // 親シーンを設定（解像度変更時に必要）
   marchingCubesManager.parentScene = scene
@@ -92,6 +93,7 @@ export const metaball = (
 
   // GUI設定（dat.GUI）
   const gui = new DAT.GUI()
+  gui.domElement.style.display = 'none'
   setupGUI(gui, {
     marchingCubesManager,
     metaballGenerator,

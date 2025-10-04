@@ -1,10 +1,10 @@
 import { HomeContent } from './components/HomeContent/HomeContent'
 // import * as styles from './page.css'
 
-const Home = () => {
+const HomePage = () => {
   return <>
     <HomeContent />
   </>
 }
 
-export default Home
+export default HomePage

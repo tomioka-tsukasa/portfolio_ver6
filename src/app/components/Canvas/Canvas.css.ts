@@ -6,5 +6,9 @@ export const root = style([
     height: '100vh',
     display: 'flex',
     pointerEvents: 'none',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: 0,
   },
 ])

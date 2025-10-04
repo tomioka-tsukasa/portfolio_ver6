@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css'
 import { rvw } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
+import { italiana } from '@/styles/fontUtils'
 
 export const root = style({
   position: 'fixed',
@@ -28,13 +29,16 @@ export const main = style({
 
 export const title = style({
   fontWeight: 'bold',
-  color: colors.text.white_80,
-  letterSpacing: '0.1em',
-  ...rvw.fontSize(48, 20),
+  color: colors.text.white,
+  letterSpacing: '0.06em',
+  lineHeight: 1,
+  ...italiana(),
+  ...rvw.fontSize(64, 32),
 })
 
 export const subTitle = style({
   color: colors.text.white_60,
   textAlign: 'center',
+  ...rvw.marginLeft(8, 4),
   ...rvw.fontSize(16, 10),
 })
