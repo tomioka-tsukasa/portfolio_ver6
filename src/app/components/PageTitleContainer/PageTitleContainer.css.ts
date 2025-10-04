@@ -11,6 +11,7 @@ export const root = style({
   justifyContent: 'flex-start',
   alignItems: 'flex-end',
   transition: 'opacity 0.6s ease-in-out',
+  pointerEvents: 'none',
   ...rvw.bottom(16, 6),
   ...rvw.left(24, 10),
 })
@@ -25,6 +26,7 @@ export const content = style({
 
 export const pageTitle = style({
   flexShrink: 0,
+  pointerEvents: 'visible',
 })
 
 export const console = style({
