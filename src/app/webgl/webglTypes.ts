@@ -40,6 +40,7 @@ export type WebGLCtrl = {
     cleanup: () => void
     animateToMenuState: (duration?: number) => void
     animateToHomeState: (duration?: number) => void
+    animateToAboutState: (duration?: number) => void
     marchingCubesManager: MarchingCubesManager
     metaballGenerator: MetaballGenerator
     statsManager: StatsManager

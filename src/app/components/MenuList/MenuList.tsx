@@ -5,6 +5,7 @@ import { MenuItem } from '../MenuItem/MenuItem'
 import * as styles from './MenuList.css'
 import { useAppDispatch } from '@/app/store/hook'
 import { PageId } from '@/modules/pageChanger/pageChangerTypes'
+import { createPageChanger } from '@/modules/pageChanger/pageChanger'
 
 export interface MenuListProps {
   items?: Array<{
@@ -25,13 +26,19 @@ export const MenuList = ({
   currentPath = 'home'
 }: MenuListProps) => {
   const dispatch = useAppDispatch()
+  const pageChanger = createPageChanger(dispatch)
+
+  const clickHandler = (id: PageId) => {
+    pageChanger({ pageId: id })
+    dispatch(setCurrentPage(id))
+  }
 
   return (
     <div className={styles.root}>
       {items.map((item, index) => (
         <div key={index} className={styles.menuItemWrapper}>
           <MenuItem
-            onClick={() => dispatch(setCurrentPage(item.id as PageId))}
+            onClick={() => clickHandler(item.id as PageId)}
             text={item.text}
             status={item.status || (currentPath === item.id ? 'current' : 'default')}
             href={item.id === 'home' ? '/' : `/${item.id}`}

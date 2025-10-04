@@ -15,7 +15,7 @@ interface PageChanger {
 const pageConfigs: Record<PageId, {
   cameraWork: CameraWorkConfig
   metaballAnimation: MetaballAnimationConfig
-  metaballState?: 'home' | 'menu'
+  metaballState?: PageId
 }> = {
   home: {
     cameraWork: cameraWork.default,
@@ -36,12 +36,13 @@ const pageConfigs: Record<PageId, {
     metaballState: 'menu'
   },
   about: {
-    cameraWork: cameraWork.default, // TODO: aboutページ用のカメラワークを定義
+    cameraWork: cameraWork.about, // TODO: aboutページ用のカメラワークを定義
     metaballAnimation: {
       targetX: 0,
       duration: 2,
       ease: 'power2.inOut'
-    }
+    },
+    metaballState: 'about'
   },
   works: {
     cameraWork: cameraWork.default, // TODO: worksページ用のカメラワークを定義
@@ -82,6 +83,8 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
     webglCtrl.metaballController?.animateToMenuState(duration / 1000)
   } else if (config.metaballState === 'home') {
     webglCtrl.metaballController?.animateToHomeState(duration / 1000)
+  } else if (config.metaballState === 'about') {
+    webglCtrl.metaballController?.animateToAboutState(duration / 1000)
   }
 
   // カメラアニメーション

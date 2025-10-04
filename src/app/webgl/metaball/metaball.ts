@@ -142,7 +142,7 @@ export const metaball = (
     gui.destroy()
   }
 
-  // アニメーション関数
+  // Menu アニメーション
   const animateToMenuState = (duration: number = 2) => {
     // 既存のアニメーションを停止
     if (configAnimationTimeline) {
@@ -170,6 +170,7 @@ export const metaball = (
     }, duration)
   }
 
+  // Home アニメーション
   const animateToHomeState = (duration: number = 2) => {
     // 既存のアニメーションを停止
     if (configAnimationTimeline) {
@@ -197,12 +198,41 @@ export const metaball = (
     }, duration)
   }
 
+  // About アニメーション
+  const animateToAboutState = (duration: number = 2) => {
+    // 既存のアニメーションを停止
+    if (configAnimationTimeline) {
+      configAnimationTimeline.kill()
+    }
+
+    // 新しいタイムラインを作成
+    configAnimationTimeline = gsap.timeline()
+
+    // speed を 0.6 から 0.2 にアニメーション
+    configAnimationTimeline.to(currentAnimatedConfig, {
+      speed: 0.35,
+      duration,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        configAnimationTimeline = null
+      }
+    })
+
+    // 振幅もアニメーション
+    metaballGenerator.animateAmplitude({
+      amplitudeX: 0.15,
+      amplitudeY: 0.01,
+      amplitudeZ: 0.18,
+    }, duration)
+  }
+
   // animate関数とcleanup関数、アニメーション関数、管理オブジェクトを返す
   return {
     animate,
     cleanup,
     animateToMenuState,
     animateToHomeState,
+    animateToAboutState,
     marchingCubesManager,
     metaballGenerator,
     statsManager,

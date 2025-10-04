@@ -10,6 +10,7 @@ export const root = style({
   zIndex: 1,
   width: '100%',
   height: '100vh',
+  pointerEvents: 'none',
 })
 
 export const content = style({
