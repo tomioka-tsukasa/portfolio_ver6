@@ -1,3 +1,5 @@
+import { CameraWorkMember } from '@/app/webgl/setup/cameraWork'
+
 export type PageId = 'home' | 'menu' | 'about' | 'works' | 'blog'
 
 export interface PageTransitionConfig {
@@ -5,11 +7,7 @@ export interface PageTransitionConfig {
   duration?: number
 }
 
-export interface CameraWorkConfig {
-  position: [number, number, number]
-  target: [number, number, number]
-  rotation: [number, number, number]
-}
+export type CameraWorkConfig = CameraWorkMember
 
 export interface MetaballAnimationConfig {
   targetX: number

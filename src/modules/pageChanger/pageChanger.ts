@@ -3,6 +3,7 @@ import { cameraAnimation } from '@/app/webgl/animation/cameraAnimation/cameraAni
 import { cameraWork } from '@/app/webgl/setup/cameraWork'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
 import { setCurrentPage } from '@/app/store/slice/pageStatus/pageStatus'
+import type { AppDispatch } from '@/app/store/makeStore'
 import gsap from 'gsap'
 import type { PageId, PageTransitionConfig, CameraWorkConfig, MetaballAnimationConfig } from './pageChangerTypes'
 
@@ -110,7 +111,7 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
 }
 
 // Redux dispatchを受け取るバージョン
-export const createPageChanger = (dispatch: any) => {
+export const createPageChanger = (dispatch: AppDispatch) => {
   return ({ pageId, duration = 2000 }: PageTransitionConfig) => {
     pageChanger({ pageId, duration })
     dispatch(setCurrentPage(pageId))

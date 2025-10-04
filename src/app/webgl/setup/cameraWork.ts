@@ -63,7 +63,7 @@ export const cameraWork = {
       },
     },
   },
-} as const
+}
 
 export type CameraWorkMember = {
   position: {
