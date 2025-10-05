@@ -1,75 +1,61 @@
 import { webglCtrl } from '@/app/webgl/setupMember'
 import { cameraAnimation } from '@/app/webgl/animation/cameraAnimation/cameraAnimation'
-import { cameraWork } from '@/app/webgl/setup/cameraWork'
+import { cameraWork } from '@/app/webgl/cameraWork'
+import { metaballConfigs, metaballAnimationConfigs } from '@/app/webgl/metaballMember'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
 import { setCurrentPage } from '@/app/store/slice/pageStatus/pageStatus'
 import type { AppDispatch } from '@/app/store/makeStore'
 import gsap from 'gsap'
-import type { PageId, PageTransitionConfig, CameraWorkConfig, MetaballAnimationConfig } from './pageChangerTypes'
+import type { PageId, PageTransitionConfig } from './pageChangerTypes'
+
+// ページ履歴管理
+const pageHistory: PageId[] = ['home']
+import { MetaballController } from '@/app/webgl/metaball/metaballTypes'
 
 interface PageChanger {
   (config: PageTransitionConfig): void
 }
 
-// ページごとのカメラワーク設定
-const pageConfigs: Record<PageId, {
-  cameraWork: CameraWorkConfig
-  metaballAnimation: MetaballAnimationConfig
-  metaballState?: PageId
-}> = {
-  home: {
-    cameraWork: cameraWork.default,
-    metaballAnimation: {
-      targetX: 0,
-      duration: 2,
-      ease: 'power2.inOut'
-    },
-    metaballState: 'home'
-  },
-  menu: {
-    cameraWork: cameraWork.menu,
-    metaballAnimation: {
-      targetX: -30,
-      duration: 2,
-      ease: 'power2.inOut'
-    },
-    metaballState: 'menu'
-  },
-  about: {
-    cameraWork: cameraWork.about, // TODO: aboutページ用のカメラワークを定義
-    metaballAnimation: {
-      targetX: 0,
-      duration: 2,
-      ease: 'power2.inOut'
-    },
-    metaballState: 'about'
-  },
-  works: {
-    cameraWork: cameraWork.default, // TODO: worksページ用のカメラワークを定義
-    metaballAnimation: {
-      targetX: 0,
-      duration: 2,
-      ease: 'power2.inOut'
-    }
-  },
-  blog: {
-    cameraWork: cameraWork.default, // TODO: blogページ用のカメラワークを定義
-    metaballAnimation: {
-      targetX: 0,
-      duration: 2,
-      ease: 'power2.inOut'
-    }
+// ページごとの設定を動的に取得する関数
+const getPageConfig = (pageId: PageId) => {
+  const cameraConfig = cameraWork[pageId] || cameraWork.default
+  const metaballConfig = metaballConfigs[pageId] || metaballConfigs.home
+  const metaballAnimationConfig = metaballAnimationConfigs[pageId] || metaballAnimationConfigs.home
+
+  return {
+    cameraWork: cameraConfig,
+    metaballAnimation: metaballConfig,
+    metaballAnimationSettings: metaballAnimationConfig
   }
 }
 
 export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
-  const config = pageConfigs[pageId]
+  // 'back'が指定された場合は前のページに戻る
+  let targetPageId: PageId
 
-  if (!config) {
-    console.warn(`Page config not found for pageId: ${pageId}`)
-
-    return
+  if (pageId === 'back') {
+    if (pageHistory.length > 1) {
+      // 現在のページを履歴から削除
+      pageHistory.pop()
+      // 前のページを取得
+      targetPageId = pageHistory[pageHistory.length - 1]
+    } else {
+      // 履歴がない場合はhomeに戻る
+      targetPageId = 'home'
+    }
+  } else {
+    targetPageId = pageId as PageId
+    // 新しいページを履歴に追加（同じページの連続は追加しない）
+    if (pageHistory[pageHistory.length - 1] !== targetPageId) {
+      pageHistory.push(targetPageId)
+      // 履歴の長さを制限（最大10ページ）
+      if (pageHistory.length > 10) {
+        pageHistory.shift()
+      }
+    }
   }
+
+  const config = getPageConfig(targetPageId)
 
   // カメラワークの準備
   const targetCameraWork = fixCamerawork(
@@ -78,13 +64,47 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
     config.cameraWork.rotation
   )
 
-  // メタボールアニメーション（メニューまたはホーム状態）
-  if (config.metaballState === 'menu') {
-    webglCtrl.metaballController?.animateToMenuState(duration / 1000)
-  } else if (config.metaballState === 'home') {
-    webglCtrl.metaballController?.animateToHomeState(duration / 1000)
-  } else if (config.metaballState === 'about') {
-    webglCtrl.metaballController?.animateToAboutState(duration / 1000)
+  // メタボールアニメーション（統合版）
+  if (webglCtrl.metaballController) {
+    // 既存のアニメーションを停止
+    const controller = webglCtrl.metaballController as MetaballController
+
+    if (!controller) {
+      console.log('メタボールアニメーションが存在しません')
+
+      return
+    }
+
+    if (controller.configAnimationTimeline) {
+      controller.configAnimationTimeline.kill()
+    }
+
+    // 新しいタイムラインを作成
+    const configAnimationTimeline = gsap.timeline()
+
+    // speed をアニメーション
+    if (controller?.currentAnimatedConfig) {
+      configAnimationTimeline.to(controller.currentAnimatedConfig, {
+        speed: config.metaballAnimationSettings.speed,
+        duration: duration / 1000,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          controller.configAnimationTimeline = null
+        }
+      })
+    }
+
+    // 振幅もアニメーション
+    if (controller.metaballGenerator && typeof controller.metaballGenerator.animateAmplitude === 'function') {
+      controller.metaballGenerator.animateAmplitude({
+        amplitudeX: config.metaballAnimationSettings.amplitude.x,
+        amplitudeY: config.metaballAnimationSettings.amplitude.y,
+        amplitudeZ: config.metaballAnimationSettings.amplitude.z,
+      }, duration / 1000)
+    }
+
+    // タイムラインを保存
+    controller.configAnimationTimeline = configAnimationTimeline
   }
 
   // カメラアニメーション
@@ -116,7 +136,23 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
 // Redux dispatchを受け取るバージョン
 export const createPageChanger = (dispatch: AppDispatch) => {
   return ({ pageId, duration = 2000 }: PageTransitionConfig) => {
+    // 'back'の場合は実際の遷移先ページIDを取得してReduxに設定
+    let targetPageId: PageId
+
+    if (pageId === 'back') {
+      if (pageHistory.length > 1) {
+        targetPageId = pageHistory[pageHistory.length - 2] // pop前の前のページ
+      } else {
+        targetPageId = 'home'
+      }
+    } else {
+      targetPageId = pageId as PageId
+    }
+
     pageChanger({ pageId, duration })
-    dispatch(setCurrentPage(pageId))
+    dispatch(setCurrentPage(targetPageId))
   }
 }
+
+// デバッグ用：ページ履歴を取得する関数
+export const getPageHistory = () => pageHistory

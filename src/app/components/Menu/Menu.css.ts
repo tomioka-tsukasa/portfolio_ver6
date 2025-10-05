@@ -1,3 +1,4 @@
+import { colors } from '@/styles/variables'
 import { style } from '@vanilla-extract/css'
 
 export const root = style({
@@ -12,6 +13,7 @@ export const root = style({
   alignItems: 'center',
   pointerEvents: 'none',
   opacity: 0,
+  backgroundColor: colors.bg.black_10,
   transition: 'opacity 0.6s ease-in-out',
 })
 

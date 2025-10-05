@@ -16,6 +16,7 @@ import { MarchingCubesConfig } from './modules/marchingCubes/marchingCubesTypes'
 import { MetaballConfig } from './modules/metaballGenerator/metaballGeneratorTypes'
 import { StatsConfig } from './modules/stats/statsTypes'
 import { webglCtrl } from '../setupMember'
+import { MetaballController } from './metaballTypes'
 
 /**
  * メタボール実装のメイン関数
@@ -27,7 +28,7 @@ import { webglCtrl } from '../setupMember'
  */
 export const metaball = (
   scene: THREE.Scene,
-) => {
+): MetaballController => {
   const marchingCubesConfig: MarchingCubesConfig = {
     resolution: 50,
     isolation: 60,
@@ -107,7 +108,7 @@ export const metaball = (
   const currentAnimatedConfig = {
     speed: metaballConfig.speed,
   }
-  let configAnimationTimeline: gsap.core.Timeline | null = null
+  const configAnimationTimeline: gsap.core.Timeline | null = null
 
   // アニメーション関数（外部のアニメーションループから呼び出される）
   const animate = (currentTime: number) => {
@@ -142,100 +143,31 @@ export const metaball = (
     gui.destroy()
   }
 
-  // Menu アニメーション
-  const animateToMenuState = (duration: number = 2) => {
-    // 既存のアニメーションを停止
-    if (configAnimationTimeline) {
-      configAnimationTimeline.kill()
-    }
-
-    // 新しいタイムラインを作成
-    configAnimationTimeline = gsap.timeline()
-
-    // speed を 0.2 から 0.6 にアニメーション
-    configAnimationTimeline.to(currentAnimatedConfig, {
-      speed: 0.6,
-      duration,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        configAnimationTimeline = null
-      }
-    })
-
-    // 振幅もアニメーション
-    metaballGenerator.animateAmplitude({
-      amplitudeX: 0.25,
-      amplitudeY: 0.21,
-      amplitudeZ: 0.28,
-    }, duration)
+  // レガシーアニメーション関数（pageChangerに統合済み、互換性のため残存）
+  const animateToMenuState = () => {
+    console.warn('animateToMenuState is deprecated. Use pageChanger instead.')
   }
 
-  // Home アニメーション
-  const animateToHomeState = (duration: number = 2) => {
-    // 既存のアニメーションを停止
-    if (configAnimationTimeline) {
-      configAnimationTimeline.kill()
-    }
-
-    // 新しいタイムラインを作成
-    configAnimationTimeline = gsap.timeline()
-
-    // speed を 0.6 から 0.2 にアニメーション
-    configAnimationTimeline.to(currentAnimatedConfig, {
-      speed: 0.2,
-      duration,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        configAnimationTimeline = null
-      }
-    })
-
-    // 振幅もアニメーション
-    metaballGenerator.animateAmplitude({
-      amplitudeX: 0.15,
-      amplitudeY: 0.01,
-      amplitudeZ: 0.18,
-    }, duration)
+  const animateToHomeState = () => {
+    console.warn('animateToHomeState is deprecated. Use pageChanger instead.')
   }
 
-  // About アニメーション
-  const animateToAboutState = (duration: number = 2) => {
-    // 既存のアニメーションを停止
-    if (configAnimationTimeline) {
-      configAnimationTimeline.kill()
-    }
-
-    // 新しいタイムラインを作成
-    configAnimationTimeline = gsap.timeline()
-
-    // speed を 0.6 から 0.2 にアニメーション
-    configAnimationTimeline.to(currentAnimatedConfig, {
-      speed: 0.35,
-      duration,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        configAnimationTimeline = null
-      }
-    })
-
-    // 振幅もアニメーション
-    metaballGenerator.animateAmplitude({
-      amplitudeX: 0.15,
-      amplitudeY: 0.01,
-      amplitudeZ: 0.18,
-    }, duration)
+  const animateToAboutState = () => {
+    console.warn('animateToAboutState is deprecated. Use pageChanger instead.')
   }
 
   // animate関数とcleanup関数、アニメーション関数、管理オブジェクトを返す
   return {
     animate,
     cleanup,
-    animateToMenuState,
-    animateToHomeState,
-    animateToAboutState,
+    animateToMenuState,    // 互換性のため残存
+    animateToHomeState,    // 互換性のため残存
+    animateToAboutState,   // 互換性のため残存
     marchingCubesManager,
     metaballGenerator,
     statsManager,
+    currentAnimatedConfig, // pageChangerからアクセス可能にする
+    configAnimationTimeline, // pageChangerからアクセス可能にする
   }
 }
 

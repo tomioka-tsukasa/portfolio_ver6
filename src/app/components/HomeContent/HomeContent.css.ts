@@ -13,12 +13,6 @@ export const root = style({
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
-  transition: 'opacity 0.6s ease-in-out',
-})
-
-export const unactive = style({
-  opacity: 0,
-  pointerEvents: 'none',
 })
 
 export const main = style({

@@ -1,4 +1,4 @@
-import { cameraWork } from './setup/cameraWork'
+import { cameraWork } from './cameraWork'
 import { LoadingObject, LoadingObjects } from './loading/loadingManagerTypes'
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DataTexture, Texture } from 'three'
@@ -10,7 +10,7 @@ import { GetSpotLight } from './setup/lights/lightsTypes'
  */
 export const setupMember = {
   gui: {
-    active: true,
+    active: false,
     stats: false,
   },
   renderer: {

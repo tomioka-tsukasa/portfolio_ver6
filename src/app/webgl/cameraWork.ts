@@ -31,6 +31,38 @@ export const cameraWork = {
       },
     },
   },
+  home: {
+    position: {
+      x: 0,
+      y: 49,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 60,
+        z: 0,
+      },
+    },
+    target: {
+      x: 0,
+      y: 0,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+    },
+    rotation: {
+      x: 0,
+      y: 0,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+    },
+  },
   menu: {
     position: {
       x: 0,
@@ -65,8 +97,8 @@ export const cameraWork = {
   },
   about: {
     position: {
-      x: 22.619601484610477,
-      y: 53.05602293482008,
+      x: 54,
+      y: 65.05602293482008,
       z: 0,
       mobile: {
         x: 0,
@@ -75,7 +107,71 @@ export const cameraWork = {
       },
     },
     target: {
-      x: 22.619601484610477,
+      x: 54,
+      y: 0,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+    },
+    rotation: {
+      x: 0,
+      y: 0,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+    },
+  },
+  works: {
+    position: {
+      x: 0,
+      y: 49,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 60,
+        z: 0,
+      },
+    },
+    target: {
+      x: 0,
+      y: 0,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+    },
+    rotation: {
+      x: 0,
+      y: 0,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+    },
+  },
+  blog: {
+    position: {
+      x: 0,
+      y: 49,
+      z: 0,
+      mobile: {
+        x: 0,
+        y: 60,
+        z: 0,
+      },
+    },
+    target: {
+      x: 0,
       y: 0,
       z: 0,
       mobile: {

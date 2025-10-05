@@ -8,6 +8,8 @@ import Canvas from './components/Canvas/Canvas'
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen'
 import { Menu } from './components/Menu/Menu'
 import { PageTitleContainer } from './components/PageTitleContainer/PageTitleContainer'
+import { MenuTrigger } from './components/MenuTrigger/MenuTrigger'
+import { MainContentProvider } from './components/MainContents/MainContentProvider'
 
 const zenOldMincho = Zen_Old_Mincho({
   variable: '--font-zen-old-mincho',
@@ -71,9 +73,12 @@ export default function RootLayout({
         <body className={`${zenOldMincho.variable} ${playfairDisplay.variable} ${italiana.variable} ${bungeeHairline.variable}`}>
           <Canvas />
           <LoadingScreen />
+          <MenuTrigger />
           <Menu />
           <PageTitleContainer />
-          {children}
+          <MainContentProvider>
+            {children}
+          </MainContentProvider>
         </body>
       </html>
     </StoreProvider>

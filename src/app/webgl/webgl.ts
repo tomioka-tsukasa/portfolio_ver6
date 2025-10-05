@@ -245,7 +245,7 @@ const initWebGL: InitWebGL = (
     /**
      * メタボールのアニメーション
      */
-    metaballController.animate(timestamp)
+    metaballController?.animate(timestamp)
 
     /**
      * レンダリング
