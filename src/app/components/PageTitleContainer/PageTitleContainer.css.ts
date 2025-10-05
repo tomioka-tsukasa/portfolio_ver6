@@ -1,4 +1,4 @@
-import { rvw } from '@/styles/responsive.css'
+import { rvw, sp } from '@/styles/responsive.css'
 import { bungeeHairline } from '@/styles/fontUtils'
 import { style } from '@vanilla-extract/css'
 
@@ -21,7 +21,12 @@ export const content = style({
   justifyContent: 'space-between',
   alignItems: 'flex-end',
   width: '100%',
-  ...rvw.gap(120, 40),
+  ...rvw.gap(120, 6),
+  ...sp({
+    flexDirection: 'column-reverse',
+    alignItems: 'flex-start',
+    ...rvw.gap(24, 24),
+  }),
 })
 
 export const pageTitle = style({

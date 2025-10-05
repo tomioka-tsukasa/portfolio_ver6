@@ -5,12 +5,12 @@ import { style } from '@vanilla-extract/css'
 
 export const root = style({
   display: 'flex',
-  gap: '24px',
   alignItems: 'center',
   position: 'relative',
   width: '100%',
   height: '100%',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  ...rvw.gap(24, 18),
 })
 
 export const textWrapper = style({
@@ -20,7 +20,6 @@ export const textWrapper = style({
 export const text = style({
   ...playfairDisplay(),
   position: 'relative',
-  fontSize: '48px',
   color: colors.text.white,
   whiteSpace: 'nowrap',
   ...rvw.fontSize(48, 20),
@@ -47,11 +46,11 @@ export const borderWrapper = style({
   gap: '10px',
   alignItems: 'flex-start',
   justifyContent: 'flex-end',
-  height: '48px',
   flexGrow: 1,
-  paddingBottom: '14px',
   position: 'relative',
   width: '100%',
+  ...rvw.height(48, 32),
+  ...rvw.paddingBottom(14, 6),
 })
 
 export const border = style({

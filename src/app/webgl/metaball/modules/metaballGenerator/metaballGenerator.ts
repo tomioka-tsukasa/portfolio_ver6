@@ -1,4 +1,4 @@
-import { Color } from 'three'
+import * as THREE from 'three'
 import { MarchingCubesManager } from '../marchingCubes/marchingCubesTypes'
 import { MetaballConfig, MetaballState } from './metaballGeneratorTypes'
 import { webglCtrl } from '../../../setupMember'
@@ -75,13 +75,13 @@ export class MetaballGenerator {
 
     // Three.js公式の位置計算アルゴリズム
     const rainbow = [
-      new Color(0xff0000),  // 赤
-      new Color(0xffbb00),  // オレンジ
-      new Color(0xffff00),  // 黄
-      new Color(0x00ff00),  // 緑
-      new Color(0x0000ff),  // 青
-      new Color(0x9400bd),  // 紫
-      new Color(0xc800eb)   // マゼンタ
+      new THREE.Color(0xff0000),  // 赤
+      new THREE.Color(0xffbb00),  // オレンジ
+      new THREE.Color(0xffff00),  // 黄
+      new THREE.Color(0x00ff00),  // 緑
+      new THREE.Color(0x0000ff),  // 青
+      new THREE.Color(0x9400bd),  // 紫
+      new THREE.Color(0xc800eb)   // マゼンタ
     ]
     const subtract = this.config.subtract
     const strength = this.config.strength / ((Math.sqrt(this.config.numBlobs) - 1) / 4 + 1)
@@ -174,7 +174,7 @@ export class MetaballGenerator {
 
     // ★Material update - カメラの位置情報をマテリアルに送信してインナーグローを実現
     if (marchingCubes.material && webglCtrl.camera) {
-      const material = marchingCubes.material as any
+      const material = marchingCubes.material as THREE.ShaderMaterial
       if (material.uniforms && material.uniforms.viewVector) {
         material.uniforms.viewVector.value = webglCtrl.camera.position
         material.uniformsNeedUpdate = true

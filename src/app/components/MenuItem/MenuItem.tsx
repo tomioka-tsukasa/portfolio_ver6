@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import * as styles from './MenuItem.css'
+import { AppLink } from '@/components/ui/AppLink/AppLink'
 
 export interface MenuItemProps {
   text: string
@@ -29,7 +29,7 @@ export const MenuItem = ({
   )
 
   if (href) {
-    return <Link href={href} className={styles.root}>{content}</Link>
+    return <AppLink href={href} className={styles.root}>{content}</AppLink>
   }
 
   return content

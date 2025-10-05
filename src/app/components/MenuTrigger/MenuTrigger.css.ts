@@ -31,7 +31,7 @@ export const triggerLine = style({
 
   selectors: {
     ['&:nth-child(1)']: {
-      transition: 'all 0.2s ease-in-out 0.1s',
+      transition: 'all 0.4s ease-out 0.1s',
       transformOrigin: 'left bottom',
     },
     ['&:nth-child(2)']: {

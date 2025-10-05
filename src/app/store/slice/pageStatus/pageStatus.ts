@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { InitialState, SetCurrentStatusAction } from './pageStatusTypes'
+import { InitialState, SetCurrentPageAction, SetCurrentStatusAction } from './pageStatusTypes'
 import { webglCtrl } from '@/app/webgl/setupMember'
 
 const initialState: InitialState = {
@@ -15,8 +15,11 @@ const pageStatus = createSlice({
       state.currentStatus = action.payload
       webglCtrl.pageStatus = action.payload
     },
+    setCurrentPage(state, action: PayloadAction<SetCurrentPageAction>) {
+      state.currentPage = action.payload
+    }
   }
 })
 
-export const { setCurrentStatus } = pageStatus.actions
+export const { setCurrentStatus, setCurrentPage } = pageStatus.actions
 export default pageStatus.reducer

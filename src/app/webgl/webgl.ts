@@ -138,7 +138,6 @@ const initWebGL: InitWebGL = (
   /**
    * メッシュ設定
    */
-  const gridHelper = new THREE.GridHelper(100, 100)
   const mesh = (() => {
     const geo = new THREE.SphereGeometry(10, 32, 32)
     const mat = new THREE.ShaderMaterial({

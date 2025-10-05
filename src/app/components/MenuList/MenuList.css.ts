@@ -7,7 +7,7 @@ export const root = style({
   alignItems: 'flex-start',
   width: '100%',
   position: 'relative',
-  ...rvw.gap(32),
+  ...rvw.gap(32, 24),
 })
 
 export const menuItemWrapper = style({

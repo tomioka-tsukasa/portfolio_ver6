@@ -1,4 +1,4 @@
-import { rvw, sp } from '@/styles/responsive.css'
+import { pcOver, rvw, sp } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
 import { style } from '@vanilla-extract/css'
 
@@ -44,5 +44,9 @@ export const text = style({
   ...sp({
     fontSize: '12px',
     maxWidth: '100%',
+  }),
+  ...pcOver({
+    ...rvw.fontSize(14),
+    ...rvw.maxWidth(540),
   }),
 })

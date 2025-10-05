@@ -1,5 +1,5 @@
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes.js'
-import { Material } from 'three'
+import { Material, Scene } from 'three'
 
 /**
  * MarchingCubes設定用の型定義
@@ -22,5 +22,5 @@ export interface MarchingCubesManager {
   /** 現在の設定 */
   config: MarchingCubesConfig
   /** 親シーンオブジェクト */
-  parentScene?: any
+  parentScene?: Scene
 }
