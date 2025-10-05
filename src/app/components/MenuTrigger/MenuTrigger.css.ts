@@ -1,4 +1,4 @@
-import { rvw } from '@/styles/responsive.css'
+import { rvw, sp } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
 import { style } from '@vanilla-extract/css'
 
@@ -24,8 +24,11 @@ export const triggerContainer = style([
     justifyContent: 'center',
     alignItems: 'center',
   },
-  rvw.width(48),
-  rvw.gap(12),
+  rvw.width(48, 36),
+  rvw.gap(12, 8),
+  sp({
+    maxWidth: '48px',
+  }),
 ])
 
 export const triggerLine = style([
@@ -50,4 +53,7 @@ export const triggerLine = style([
     }
   },
   rvw.height(4, 3),
+  sp({
+    maxHeight: '4px',
+  }),
 ])

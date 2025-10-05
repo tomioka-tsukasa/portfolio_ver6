@@ -57,7 +57,7 @@ export const text = style([
     color: colors.text.white,
     ...zenOldMincho(),
   },
-  rvw.fontSize(18, 10),
+  rvw.fontSize(18, 12),
 ])
 
 export const lineContainer = style([
@@ -69,7 +69,7 @@ export const lineContainer = style([
     width: '1px',
     overflow: 'hidden',
   },
-  rvw.height(110, 100),
+  rvw.height(110, 70),
 ])
 
 export const line = style([
@@ -83,7 +83,7 @@ export const line = style([
     backgroundColor: colors.text.white_50,
     animation: `${lineAnimation} 2.4s ease-in-out infinite`,
   },
-  rvw.height(110, 100),
+  rvw.height(110, 70),
 ])
 
 export const markerContainer = style([
@@ -92,9 +92,9 @@ export const markerContainer = style([
     left: '50%',
     transform: 'translateX(-50%)',
   },
-  rvw.width(120, 60),
-  rvw.height(120, 60),
-  rvw.bottom(-60, 60),
+  rvw.width(120, 90),
+  rvw.height(120, 90),
+  rvw.bottom(-60, -45),
 ])
 
 export const markerInner = style({

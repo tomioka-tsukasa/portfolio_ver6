@@ -69,9 +69,9 @@ export const cameraWork = {
       y: 106.14058902365646,
       z: 0,
       mobile: {
-        x: 0,
-        y: 60,
-        z: 0,
+        x: -29.53605610448507,
+        y: 117.27831515975302,
+        z: 36,
       },
     },
     target: {
@@ -79,9 +79,9 @@ export const cameraWork = {
       y: 0,
       z: 0,
       mobile: {
-        x: 0,
+        x: -29.53605610448507,
         y: 0,
-        z: 0,
+        z: 36,
       },
     },
     rotation: {
@@ -101,9 +101,9 @@ export const cameraWork = {
       y: 48,
       z: 0,
       mobile: {
-        x: 0,
-        y: 60,
-        z: 0,
+        x: 21,
+        y: 80,
+        z: 1.5,
       },
     },
     target: {
@@ -111,9 +111,9 @@ export const cameraWork = {
       y: 0,
       z: 0,
       mobile: {
-        x: 0,
+        x: 21,
         y: 0,
-        z: 0,
+        z: 1.5,
       },
     },
     rotation: {

@@ -28,7 +28,6 @@ export const content = style([
   rvw.gap(120, 6),
   sp({
     flexDirection: 'column-reverse',
-    alignItems: 'flex-start',
     ...rvw.gap(24, 24),
   }),
 ])
@@ -54,7 +53,7 @@ export const consoleText = style([
     lineHeight: 1,
     ...bungeeHairline(),
   },
-  rvw.fontSize(12, 8),
+  rvw.fontSize(12, '8px'),
 ])
 
 export const unactive = style({
