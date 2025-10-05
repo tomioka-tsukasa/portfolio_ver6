@@ -1,19 +1,18 @@
 'use client'
 
-import { setCurrentPage } from '@/app/store/slice/pageStatus/pageStatus'
+import { setCurrentStatus } from '@/app/store/slice/pageStatus/pageStatus'
 import { MenuItem } from '../MenuItem/MenuItem'
 import * as styles from './MenuList.css'
-import { useAppDispatch } from '@/app/store/hook'
-import { PageId } from '@/modules/pageChanger/pageChangerTypes'
+import { useAppDispatch, useAppSelector } from '@/app/store/hook'
+import { PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
 import { createPageChanger } from '@/modules/pageChanger/pageChanger'
 
 export interface MenuListProps {
   items?: Array<{
     text: string
-    id?: PageId
+    id?: PageStatus
     status?: 'default' | 'current'
   }>
-  currentPath?: PageId
 }
 
 export const MenuList = ({
@@ -23,14 +22,14 @@ export const MenuList = ({
     { text: 'Works.', id: 'works' },
     { text: 'Blog.', id: 'blog' }
   ],
-  currentPath = 'home'
 }: MenuListProps) => {
   const dispatch = useAppDispatch()
   const pageChanger = createPageChanger(dispatch)
+  const currentPage = useAppSelector(selector => selector.pageStatus.currentPage)
 
-  const clickHandler = (id: PageId) => {
+  const clickHandler = (id: PageStatus) => {
     pageChanger({ pageId: id })
-    dispatch(setCurrentPage(id))
+    dispatch(setCurrentStatus(id))
   }
 
   return (
@@ -38,9 +37,9 @@ export const MenuList = ({
       {items.map((item, index) => (
         <div key={index} className={styles.menuItemWrapper}>
           <MenuItem
-            onClick={() => clickHandler(item.id as PageId)}
+            onClick={() => clickHandler(item.id as PageStatus)}
             text={item.text}
-            status={item.status || (currentPath === item.id ? 'current' : 'default')}
+            status={item.status || (currentPage === item.id ? 'current' : 'default')}
             href={item.id === 'home' ? '/' : `/${item.id}`}
           />
         </div>

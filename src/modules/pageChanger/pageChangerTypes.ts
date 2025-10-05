@@ -1,9 +1,9 @@
 import { CameraWorkMember } from '@/app/webgl/cameraWork'
 
-export type PageId = 'home' | 'menu' | 'about' | 'works' | 'blog'
+export type PageStatus = 'home' | 'menu' | 'about' | 'works' | 'blog'
 
 export interface PageTransitionConfig {
-  pageId: PageId | 'back'
+  pageId: PageStatus | 'back'
   duration?: number
 }
 

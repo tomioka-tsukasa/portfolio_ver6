@@ -4,7 +4,7 @@ import * as styles from './MainContentProvider.css'
 import { useAppSelector } from '@/app/store/hook'
 
 export const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
-  const pageStatus = useAppSelector(selector => selector.pageStatus.currentPage)
+  const pageStatus = useAppSelector(selector => selector.pageStatus.currentStatus)
 
   return (
     <div className={`${styles.root} ${pageStatus === 'menu' ? styles.unactive : ''}`}>

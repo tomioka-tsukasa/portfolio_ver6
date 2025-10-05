@@ -5,7 +5,7 @@ import { PageTitle } from '../PageTitle/PageTitle'
 import { useAppSelector } from '@/app/store/hook'
 
 export const PageTitleContainer = () => {
-  const pageStatus = useAppSelector(selector => selector.pageStatus.currentPage)
+  const pageStatus = useAppSelector(selector => selector.pageStatus.currentStatus)
 
   return (
     <div className={`${styles.root} ${pageStatus === 'home' ? styles.unactive : ''}`}>

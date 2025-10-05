@@ -3,13 +3,14 @@ import { cameraAnimation } from '@/app/webgl/animation/cameraAnimation/cameraAni
 import { cameraWork } from '@/app/webgl/cameraWork'
 import { metaballConfigs, metaballAnimationConfigs } from '@/app/webgl/metaballMember'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
-import { setCurrentPage } from '@/app/store/slice/pageStatus/pageStatus'
+import { setCurrentStatus } from '@/app/store/slice/pageStatus/pageStatus'
 import type { AppDispatch } from '@/app/store/makeStore'
 import gsap from 'gsap'
-import type { PageId, PageTransitionConfig } from './pageChangerTypes'
+import type { PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
+import type { PageTransitionConfig } from '@/modules/pageChanger/pageChangerTypes'
 
 // ページ履歴管理
-const pageHistory: PageId[] = ['home']
+const pageHistory: PageStatus[] = ['home']
 import { MetaballController } from '@/app/webgl/metaball/metaballTypes'
 
 interface PageChanger {
@@ -17,7 +18,7 @@ interface PageChanger {
 }
 
 // ページごとの設定を動的に取得する関数
-const getPageConfig = (pageId: PageId) => {
+const getPageConfig = (pageId: PageStatus) => {
   const cameraConfig = cameraWork[pageId] || cameraWork.default
   const metaballConfig = metaballConfigs[pageId] || metaballConfigs.home
   const metaballAnimationConfig = metaballAnimationConfigs[pageId] || metaballAnimationConfigs.home
@@ -31,7 +32,7 @@ const getPageConfig = (pageId: PageId) => {
 
 export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
   // 'back'が指定された場合は前のページに戻る
-  let targetPageId: PageId
+  let targetPageId: PageStatus
 
   if (pageId === 'back') {
     if (pageHistory.length > 1) {
@@ -44,7 +45,7 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
       targetPageId = 'home'
     }
   } else {
-    targetPageId = pageId as PageId
+    targetPageId = pageId as PageStatus
     // 新しいページを履歴に追加（同じページの連続は追加しない）
     if (pageHistory[pageHistory.length - 1] !== targetPageId) {
       pageHistory.push(targetPageId)
@@ -137,7 +138,7 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
 export const createPageChanger = (dispatch: AppDispatch) => {
   return ({ pageId, duration = 2000 }: PageTransitionConfig) => {
     // 'back'の場合は実際の遷移先ページIDを取得してReduxに設定
-    let targetPageId: PageId
+    let targetPageId: PageStatus
 
     if (pageId === 'back') {
       if (pageHistory.length > 1) {
@@ -146,11 +147,11 @@ export const createPageChanger = (dispatch: AppDispatch) => {
         targetPageId = 'home'
       }
     } else {
-      targetPageId = pageId as PageId
+      targetPageId = pageId as PageStatus
     }
 
     pageChanger({ pageId, duration })
-    dispatch(setCurrentPage(targetPageId))
+    dispatch(setCurrentStatus(targetPageId))
   }
 }
 

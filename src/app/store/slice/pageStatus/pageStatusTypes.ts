@@ -1,7 +1,10 @@
 export type InitialState = {
-  currentPage: 'home' | 'menu' | 'about' | 'works' | 'blog'
+  currentStatus: PageStatus
+  currentPage: PageId
 }
 
-export type PageId = 'home' | 'menu' | 'about' | 'works' | 'blog'
+export type PageStatus = 'home' | 'menu' | 'about' | 'works' | 'blog'
 
-export type SetCurrentPageAction = PageId
+export type PageId = 'home' | 'about' | 'works' | 'blog'
+
+export type SetCurrentStatusAction = PageStatus

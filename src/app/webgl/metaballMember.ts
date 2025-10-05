@@ -1,4 +1,4 @@
-import { PageId } from '@/modules/pageChanger/pageChangerTypes'
+import { PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
 
 export interface MetaballConfig {
   numBlobs: number
@@ -10,7 +10,7 @@ export interface MetaballConfig {
   targetX: number
   duration: number
   ease: string
-  animationState?: PageId
+  animationState?: PageStatus
 }
 
 export interface MetaballAnimationConfig {

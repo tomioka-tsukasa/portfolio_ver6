@@ -5,7 +5,7 @@ import * as styles from './MenuTrigger.css'
 import { createPageChanger } from '@/modules/pageChanger/pageChanger'
 
 export const MenuTrigger = () => {
-  const pageStatus = useAppSelector(selector => selector.pageStatus.currentPage)
+  const pageStatus = useAppSelector(selector => selector.pageStatus.currentStatus)
   const dispatch = useAppDispatch()
   const pageChanger = createPageChanger(dispatch)
 
