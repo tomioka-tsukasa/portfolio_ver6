@@ -38,7 +38,7 @@ const bungeeHairline = Bungee_Hairline({
 export const metadata: Metadata = {
   title: 'meta title',
   description: 'meta description',
-  manifest: '/sakura_camera/assets/home-icon/manifest.json',
+  // manifest: '/sakura_camera/assets/home-icon/manifest.json',
   openGraph: {
     title: 'meta title',
     siteName: 'meta title',
