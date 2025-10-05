@@ -39,7 +39,7 @@ export const MenuList = ({
           <MenuItem
             onClick={() => clickHandler(item.id as PageStatus)}
             text={item.text}
-            status={item.status || (currentPage === item.id ? 'current' : 'default')}
+            unactive={currentPage === item.id ? true : false}
             href={item.id === 'home' ? '/' : `/${item.id}`}
           />
         </div>

@@ -3,6 +3,10 @@ import { colors } from '@/styles/variables'
 import { playfairDisplay } from '@/styles/fontUtils'
 import { style } from '@vanilla-extract/css'
 
+export const unactive = style({
+  pointerEvents: 'none',
+})
+
 export const root = style([
   {
     display: 'flex',
@@ -25,13 +29,17 @@ export const text = style([
     position: 'relative',
     color: colors.text.white,
     whiteSpace: 'nowrap',
+    selectors: {
+      [`.${unactive} &`]: {
+        color: colors.text.white_30,
+        pointerEvents: 'none',
+      },
+    },
   },
   rvw.fontSize(48, 20),
 ])
 
 export const textCurrent = style({
-  color: colors.text.white_30,
-  pointerEvents: 'none',
 })
 
 export const textStrikethrough = style({

@@ -3,24 +3,24 @@ import { AppLink } from '@/components/ui/AppLink/AppLink'
 
 export interface MenuItemProps {
   text: string
-  status?: 'default' | 'current'
   href?: string
   onClick?: () => void
+  unactive?: boolean
 }
 
 export const MenuItem = ({
   text,
-  status = 'default',
   href,
-  onClick
+  onClick,
+  unactive = false
 }: MenuItemProps) => {
   const content = (
-    <div className={styles.root} onClick={onClick}>
+    <div className={`${styles.root} ${unactive ? styles.unactive : ''}`} onClick={onClick}>
       <div className={styles.textWrapper}>
-        <p className={`${status === 'current' ? styles.textCurrent : ''} ${styles.text}`}>
+        <p className={`${styles.text}`}>
           {text}
         </p>
-        {status === 'current' && <div className={styles.textStrikethrough} />}
+        {unactive && <div className={styles.textStrikethrough} />}
       </div>
       <div className={styles.borderWrapper}>
         <div className={styles.border} />
@@ -29,7 +29,7 @@ export const MenuItem = ({
   )
 
   if (href) {
-    return <AppLink href={href} className={styles.root}>{content}</AppLink>
+    return <AppLink href={href} className={`${styles.root} ${unactive ? styles.unactive : ''}`}>{content}</AppLink>
   }
 
   return content
