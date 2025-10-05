@@ -97,8 +97,8 @@ export const cameraWork = {
   },
   about: {
     position: {
-      x: 54,
-      y: 65.05602293482008,
+      x: 48.01712053685565,
+      y: 48,
       z: 0,
       mobile: {
         x: 0,
@@ -107,7 +107,7 @@ export const cameraWork = {
       },
     },
     target: {
-      x: 54,
+      x: 48.01712053685565,
       y: 0,
       z: 0,
       mobile: {

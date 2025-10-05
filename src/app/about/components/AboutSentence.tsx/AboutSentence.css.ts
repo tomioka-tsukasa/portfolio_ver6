@@ -13,7 +13,7 @@ export const root = style({
 })
 
 export const content = style({
-  backgroundColor: colors.bg.black_30,
+  backgroundColor: colors.bg.black_50,
   width: '100%',
   display: 'flex',
   flexDirection: 'column',

@@ -4,9 +4,6 @@ import { colors } from '@/styles/variables'
 import { italiana } from '@/styles/fontUtils'
 
 export const root = style({
-  position: 'fixed',
-  top: '0',
-  left: '0',
   width: '100%',
   height: '100vh',
   display: 'flex',

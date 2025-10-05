@@ -26,8 +26,8 @@ export const triggerContainer = style({
 
 export const triggerLine = style({
   width: '100%',
-  height: '4px',
   backgroundColor: colors.text.white_80,
+  ...rvw.height(4, 3),
 
   selectors: {
     ['&:nth-child(1)']: {
