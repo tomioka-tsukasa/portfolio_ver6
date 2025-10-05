@@ -19,7 +19,12 @@ const lineAnimation = keyframes({
 })
 
 const markerOuterAnimation = keyframes({
-  '0%': {
+  '5%': {
+    width: '10%',
+    height: '10%',
+    opacity: 0,
+  },
+  '6%': {
     width: '10%',
     height: '10%',
     opacity: 1,
@@ -80,7 +85,7 @@ export const line = style([
     transform: 'translateX(-50%)',
     width: '100%',
     height: '100%',
-    backgroundColor: colors.text.white_50,
+    backgroundColor: colors.text.white_70,
     animation: `${lineAnimation} 2.4s ease-in-out infinite`,
   },
   rvw.height(110, 70),
@@ -108,11 +113,14 @@ export const markerItemOuter = style({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '100%',
-  height: '100%',
   borderRadius: '50%',
+  width: '10%',
+  height: '10%',
+  opacity: 0,
   border: `1px solid ${colors.text.white}`,
-  animation: `${markerOuterAnimation} 2.4s ease-in-out infinite`,
+  animation: `${markerOuterAnimation} 2.4s ease-in-out 0s infinite`,
+  willChange: 'opacity, width, height',
+  backfaceVisibility: 'hidden',
 })
 
 export const markerItem = style({
