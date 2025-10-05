@@ -9,8 +9,8 @@ export const root = style([
     transition: 'opacity 0.6s ease-in-out',
     cursor: 'pointer',
   },
-  rvw.right(32),
-  rvw.top(24),
+  rvw.right(32, '16px'),
+  rvw.top(24, '20px'),
 ])
 
 export const open = style({
@@ -23,6 +23,7 @@ export const triggerContainer = style([
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    minWidth: '32px',
   },
   rvw.width(48, 36),
   rvw.gap(12, 8),
