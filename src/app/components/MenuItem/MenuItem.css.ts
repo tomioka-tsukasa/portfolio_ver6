@@ -7,6 +7,8 @@ export const unactive = style({
   pointerEvents: 'none',
 })
 
+export const hovered = style({})
+
 export const root = style([
   {
     display: 'flex',
@@ -21,6 +23,13 @@ export const root = style([
 
 export const textWrapper = style({
   position: 'relative',
+  transition: 'all 0.4s cubic-bezier(0, 0.5, 0.5, 1) 0s',
+  selectors: {
+    [`.${hovered} &`]: {
+      paddingLeft: '2%',
+      filter: 'brightness(0.7)',
+    },
+  },
 })
 
 export const text = style([
@@ -29,6 +38,8 @@ export const text = style([
     position: 'relative',
     color: colors.text.white,
     whiteSpace: 'nowrap',
+    textAlign: 'right',
+    transition: 'all 0.4s cubic-bezier(0, 0.5, 0.5, 1) 0s',
     selectors: {
       [`.${unactive} &`]: {
         color: colors.text.white_30,
@@ -38,9 +49,6 @@ export const text = style([
   },
   rvw.fontSize(48, 20),
 ])
-
-export const textCurrent = style({
-})
 
 export const textStrikethrough = style({
   backgroundColor: colors.text.white_30,

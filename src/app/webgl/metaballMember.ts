@@ -74,7 +74,7 @@ export const metaballAnimationConfigs = {
     }
   },
   about: {
-    speed: 0.32,
+    speed: 0.15,
     amplitude: {
       x: 0.15,
       y: 0.15,

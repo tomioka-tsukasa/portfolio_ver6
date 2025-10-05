@@ -14,7 +14,7 @@ export const root = style({
   alignItems: 'center',
   pointerEvents: 'none',
   opacity: 0,
-  backgroundColor: colors.bg.black_50,
+  backgroundColor: colors.bg.black_30,
   transition: 'opacity 0.6s ease-in-out',
 })
 

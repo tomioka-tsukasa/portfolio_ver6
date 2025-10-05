@@ -35,14 +35,13 @@ export const triggerLine = style([
   {
     width: '100%',
     backgroundColor: colors.text.white_80,
-
     selectors: {
       ['&:nth-child(1)']: {
-        transition: 'all 0.4s ease-out 0.1s',
+        transition: 'all 0.4s cubic-bezier(0, 0.5, 0.5, 1) 0.1s',
         transformOrigin: 'left bottom',
       },
       ['&:nth-child(2)']: {
-        transition: 'all 0.3s ease-out 0s',
+        transition: 'all 0.3s cubic-bezier(0, 0.5, 0.5, 1) 0s',
       },
       [`${open} &:nth-child(1)`]: {
         transform: 'rotate(32deg)',
