@@ -18,18 +18,22 @@ export const main = style({
   flexDirection: 'column',
 })
 
-export const title = style({
-  fontWeight: 'bold',
-  color: colors.text.white,
-  letterSpacing: '0.06em',
-  lineHeight: 1,
-  ...italiana(),
-  ...rvw.fontSize(64, 32),
-})
+export const title = style([
+  {
+    fontWeight: 'bold',
+    color: colors.text.white,
+    letterSpacing: '0.06em',
+    lineHeight: 1,
+    ...italiana(),
+  },
+  rvw.fontSize(64, 32),
+])
 
-export const subTitle = style({
-  color: colors.text.white_60,
-  textAlign: 'center',
-  ...rvw.marginLeft(8, 4),
-  ...rvw.fontSize(16, 10),
-})
+export const subTitle = style([
+  {
+    color: colors.text.white_60,
+    textAlign: 'center',
+  },
+  rvw.marginLeft(8, 4),
+  rvw.fontSize(16, 10),
+])

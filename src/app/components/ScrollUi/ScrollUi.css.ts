@@ -36,13 +36,15 @@ const markerOuterAnimation = keyframes({
   },
 })
 
-export const root = style({
-  position: 'fixed',
-  left: '50%',
-  bottom: '0',
-  transform: 'translateX(-50%)',
-  ...rvw.height(150, 100),
-})
+export const root = style([
+  {
+    position: 'fixed',
+    left: '50%',
+    bottom: '0',
+    transform: 'translateX(-50%)',
+  },
+  rvw.height(150, 100),
+])
 
 export const container = style({
   position: 'relative',
@@ -50,42 +52,50 @@ export const container = style({
   height: '100%',
 })
 
-export const text = style({
-  color: colors.text.white,
-  ...zenOldMincho(),
-  ...rvw.fontSize(18, 10),
-})
+export const text = style([
+  {
+    color: colors.text.white,
+    ...zenOldMincho(),
+  },
+  rvw.fontSize(18, 10),
+])
 
-export const lineContainer = style({
-  position: 'absolute',
-  bottom: '0',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  width: '1px',
-  ...rvw.height(110, 100),
-  overflow: 'hidden',
-})
+export const lineContainer = style([
+  {
+    position: 'absolute',
+    bottom: '0',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '1px',
+    overflow: 'hidden',
+  },
+  rvw.height(110, 100),
+])
 
-export const line = style({
-  position: 'absolute',
-  bottom: '0',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  width: '100%',
-  height: '100%',
-  backgroundColor: colors.text.white_50,
-  ...rvw.height(110, 100),
-  animation: `${lineAnimation} 2.4s ease-in-out infinite`,
-})
+export const line = style([
+  {
+    position: 'absolute',
+    bottom: '0',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.text.white_50,
+    animation: `${lineAnimation} 2.4s ease-in-out infinite`,
+  },
+  rvw.height(110, 100),
+])
 
-export const markerContainer = style({
-  position: 'absolute',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  ...rvw.width(120, 60),
-  ...rvw.height(120, 60),
-  ...rvw.bottom(-60, 60),
-})
+export const markerContainer = style([
+  {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+  },
+  rvw.width(120, 60),
+  rvw.height(120, 60),
+  rvw.bottom(-60, 60),
+])
 
 export const markerInner = style({
   position: 'relative',

@@ -1,3 +1,4 @@
+import { rvw } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
 import { style } from '@vanilla-extract/css'
 
@@ -22,19 +23,24 @@ export const active = style({
   pointerEvents: 'visible',
 })
 
-export const container = style({
-  position: 'relative',
-  width: '50%',
-  height: '100%',
-})
+export const container = style([
+  {
+    position: 'relative',
+    height: '100%',
+  },
+  rvw.width('50%', '100%'),
+])
 
-export const menuContent = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  position: 'relative',
-  top: '46%',
-  left: '16%',
-  transform: 'translateY(-50%)',
-  width: '72%',
-})
+export const menuContent = style([
+  {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    position: 'absolute',
+  },
+  rvw.width('72%', '90%'),
+  rvw.left('16%', '5%'),
+  rvw.top('46%', 'unset'),
+  rvw.bottom('unset', '24%'),
+  rvw.transform('translateY(-50%)', 'translateY(0)'),
+])

@@ -35,18 +35,20 @@ export const textContainer = style({
   }),
 })
 
-export const text = style({
-  color: colors.text.white,
-  lineHeight: '170%',
-  fontSize: '14px',
-  maxWidth: '540px',
-  ...rvw.width('100%', '100%'),
-  ...sp({
+export const text = style([
+  {
+    color: colors.text.white,
+    lineHeight: '170%',
+    fontSize: '14px',
+    maxWidth: '540px',
+  },
+  rvw.width('100%', '100%'),
+  sp({
     fontSize: '12px',
     maxWidth: '100%',
   }),
-  ...pcOver({
+  pcOver({
     ...rvw.fontSize(14),
     ...rvw.maxWidth(540),
   }),
-})
+])

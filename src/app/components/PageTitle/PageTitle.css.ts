@@ -9,16 +9,20 @@ export const root = style({
   justifyContent: 'center',
 })
 
-export const title = style({
-  color: colors.text.white_60,
-  fontWeight: 'bold',
-  lineHeight: 1,
-  letterSpacing: '0.06em',
-  ...italiana(),
-  ...rvw.fontSize(28, 20),
-})
+export const title = style([
+  {
+    color: colors.text.white_60,
+    fontWeight: 'bold',
+    lineHeight: 1,
+    letterSpacing: '0.06em',
+    ...italiana(),
+  },
+  rvw.fontSize(28, 20),
+])
 
-export const subTitle = style({
-  color: colors.text.white_40,
-  ...rvw.fontSize(10, 8),
-})
+export const subTitle = style([
+  {
+    color: colors.text.white_40,
+  },
+  rvw.fontSize(10, 8),
+])
