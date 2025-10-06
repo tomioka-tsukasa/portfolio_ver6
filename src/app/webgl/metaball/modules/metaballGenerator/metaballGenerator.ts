@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { MarchingCubesManager } from '../marchingCubes/marchingCubesTypes'
 import { MetaballConfig, MetaballState } from './metaballGeneratorTypes'
 import { webglCtrl } from '../../../setupMember'
+import { metaballAnimationConfigs } from '../../../metaballMember'
 import gsap from 'gsap'
 
 type AmplitudeConfig = {
@@ -19,15 +20,25 @@ export class MetaballGenerator {
   private config: MetaballConfig
   private metaballStates: MetaballState[] = []
   private time = 0
-  private currentAmplitude: AmplitudeConfig = {
-    amplitudeX: 0.15,
-    amplitudeY: 0.01,
-    amplitudeZ: 0.18,
+  private currentAmplitude: AmplitudeConfig
+
+  private initCurrentAmplitude(): AmplitudeConfig {
+    const currentPageId = webglCtrl.pageId || 'home'
+    const currentAnimationConfig = metaballAnimationConfigs[currentPageId] || metaballAnimationConfigs.home
+
+    console.log('MetaballGenerator: Using amplitude config for page:', currentPageId, currentAnimationConfig)
+
+    return {
+      amplitudeX: currentAnimationConfig.amplitude?.x || 0.15,
+      amplitudeY: currentAnimationConfig.amplitude?.y || 0.01,
+      amplitudeZ: currentAnimationConfig.amplitude?.z || 0.18,
+    }
   }
   private animationTimeline: gsap.core.Timeline | null = null
 
   constructor(config: MetaballConfig) {
     this.config = config
+    this.currentAmplitude = this.initCurrentAmplitude()
     this.initMetaballStates()
   }
 

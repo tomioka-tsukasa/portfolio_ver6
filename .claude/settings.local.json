@@ -4,7 +4,11 @@
       "WebFetch(domain:github.com)",
       "Bash(mkdir:*)",
       "Bash(npm run lint)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(open http://localhost:3001/about)",
+      "Bash(npm run dev:*)",
+      "Bash(open http://localhost:3000/about)",
+      "Bash(open http://localhost:3000)"
     ],
     "deny": [],
     "ask": []

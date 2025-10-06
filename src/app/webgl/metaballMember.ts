@@ -24,30 +24,60 @@ export interface MetaballAnimationConfig {
 
 export const metaballConfigs = {
   home: {
+    numBlobs: 4,
+    speed: 0.2,
+    strength: 1.6,
+    subtract: 10,
+    enableColors: true,
+    showFloor: false,
     targetX: 0,
     duration: 2,
     ease: 'power2.inOut',
     animationState: 'home' as const
   },
   menu: {
+    numBlobs: 6,
+    speed: 0.6,
+    strength: 2.0,
+    subtract: 8,
+    enableColors: true,
+    showFloor: false,
     targetX: -30,
     duration: 2,
     ease: 'power2.inOut',
     animationState: 'menu' as const
   },
   about: {
-    targetX: 22.619601484610477,
+    numBlobs: 3,
+    speed: 0.15,
+    strength: 1.2,
+    subtract: 12,
+    enableColors: true,
+    showFloor: false,
+    x: 48.01712053685565,
     duration: 2,
     ease: 'power2.inOut',
     animationState: 'about' as const
   },
   works: {
+    numBlobs: 5,
+    speed: 0.25,
+    strength: 1.8,
+    subtract: 9,
+    enableColors: true,
+    showFloor: true,
     targetX: 0,
     duration: 2,
     ease: 'power2.inOut',
     animationState: 'works' as const
   },
   blog: {
+    numBlobs: 4,
+    speed: 0.2,
+    strength: 1.6,
+    subtract: 10,
+    enableColors: true,
+    showFloor: false,
     targetX: 0,
     duration: 2,
     ease: 'power2.inOut',

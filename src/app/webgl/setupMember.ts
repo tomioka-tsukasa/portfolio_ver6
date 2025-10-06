@@ -78,6 +78,7 @@ export const webglCtrl: WebGLCtrl = {
   world: null,
   metaballController: null,
   pageStatus: 'home',
+  pageId: 'home',
 }
 
 /**

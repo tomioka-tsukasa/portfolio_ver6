@@ -17,6 +17,7 @@ import { MetaballConfig } from './modules/metaballGenerator/metaballGeneratorTyp
 import { StatsConfig } from './modules/stats/statsTypes'
 import { webglCtrl } from '../setupMember'
 import { MetaballController } from './metaballTypes'
+import { metaballConfigs } from '../metaballMember'
 
 /**
  * メタボール実装のメイン関数
@@ -65,13 +66,19 @@ export const metaball = (
     }),
   }
 
+  // 現在のページに対応するmetaball設定を取得
+  const currentPageId = webglCtrl.pageId || 'home'
+  const currentMetaballConfig = metaballConfigs[currentPageId] || metaballConfigs.home
+
+  console.log('Metaball: Using config for page:', currentPageId, currentMetaballConfig)
+
   const metaballConfig: MetaballConfig = {
-    speed: 0.2,
-    numBlobs: 4,
-    strength: 1.6,
-    subtract: 10,
-    enableColors: true,
-    showFloor: false,
+    speed: currentMetaballConfig.speed || 0.2,
+    numBlobs: currentMetaballConfig.numBlobs || 4,
+    strength: currentMetaballConfig.strength || 1.6,
+    subtract: currentMetaballConfig.subtract || 10,
+    enableColors: currentMetaballConfig.enableColors !== undefined ? currentMetaballConfig.enableColors : true,
+    showFloor: currentMetaballConfig.showFloor !== undefined ? currentMetaballConfig.showFloor : false,
   }
 
   const statsConfig: StatsConfig = {

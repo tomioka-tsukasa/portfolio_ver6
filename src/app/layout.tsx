@@ -10,6 +10,7 @@ import { Menu } from './components/Menu/Menu'
 import { PageTitleContainer } from './components/PageTitleContainer/PageTitleContainer'
 import { MenuTrigger } from './components/MenuTrigger/MenuTrigger'
 import { MainContentProvider } from './components/MainContents/MainContentProvider'
+import { PageInitProvider } from './components/PageInitProvider/PageInitProvider'
 
 const zenOldMincho = Zen_Old_Mincho({
   variable: '--font-zen-old-mincho',
@@ -69,18 +70,20 @@ export default function RootLayout({
   return <>
     <StoreProvider>
       <GsapManager />
-      <html lang='ja'>
-        <body className={`${zenOldMincho.variable} ${playfairDisplay.variable} ${italiana.variable} ${bungeeHairline.variable}`}>
-          <Canvas />
-          <LoadingScreen />
-          <MenuTrigger />
-          <Menu />
-          <PageTitleContainer />
-          <MainContentProvider>
-            {children}
-          </MainContentProvider>
-        </body>
-      </html>
+      <PageInitProvider>
+        <html lang='ja'>
+          <body className={`${zenOldMincho.variable} ${playfairDisplay.variable} ${italiana.variable} ${bungeeHairline.variable}`}>
+            <Canvas />
+            <LoadingScreen />
+            <MenuTrigger />
+            <Menu />
+            <PageTitleContainer />
+            <MainContentProvider>
+              {children}
+            </MainContentProvider>
+          </body>
+        </html>
+      </PageInitProvider>
     </StoreProvider>
   </>
 }

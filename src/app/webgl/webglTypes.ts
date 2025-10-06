@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { LoadedAssets } from './setupMember'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { PageStatus } from '../store/slice/pageStatus/pageStatusTypes'
+import { PageId, PageStatus } from '../store/slice/pageStatus/pageStatusTypes'
 import { MetaballController } from './metaball/metaballTypes'
 
 /**
@@ -33,5 +33,6 @@ export type WebGLCtrl = {
   car: GLTF | null
   world: GLTF | null
   pageStatus: PageStatus,
+  pageId: PageId,
   metaballController: MetaballController
 }

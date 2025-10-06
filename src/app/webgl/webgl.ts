@@ -27,6 +27,7 @@ import { setCameraGUI } from './gui/setter/camera/setCameraGUI'
 import { setPostprocessGUI } from './gui/setter/postprocess/setPostprocessGUI'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
 import { metaball } from './metaball/metaball'
+import { cameraWork as cameraWorkConfig } from './cameraWork'
 
 /**
  * 【WebGLの初期化】
@@ -94,23 +95,25 @@ const initWebGL: InitWebGL = (
   )
 
   /**
-   * カメラ設定
+   * カメラ設定 - 現在のページに対応するカメラワークを使用
    */
+  const currentCameraConfig = cameraWorkConfig[webglCtrl.pageId || 'home'] || cameraWorkConfig.home
+
+  console.log('WebGL: Using camera config for page:', webglCtrl.pageId || 'home', currentCameraConfig)
+
   const cameraWork = fixCamerawork(
-    setupMember.camera.default.position,
-    setupMember.camera.default.target,
-    setupMember.camera.default.rotation,
+    currentCameraConfig.position,
+    currentCameraConfig.target,
+    currentCameraConfig.rotation,
   )
 
-  const camera = getCamera({
-    position: cameraWork.position,
-  })
+  const camera = getCamera(cameraWork)
   const controls = getControls(
     camera,
     renderer,
     cameraWork.target,
   )
-  setCameraGUI(camera, cameraWork)
+  if (setupMember.gui.active) setCameraGUI(camera, cameraWork)
 
   // カメラの動きをログに出力
   getCameraInfo(camera, controls)
@@ -158,6 +161,11 @@ const initWebGL: InitWebGL = (
   mesh.position.set(0, 10, 0)
 
   /**
+   * グリッドヘルパー
+   */
+  const gridHelper = new THREE.GridHelper(100, 100)
+
+  /**
    * メタボール
    */
   const metaballController = metaball(scene)
@@ -167,7 +175,7 @@ const initWebGL: InitWebGL = (
    */
   scene.add(
     camera,
-    // gridHelper,
+    gridHelper,
     // mesh,
   )
 
@@ -186,7 +194,7 @@ const initWebGL: InitWebGL = (
   composer.addPass(bloomPass)
 
   // GUI設定
-  setPostprocessGUI(
+  if (setupMember.gui.active) setPostprocessGUI(
     bloomPass,
     {
       bloomPass: setupMember.postprocess.bloomPass
