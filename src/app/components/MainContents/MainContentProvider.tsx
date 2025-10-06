@@ -6,11 +6,13 @@ import { useEffect, useState } from 'react'
 
 export const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
   const pageStatus = useAppSelector(selector => selector.pageStatus.currentStatus)
-  const [canvasClassName, setCanvasClassName] = useState<'defaultType' | 'aboutType'>('defaultType')
+  const [canvasClassName, setCanvasClassName] = useState<'defaultType' | 'aboutType' | 'worksType'>('defaultType')
 
   useEffect(() => {
     if (pageStatus === 'about') {
       setCanvasClassName('aboutType')
+    } else if (pageStatus === 'works') {
+      setCanvasClassName('worksType')
     } else {
       setCanvasClassName('defaultType')
     }

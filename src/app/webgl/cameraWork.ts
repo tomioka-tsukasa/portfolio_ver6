@@ -101,9 +101,9 @@ export const cameraWork = {
       y: 48,
       z: 1.3981978440984177,
       mobile: {
-        x: 21,
-        y: 80,
-        z: 1.5,
+        x: 8,
+        y: 60,
+        z: 15,
       },
     },
     target: {
@@ -111,9 +111,9 @@ export const cameraWork = {
       y: -0.0000010544828656265988,
       z: 1.3981978440984177,
       mobile: {
-        x: 21,
+        x: 8,
         y: 0,
-        z: 1.5,
+        z: 15,
       },
     },
     rotation: {
@@ -130,11 +130,11 @@ export const cameraWork = {
   works: {
     position: {
       x: 0,
-      y: 49,
+      y: 88,
       z: 0,
       mobile: {
         x: 0,
-        y: 60,
+        y: 88,
         z: 0,
       },
     },
