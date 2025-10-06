@@ -176,7 +176,7 @@ const initWebGL: InitWebGL = (
    */
   scene.add(
     camera,
-    gridHelper,
+    // gridHelper,
     // mesh,
   )
 
