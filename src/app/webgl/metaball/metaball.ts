@@ -125,6 +125,14 @@ export const metaball = (
     // Stats開始
     beginStats(statsManager)
 
+    // カメラ位置でviewVectorを更新
+    if (webglCtrl.camera && marchingCubesConfig.material instanceof THREE.ShaderMaterial) {
+      const shaderMaterial = marchingCubesConfig.material as THREE.ShaderMaterial
+      if (shaderMaterial.uniforms?.viewVector) {
+        shaderMaterial.uniforms.viewVector.value.copy(webglCtrl.camera.position)
+      }
+    }
+
     // アニメーション中の設定を適用
     metaballGenerator.updateConfig({ speed: currentAnimatedConfig.speed })
 
