@@ -52,10 +52,8 @@ export const metaball = (
     material: new THREE.ShaderMaterial({
       uniforms : {
         viewVector: { value: webglCtrl.camera?.position || new THREE.Vector3() },//initial camera.position
-        uColor: { value: new THREE.Color(0xffffff)},// Default
-        // uColor: { value: new THREE.Color(0x42a9f1)},// Blue
-        // uColor: { value: new THREE.Color(0xF14242)},// Red
-        // uColor: { value: new THREE.Color(0x42F171)},// Green
+        uColor: { value: new THREE.Color(0xffffff)},// Base color multiplier
+        uColorPattern: { value: 0.0 }, // 0.0: blue, 1.0: red, 2.0: green, 3.0: white
         uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         uPos: { value: 0.0 },
       },

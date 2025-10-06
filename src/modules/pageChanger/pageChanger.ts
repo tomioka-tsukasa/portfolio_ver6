@@ -8,6 +8,7 @@ import type { AppDispatch } from '@/app/store/makeStore'
 import gsap from 'gsap'
 import type { PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
 import type { PageTransitionConfig } from '@/modules/pageChanger/pageChangerTypes'
+import * as THREE from 'three'
 
 // ページ履歴管理 - 動的に初期化
 const pageHistory: PageStatus[] = []
@@ -120,7 +121,7 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
         numBlobs: config.metaballAnimation.numBlobs,
       })
     }
-  }, duration / 2.12)
+  }, duration / 1.2)
 
   // メタボールのアニメーション設定更新（滑らかに変化）
   if (webglCtrl.metaballController) {
@@ -181,6 +182,44 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
         amplitudeY: config.metaballAnimationSettings.amplitude.y,
         amplitudeZ: config.metaballAnimationSettings.amplitude.z,
       }, duration / 1000)
+    }
+
+    // uColorPattern を滑らかにアニメーション
+    if (controller.marchingCubesManager?.marchingCubes?.material) {
+      const material = controller.marchingCubesManager.marchingCubes.material as THREE.ShaderMaterial
+      if (material.uniforms?.uColorPattern) {
+        // 文字列からパターン番号に変換
+        const getColorPatternValue = (pattern: string): number => {
+          switch (pattern) {
+            case 'blue': return 0.0
+            case 'red': return 1.0
+            case 'yellow': return 2.0
+            case 'white': return 3.0
+            default: return 0.0
+          }
+        }
+
+        const targetPattern = getColorPatternValue(config.metaballAnimationSettings.colorPattern)
+        const animationPattern = {
+          value: material.uniforms.uColorPattern.value
+        }
+
+        configAnimationTimeline.to(animationPattern, {
+          value: targetPattern,
+          duration: duration / 1000,
+          ease: 'power2.inOut',
+          onUpdate: () => {
+            if (material.uniforms?.uColorPattern) {
+              material.uniforms.uColorPattern.value = animationPattern.value
+            }
+          }
+        }, 0)
+
+        // uColorは常に白に保つ
+        if (material.uniforms?.uColor) {
+          material.uniforms.uColor.value.setRGB(1, 1, 1)
+        }
+      }
     }
 
     // タイムラインを保存

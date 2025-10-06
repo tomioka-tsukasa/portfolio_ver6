@@ -20,6 +20,7 @@ export interface MetaballAnimationConfig {
     y: number
     z: number
   }
+  colorPattern: 'blue' | 'red' | 'yellow' | 'white'
 }
 
 export const metaballConfigs = {
@@ -60,12 +61,12 @@ export const metaballConfigs = {
     animationState: 'about' as const
   },
   works: {
-    numBlobs: 5,
-    speed: 0.25,
-    strength: 1.8,
-    subtract: 9,
+    numBlobs: 4,
+    speed: 0.15,
+    strength: 8.0,
+    subtract: 3,
     enableColors: true,
-    showFloor: true,
+    showFloor: false,
     targetX: 0,
     duration: 2,
     ease: 'power2.inOut',
@@ -93,7 +94,8 @@ export const metaballAnimationConfigs = {
       x: 0.13,
       y: 0.01,
       z: 0.15
-    }
+    },
+    colorPattern: 'blue'
   },
   menu: {
     speed: 0.6,
@@ -101,7 +103,8 @@ export const metaballAnimationConfigs = {
       x: 0.25,
       y: 0.25,
       z: 0.28
-    }
+    },
+    colorPattern: 'red'
   },
   about: {
     speed: 0.15,
@@ -109,15 +112,20 @@ export const metaballAnimationConfigs = {
       x: 0.14,
       y: 0.15,
       z: 0.12
-    }
+    },
+    colorPattern: 'blue'
   },
   works: {
-    speed: 0.2,
+    speed: 0.15,
     amplitude: {
-      x: 0.15,
-      y: 0.01,
-      z: 0.18
-    }
+      x: 0.48,
+      y: 0.03,
+      z: 0.48
+      // x: 0.62,
+      // y: 0.12,
+      // z: 0.65
+    },
+    colorPattern: 'blue'
   },
   blog: {
     speed: 0.2,
@@ -125,7 +133,8 @@ export const metaballAnimationConfigs = {
       x: 0.15,
       y: 0.01,
       z: 0.18
-    }
+    },
+    colorPattern: 'blue'
   }
 } as const
 
