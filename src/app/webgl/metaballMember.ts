@@ -54,7 +54,7 @@ export const metaballConfigs = {
     subtract: 12,
     enableColors: true,
     showFloor: false,
-    x: 48.01712053685565,
+    targetX: 48.01712053685565,
     duration: 2,
     ease: 'power2.inOut',
     animationState: 'about' as const
