@@ -43,7 +43,6 @@ export const getControls: (
   target,
 ) => {
   const ctrl = new OrbitControls(camera, renderer.domElement)
-  ctrl.update()
   // ctrl.autoRotate = true
   ctrl.autoRotateSpeed = 2
   ctrl.target.set(
@@ -51,6 +50,7 @@ export const getControls: (
     target?.y ?? 0,
     target?.z ?? 0,
   )
+  ctrl.update()
 
   return ctrl
 }
