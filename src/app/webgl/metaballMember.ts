@@ -42,7 +42,7 @@ export const metaballConfigs = {
     subtract: 8,
     enableColors: true,
     showFloor: false,
-    targetX: -30,
+    targetX: 0,
     duration: 2,
     ease: 'power2.inOut',
     animationState: 'menu' as const
@@ -54,7 +54,7 @@ export const metaballConfigs = {
     subtract: 12,
     enableColors: true,
     showFloor: false,
-    targetX: 48.01712053685565,
+    targetX: 0,
     duration: 2,
     ease: 'power2.inOut',
     animationState: 'about' as const
