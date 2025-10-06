@@ -108,16 +108,18 @@ const initWebGL: InitWebGL = (
   )
 
   const camera = getCamera(cameraWork)
-  // const controls = getControls(
-  //   camera,
-  //   renderer,
-  //   cameraWork.target,
-  // )
-  const controls = null
+
+  // デバッグ用のコントロール（必要時のみ有効化）
+  const controls = setupMember.controls.enabled ? getControls(
+    camera,
+    renderer,
+    cameraWork.target,
+  ) : null
+
   if (setupMember.gui.active) setCameraGUI(camera, cameraWork)
 
   // カメラの動きをログに出力
-  // getCameraInfo(camera, controls)
+  if (controls) getCameraInfo(camera, controls)
 
   /**
    * 光源設定
@@ -164,7 +166,7 @@ const initWebGL: InitWebGL = (
   /**
    * グリッドヘルパー
    */
-  const gridHelper = new THREE.GridHelper(100, 100)
+  // const gridHelper = new THREE.GridHelper(100, 100)
 
   /**
    * メタボール
@@ -242,9 +244,11 @@ const initWebGL: InitWebGL = (
     /**
      * アップデート関数
      */
-    // controls.update()
-    // controls.enabled = setupMember.controls.enabled
-    // controls.autoRotate = setupMember.controls.autoRotate
+    if (controls && controls.enabled) {
+      controls.update()
+      controls.enabled = setupMember.controls.enabled
+      controls.autoRotate = setupMember.controls.autoRotate
+    }
 
     if (setupMember.light.directionalLight.helper) {
       directionalLightHelper.update()
