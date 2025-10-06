@@ -41,7 +41,7 @@ export const setupMember = {
   },
   camera: cameraWork,
   controls: {
-    enabled: true,
+    enabled: false,  // 基本的に無効、検証時のみ有効化
     autoRotate: false,
     debug: true,
   },
