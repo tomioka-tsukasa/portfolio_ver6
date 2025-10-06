@@ -108,15 +108,16 @@ const initWebGL: InitWebGL = (
   )
 
   const camera = getCamera(cameraWork)
-  const controls = getControls(
-    camera,
-    renderer,
-    cameraWork.target,
-  )
+  // const controls = getControls(
+  //   camera,
+  //   renderer,
+  //   cameraWork.target,
+  // )
+  const controls = null
   if (setupMember.gui.active) setCameraGUI(camera, cameraWork)
 
   // カメラの動きをログに出力
-  getCameraInfo(camera, controls)
+  // getCameraInfo(camera, controls)
 
   /**
    * 光源設定
@@ -241,9 +242,9 @@ const initWebGL: InitWebGL = (
     /**
      * アップデート関数
      */
-    controls.update()
-    controls.enabled = setupMember.controls.enabled
-    controls.autoRotate = setupMember.controls.autoRotate
+    // controls.update()
+    // controls.enabled = setupMember.controls.enabled
+    // controls.autoRotate = setupMember.controls.autoRotate
 
     if (setupMember.light.directionalLight.helper) {
       directionalLightHelper.update()
