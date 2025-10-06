@@ -9,8 +9,25 @@ import gsap from 'gsap'
 import type { PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
 import type { PageTransitionConfig } from '@/modules/pageChanger/pageChangerTypes'
 
-// ページ履歴管理
-const pageHistory: PageStatus[] = ['home']
+// ページ履歴管理 - 動的に初期化
+const pageHistory: PageStatus[] = []
+
+// 初期化フラグ
+let isPageHistoryInitialized = false
+
+// ページ履歴を初期化する関数
+const initializePageHistory = () => {
+  if (!isPageHistoryInitialized && webglCtrl.pageId && webglCtrl.pageId !== 'home') {
+    pageHistory.length = 0
+    pageHistory.push(webglCtrl.pageId as PageStatus)
+    isPageHistoryInitialized = true
+    console.log('📚 PageHistory initialized with:', webglCtrl.pageId)
+  } else if (pageHistory.length === 0) {
+    pageHistory.push('home')
+    isPageHistoryInitialized = true
+    console.log('📚 PageHistory initialized with default: home')
+  }
+}
 import { MetaballController } from '@/app/webgl/metaball/metaballTypes'
 
 interface PageChanger {
@@ -31,6 +48,12 @@ const getPageConfig = (pageId: PageStatus) => {
 }
 
 export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
+  // ページ履歴を初期化（初回のみ）
+  initializePageHistory()
+
+  console.log(`🔄 PageChanger called with pageId: ${pageId}`)
+  console.log('📚 Current pageHistory:', [...pageHistory])
+
   // 'back'が指定された場合は前のページに戻る
   let targetPageId: PageStatus
 
@@ -40,21 +63,30 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
       pageHistory.pop()
       // 前のページを取得
       targetPageId = pageHistory[pageHistory.length - 1]
+      console.log(`⬅️ Going back to: ${targetPageId}`)
     } else {
       // 履歴がない場合はhomeに戻る
       targetPageId = 'home'
+      console.log('🏠 No history, going to home')
     }
   } else {
     targetPageId = pageId as PageStatus
     // 新しいページを履歴に追加（同じページの連続は追加しない）
     if (pageHistory[pageHistory.length - 1] !== targetPageId) {
       pageHistory.push(targetPageId)
+      console.log(`➕ Added to history: ${targetPageId}`)
       // 履歴の長さを制限（最大10ページ）
       if (pageHistory.length > 10) {
         pageHistory.shift()
       }
+    } else {
+      console.log(`🔄 Same page, not adding to history: ${targetPageId}`)
     }
   }
+
+  console.log('📚 Updated pageHistory:', [...pageHistory])
+  console.log(`🎯 Target page: ${targetPageId}`)
+  console.log('----------------------------------------')
 
   const config = getPageConfig(targetPageId)
 
