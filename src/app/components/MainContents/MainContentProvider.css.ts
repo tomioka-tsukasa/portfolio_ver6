@@ -6,10 +6,18 @@ export const root = style({
   height: '100%',
   opacity: 1,
   pointerEvents: 'visible',
-  transition: 'opacity 0.6s ease-in-out',
+  transition: 'opacity 0.6s ease-in-out, backdrop-filter 0.6s ease-in-out',
 })
 
 export const unactive = style({
   opacity: 0,
   pointerEvents: 'none',
+})
+
+export const aboutType = style({
+  backdropFilter: 'blur(7px)',
+})
+
+export const defaultType = style({
+  backdropFilter: 'blur(0px)',
 })
