@@ -47,7 +47,7 @@ export const textContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '32px',
-  width: '50%',
+  width: '48%',
   ...sp({
     gap: '24px',
     width: '100%',

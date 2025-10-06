@@ -36,7 +36,7 @@ export const metaballConfigs = {
     animationState: 'home' as const
   },
   menu: {
-    numBlobs: 6,
+    numBlobs: 4,
     speed: 0.6,
     strength: 2.0,
     subtract: 8,
@@ -48,7 +48,7 @@ export const metaballConfigs = {
     animationState: 'menu' as const
   },
   about: {
-    numBlobs: 3,
+    numBlobs: 4,
     speed: 0.15,
     strength: 1.2,
     subtract: 12,
@@ -90,9 +90,9 @@ export const metaballAnimationConfigs = {
   home: {
     speed: 0.2,
     amplitude: {
-      x: 0.15,
+      x: 0.13,
       y: 0.01,
-      z: 0.18
+      z: 0.15
     }
   },
   menu: {
@@ -106,7 +106,7 @@ export const metaballAnimationConfigs = {
   about: {
     speed: 0.15,
     amplitude: {
-      x: 0.15,
+      x: 0.14,
       y: 0.15,
       z: 0.12
     }

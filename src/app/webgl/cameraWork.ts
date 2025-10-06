@@ -65,9 +65,9 @@ export const cameraWork = {
   },
   menu: {
     position: {
-      x: 26,
+      x: 32,
       y: 106.14058902365646,
-      z: 0,
+      z: 6,
       mobile: {
         x: -29.53605610448507,
         y: 117.27831515975302,
@@ -75,9 +75,9 @@ export const cameraWork = {
       },
     },
     target: {
-      x: 26,
+      x: 32,
       y: 0,
-      z: 0,
+      z: 6,
       mobile: {
         x: -29.53605610448507,
         y: 0,
@@ -97,7 +97,7 @@ export const cameraWork = {
   },
   about: {
     position: {
-      x: 24,
+      x: 20,
       y: 48,
       z: 1.3981978440984177,
       mobile: {
@@ -107,7 +107,7 @@ export const cameraWork = {
       },
     },
     target: {
-      x: 24,
+      x: 20,
       y: -0.0000010544828656265988,
       z: 1.3981978440984177,
       mobile: {
