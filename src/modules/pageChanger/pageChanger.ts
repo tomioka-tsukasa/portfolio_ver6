@@ -65,17 +65,42 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
     config.cameraWork.rotation
   )
 
-  // メタボールアニメーション（統合版）
+  // カメラアニメーション
+  cameraAnimation(
+    targetCameraWork.positionVector,
+    targetCameraWork.targetVector,
+    duration
+  )
+
+  // メタボール設定の即座更新（真偽値のみ）
+  if (webglCtrl.metaballController?.metaballGenerator) {
+    console.log(`Updating metaball config for ${pageId}:`, config.metaballAnimation)
+    webglCtrl.metaballController.metaballGenerator.updateConfig({
+      enableColors: config.metaballAnimation.enableColors,
+      showFloor: config.metaballAnimation.showFloor
+    })
+  }
+
+  // メタボール個数更新（カメラ移動が少し落ち着いてから）
+  setTimeout(() => {
+    if (webglCtrl.metaballController?.metaballGenerator) {
+      webglCtrl.metaballController.metaballGenerator.updateConfig({
+        numBlobs: config.metaballAnimation.numBlobs,
+      })
+    }
+  }, duration / 2.12)
+
+  // メタボールのアニメーション設定更新（滑らかに変化）
   if (webglCtrl.metaballController) {
-    // 既存のアニメーションを停止
     const controller = webglCtrl.metaballController as MetaballController
 
     if (!controller) {
-      console.log('メタボールアニメーションが存在しません')
+      console.log('メタボールコントローラーが存在しません')
 
       return
     }
 
+    // 既存のアニメーションを停止
     if (controller.configAnimationTimeline) {
       controller.configAnimationTimeline.kill()
     }
@@ -83,7 +108,7 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
     // 新しいタイムラインを作成
     const configAnimationTimeline = gsap.timeline()
 
-    // speed をアニメーション
+    // speed を滑らかにアニメーション
     if (controller?.currentAnimatedConfig) {
       configAnimationTimeline.to(controller.currentAnimatedConfig, {
         speed: config.metaballAnimationSettings.speed,
@@ -95,7 +120,29 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
       })
     }
 
-    // 振幅もアニメーション
+    // strength と subtract を滑らかにアニメーション
+    if (controller.metaballGenerator) {
+      const currentConfig = controller.metaballGenerator.getConfig()
+      const animationConfig = {
+        strength: currentConfig.strength,
+        subtract: currentConfig.subtract
+      }
+
+      configAnimationTimeline.to(animationConfig, {
+        strength: config.metaballAnimation.strength,
+        subtract: config.metaballAnimation.subtract,
+        duration: duration / 1000,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          controller.metaballGenerator?.updateConfig({
+            strength: animationConfig.strength,
+            subtract: animationConfig.subtract
+          })
+        }
+      }, 0)
+    }
+
+    // 振幅を滑らかにアニメーション
     if (controller.metaballGenerator && typeof controller.metaballGenerator.animateAmplitude === 'function') {
       controller.metaballGenerator.animateAmplitude({
         amplitudeX: config.metaballAnimationSettings.amplitude.x,
@@ -107,13 +154,6 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
     // タイムラインを保存
     controller.configAnimationTimeline = configAnimationTimeline
   }
-
-  // カメラアニメーション
-  cameraAnimation(
-    targetCameraWork.positionVector,
-    targetCameraWork.targetVector,
-    duration
-  )
 
   // メタボール位置のアニメーション
   if (webglCtrl.metaballController?.marchingCubesManager.marchingCubes) {
