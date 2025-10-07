@@ -4,7 +4,9 @@ import type { StyleRule } from '@vanilla-extract/css'
 export const basicFontStyle = '"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif'
 export const notoSansStyle = `'Noto Sans JP', ${basicFontStyle}`
 export const zenOldMinchoStyle = 'var(--font-zen-old-mincho)'
-export const cormorantGaramondStyle = 'var(--font-cormorant-garamond)'
+export const playfairDisplayStyle = 'var(--font-playfair-display)'
+export const italianaStyle = 'var(--font-italiana)'
+export const bungeeHairlineStyle = 'var(--font-bungee-hairline)'
 
 // フォントスタイル適用関数
 export type SetFontFamily = (
@@ -30,12 +32,42 @@ export const zenOldMincho: SetFontFamily = (option = {
   }
 }
 
-export const cormorantGaramond: SetFontFamily = (option = {
+export const playfairDisplay: SetFontFamily = (option = {
   weight: 400,
   style: 'normal',
 }) => {
   return {
-    fontFamily: cormorantGaramondStyle,
+    fontFamily: playfairDisplayStyle,
+    fontOpticalSizing: 'auto',
+    fontWeight: option.weight,
+    fontStyle: option.style,
+    WebkitTextSizeAdjust: '100%',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
+  }
+}
+
+export const italiana: SetFontFamily = (option = {
+  weight: 400,
+  style: 'normal',
+}) => {
+  return {
+    fontFamily: italianaStyle,
+    fontOpticalSizing: 'auto',
+    fontWeight: option.weight,
+    fontStyle: option.style,
+    WebkitTextSizeAdjust: '100%',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
+  }
+}
+
+export const bungeeHairline: SetFontFamily = (option = {
+  weight: 400,
+  style: 'normal',
+}) => {
+  return {
+    fontFamily: bungeeHairlineStyle,
     fontOpticalSizing: 'auto',
     fontWeight: option.weight,
     fontStyle: option.style,

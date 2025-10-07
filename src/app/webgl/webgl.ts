@@ -11,19 +11,23 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 
 // パフォーマンス
-import Stats from 'stats.js'
+// import Stats from 'stats.js'
 import { setFpsManager } from '@/lib/threejs/setFpsManager/setFpsManager'
 
 // ローディング
 import { loadingManager } from './loading/loadingManager'
 
-// メッシュ
+// シェーダーのインポート
+import vertexShader from './metaball/shader/vertex.glsl'
+import fragmentShader from './metaball/shader/fragment.glsl'
 
 // GUI
 import { setSceneGUI } from './gui/setter/scene/setSceneGUI'
 import { setCameraGUI } from './gui/setter/camera/setCameraGUI'
 import { setPostprocessGUI } from './gui/setter/postprocess/setPostprocessGUI'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
+import { metaball } from './metaball/metaball'
+import { cameraWork as cameraWorkConfig } from './cameraWork'
 
 /**
  * 【WebGLの初期化】
@@ -45,11 +49,11 @@ const initWebGL: InitWebGL = (
   /**
    * Stats
    */
-  const stats = new Stats()
-  stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-  if (setupMember.gui.stats) {
-    document.body.appendChild(stats.dom)
-  }
+  // const stats = new Stats()
+  // stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+  // if (setupMember.gui.stats) {
+  //   document.body.appendChild(stats.dom)
+  // }
 
   /**
    * FPSマネージャー
@@ -91,31 +95,31 @@ const initWebGL: InitWebGL = (
   )
 
   /**
-   * カメラ設定
+   * カメラ設定 - 現在のページに対応するカメラワークを使用
    */
+  const currentCameraConfig = cameraWorkConfig[webglCtrl.pageId || 'home'] || cameraWorkConfig.home
+
+  console.log('WebGL: Using camera config for page:', webglCtrl.pageId || 'home', currentCameraConfig)
+
   const cameraWork = fixCamerawork(
-    setupMember.camera.default.position,
-    setupMember.camera.default.target,
-    setupMember.camera.default.rotation,
+    currentCameraConfig.position,
+    currentCameraConfig.target,
+    currentCameraConfig.rotation,
   )
 
-  const camera = getCamera({
-    position: cameraWork.position,
-  })
-  const controls = getControls(
+  const camera = getCamera(cameraWork)
+
+  // デバッグ用のコントロール（必要時のみ有効化）
+  const controls = setupMember.controls.enabled ? getControls(
     camera,
     renderer,
     cameraWork.target,
-  )
-  setCameraGUI(camera, cameraWork)
+  ) : null
+
+  if (setupMember.gui.active) setCameraGUI(camera, cameraWork)
 
   // カメラの動きをログに出力
-  getCameraInfo(camera, controls)
-
-  // カメラをシーンに追加
-  scene.add(
-    camera,
-  )
+  if (controls) getCameraInfo(camera, controls)
 
   /**
    * 光源設定
@@ -140,23 +144,42 @@ const initWebGL: InitWebGL = (
   /**
    * メッシュ設定
    */
-  const sampleMesh = (() => {
-    const geo = new THREE.TorusGeometry( 10, 3, 16, 32 )
-    const mat = new THREE.MeshBasicMaterial({ color: 0xffffff })
-    mat.envMap = loadedAssets.envmaps[setupMember.scene.environment]
+  const mesh = (() => {
+    const geo = new THREE.SphereGeometry(10, 32, 32)
+    const mat = new THREE.ShaderMaterial({
+      uniforms : {
+        viewVector: { value: new THREE.Vector3(0, 0, 20)},//initial camera.position
+        uColor: { value: new THREE.Color(0x42a9f1)},// GrowColor
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      blending: THREE.CustomBlending,
+      transparent:true,
+    })
 
     const mesh = new THREE.Mesh(geo, mat)
 
     return mesh
   })()
-  sampleMesh.position.set(0, 16, 0)
+  mesh.position.set(0, 10, 0)
 
-  const gridHelper = new THREE.GridHelper(100, 100)
+  /**
+   * グリッドヘルパー
+   */
+  // const gridHelper = new THREE.GridHelper(100, 100)
 
+  /**
+   * メタボール
+   */
+  const metaballController = metaball(scene)
+
+  /**
+   * シーン追加
+   */
   scene.add(
     camera,
-    sampleMesh,
-    gridHelper,
+    // gridHelper,
+    // mesh,
   )
 
   /**
@@ -174,7 +197,7 @@ const initWebGL: InitWebGL = (
   composer.addPass(bloomPass)
 
   // GUI設定
-  setPostprocessGUI(
+  if (setupMember.gui.active) setPostprocessGUI(
     bloomPass,
     {
       bloomPass: setupMember.postprocess.bloomPass
@@ -212,7 +235,7 @@ const initWebGL: InitWebGL = (
     /**
      * パフォーマンス管理
      */
-    stats.begin()
+    // stats.begin()
     // const currentTime = performance.now()
     // const delta = (currentTime - prevTime) / 1000 // 秒単位
     // const deltaFPS = delta * targetFPS
@@ -221,19 +244,20 @@ const initWebGL: InitWebGL = (
     /**
      * アップデート関数
      */
-    controls.update()
-    controls.enabled = setupMember.controls.enabled
-    controls.autoRotate = setupMember.controls.autoRotate
+    if (controls && controls.enabled) {
+      controls.update()
+      controls.enabled = setupMember.controls.enabled
+      controls.autoRotate = setupMember.controls.autoRotate
+    }
 
     if (setupMember.light.directionalLight.helper) {
       directionalLightHelper.update()
     }
 
     /**
-     * サンプルメッシュのアニメーション
+     * メタボールのアニメーション
      */
-    sampleMesh.rotation.y += 0.003
-    sampleMesh.rotation.x += 0.003
+    metaballController?.animate(timestamp)
 
     /**
      * レンダリング
@@ -243,7 +267,7 @@ const initWebGL: InitWebGL = (
     /**
      * パフォーマンス
      */
-    stats.end()
+    // stats.end()
   }
   renderer.setAnimationLoop(animate)
 
@@ -256,6 +280,52 @@ const initWebGL: InitWebGL = (
   webglCtrl.envmaps = loadedAssets.envmaps
   webglCtrl.textures = loadedAssets.textures
   webglCtrl.controls = controls
+  webglCtrl.metaballController = metaballController
+
+  /**
+   * リサイズハンドラー - スクロールバーの影響を考慮
+   */
+  const handleResize = () => {
+    // ビューポートサイズを使用（スクロールバーの影響を受けない）
+    const displayWidth = window.innerWidth
+    const displayHeight = window.innerHeight
+
+    // カメラのアスペクト比を更新
+    if (camera instanceof THREE.PerspectiveCamera) {
+      camera.aspect = displayWidth / displayHeight
+      camera.updateProjectionMatrix()
+    }
+
+    // レンダラーのサイズを更新
+    renderer.setSize(displayWidth, displayHeight)
+
+    // ポストプロセッシングがある場合はcomposerも更新
+    if (composer) {
+      composer.setSize(displayWidth, displayHeight)
+
+      // BloomPassのサイズも更新
+      const bloomPass = composer.passes.find(pass => pass instanceof UnrealBloomPass) as UnrealBloomPass
+      if (bloomPass) {
+        bloomPass.setSize(displayWidth, displayHeight)
+      }
+    }
+
+    // メタボールのシェーダーユニフォームも更新
+    if (webglCtrl.metaballController?.marchingCubesManager?.marchingCubes?.material) {
+      const material = webglCtrl.metaballController.marchingCubesManager.marchingCubes.material as THREE.ShaderMaterial
+      if (material.uniforms?.uResolution) {
+        material.uniforms.uResolution.value.set(displayWidth, displayHeight)
+      }
+    }
+
+    console.log('WebGL resized:', { displayWidth, displayHeight })
+  }
+
+  // リサイズイベントリスナーを追加
+  // window.addEventListener('resize', handleResize)
+
+  // 初回リサイズを実行（初期化時のサイズ調整）
+  handleResize()
 
   /**
    * 初期化完了通知

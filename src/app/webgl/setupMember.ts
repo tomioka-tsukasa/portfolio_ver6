@@ -1,4 +1,4 @@
-import { cameraWork } from './setup/cameraWork'
+import { cameraWork } from './cameraWork'
 import { LoadingObject, LoadingObjects } from './loading/loadingManagerTypes'
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DataTexture, Texture } from 'three'
@@ -10,8 +10,8 @@ import { GetSpotLight } from './setup/lights/lightsTypes'
  */
 export const setupMember = {
   gui: {
-    active: true,
-    stats: true,
+    active: false,
+    stats: false,
   },
   renderer: {
     active: true,
@@ -41,19 +41,19 @@ export const setupMember = {
   },
   camera: cameraWork,
   controls: {
-    enabled: true,
+    enabled: false,  // 基本的に無効、検証時のみ有効化
     autoRotate: false,
-    debug: false,
+    debug: true,
   },
   scene: {
-    environment: 'blocky_photo_studio_1k',
-    background: true,
+    environment: '',
+    background: false,
     environmentIntensity: 0.07,
   },
   postprocess: {
     active: true,
     bloomPass: {
-      active: true,
+      active: false,
       strength: 0.3,
       radius: 0.1,
       threshold: 0.85,
@@ -76,6 +76,9 @@ export const webglCtrl: WebGLCtrl = {
   controls: null,
   car: null,
   world: null,
+  metaballController: null,
+  pageStatus: 'home',
+  pageId: 'home',
 }
 
 /**

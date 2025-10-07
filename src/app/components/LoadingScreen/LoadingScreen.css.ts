@@ -1,7 +1,7 @@
 import { colors } from '@/styles/variables'
 import { rvw } from '@/styles/responsive.css'
 import { keyframes, style } from '@vanilla-extract/css'
-import { cormorantGaramond } from '@/styles/fontUtils'
+import { playfairDisplay } from '@/styles/fontUtils'
 
 const blink = keyframes({
   '0%': { opacity: 1 },
@@ -31,8 +31,8 @@ export const text = style([
     textAlign: 'center',
     animation: `${blink} 1.2s ease-in-out infinite`,
   },
-  rvw.fontSize(24),
-  cormorantGaramond(),
+  rvw.fontSize(24, 14),
+  playfairDisplay(),
 ])
 
 export const fadeOut = style({

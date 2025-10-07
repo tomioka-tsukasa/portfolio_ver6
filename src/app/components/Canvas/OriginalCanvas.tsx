@@ -1,6 +1,5 @@
 'use client'
 
-import * as styles from './Canvas.css'
 import { createWebGL } from '../../webgl/webgl'
 import { useEffect } from 'react'
 import { destroyGUI } from '../../webgl/gui/gui'
@@ -11,6 +10,7 @@ import { setLoadComplete } from '../../store/slice/loadingStore/loadingStore'
 /**
  * キャンバスコンポーネント
  * ・`./Canvas.tsx` でダイナミックインポートしている
+ * ・マスクは CanvasMask コンポーネントが別途担当
  */
 const OriginalCanvas = () => {
   const dispatch = useAppDispatch()
@@ -32,7 +32,7 @@ const OriginalCanvas = () => {
   }, [dispatch])
 
   return <>
-    <canvas id='canvas' className={`${styles.root}`} />
+    <canvas id='canvas' />
   </>
 }
 
