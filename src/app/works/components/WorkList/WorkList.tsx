@@ -83,8 +83,8 @@ export const WorkList = () => {
       tags: [{ id: '1', name: 'Tag 1' }, { id: '2', name: 'Tag 2' }],
       desc: '長谷工不動産「BRANCHERA」札幌シリーズ告知LP',
       image: {
-        src: '/assets/images/work/work-project-car-show@1.5.jpg',
-        alt: 'Work 1',
+        src: '/assets/images/work/work-branchera-sapporo-lp@1.5.jpg',
+        alt: '長谷工不動産「BRANCHERA」札幌シリーズ告知LP',
       },
       date: '2025.07.01',
     },
@@ -94,8 +94,19 @@ export const WorkList = () => {
       tags: [tags.webdesign, tags.lp, tags.gsap, tags.blanding],
       desc: '飲食店「陶酔芸」公式サイト実装',
       image: {
-        src: '/assets/images/work/work-project-car-show@1.5.jpg',
-        alt: 'Work 1',
+        src: '/assets/images/work/work-tosuigei-official-site@1.5.jpg',
+        alt: '飲食店「陶酔芸」公式サイト実装',
+      },
+      date: '2025.07.01',
+    },
+    {
+      id: 'wms-web-app',
+      title: 'WMS Web App',
+      tags: [tags.webdesign, tags.lp, tags.gsap, tags.blanding],
+      desc: '在庫管理Webアプリ(WMS)開発支援',
+      image: {
+        src: '/assets/images/work/work-wms-web-app@1.5.jpg',
+        alt: '在庫管理Webアプリ(WMS)開発支援',
       },
       date: '2025.07.01',
     },

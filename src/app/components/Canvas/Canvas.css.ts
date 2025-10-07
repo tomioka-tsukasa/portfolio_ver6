@@ -45,11 +45,12 @@ export const mask = style({
 
 export const aboutType = style({
   backdropFilter: 'blur(7px)',
+  backgroundColor: colors.bg.black_40,
 })
 
 export const worksType = style({
   backdropFilter: 'blur(12px)',
-  backgroundColor: colors.bg.black_70,
+  backgroundColor: colors.bg.black_80,
 })
 
 export const blogType = style({

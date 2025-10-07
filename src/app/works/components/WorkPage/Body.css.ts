@@ -16,7 +16,7 @@ export const body = style([
 
 export const link = style([
   {
-    color: colors.text.white_70,
+    color: colors.text.white_80,
     display: 'inline',
     padding: '0 0 1px 0',
     textDecoration: 'none',

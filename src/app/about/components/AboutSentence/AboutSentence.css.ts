@@ -14,7 +14,7 @@ export const root = style([
   },
   sp({
     justifyContent: 'flex-start',
-    height: '70vh',
+    height: '64vh',
   }),
 ])
 

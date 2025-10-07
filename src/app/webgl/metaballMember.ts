@@ -72,7 +72,7 @@ export const metaballConfigs = {
   },
   works: {
     numBlobs: 4,
-    speed: 0.15,
+    speed: 0.1,
     strength: 6,
     subtract: 2,
     enableColors: true,
@@ -84,7 +84,7 @@ export const metaballConfigs = {
   },
   blog: {
     numBlobs: 4,
-    speed: 0.1,
+    speed: 0.15,
     strength: 6,
     subtract: 2,
     enableColors: true,
@@ -126,7 +126,7 @@ export const metaballAnimationConfigs = {
     colorPattern: 'blue'
   },
   works: {
-    speed: 0.15,
+    speed: 0.1,
     amplitude: {
       x: 0.50,
       y: 0.05,
@@ -138,7 +138,7 @@ export const metaballAnimationConfigs = {
     colorPattern: 'blue'
   },
   blog: {
-    speed: 0.1,
+    speed: 0.15,
     amplitude: {
       x: 0.50,
       y: 0.05,

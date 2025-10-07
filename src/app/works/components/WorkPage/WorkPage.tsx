@@ -7,7 +7,7 @@ interface WorkPageProps {
   title: string
   desc: string
   thumbnail: ImageProps
-  pageUrl: string
+  pageUrl?: string
   body: React.ReactNode
 }
 
@@ -31,7 +31,7 @@ export const WorkPage = ({
           <div className={styles.desc}>
             {desc}
           </div>
-          <div className={styles.info}>
+          {pageUrl && <div className={styles.info}>
             <div className={styles.pageUrl}>
               <span className={styles.pageUrlLabel}>
                 URL:
@@ -40,7 +40,7 @@ export const WorkPage = ({
                 {pageUrl}
               </a>
             </div>
-          </div>
+          </div>}
           <main className={styles.body}>
             {body}
           </main>

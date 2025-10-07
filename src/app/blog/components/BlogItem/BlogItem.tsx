@@ -1,7 +1,7 @@
 'use client'
 
+import Link from 'next/link'
 import * as styles from './BlogItem.css'
-import { useState } from 'react'
 
 export interface Tag {
   name: string
@@ -10,27 +10,30 @@ export interface Tag {
 
 export interface BlogItemProps {
   title: string
+  url: string
   tags: Tag[]
   desc: string
   icon: string
   date: string
-  isHovered: boolean
+  isHovered?: boolean
 }
 
 export const BlogItem = ({
   title,
+  url,
   tags,
   desc,
   icon,
   date,
+  // isHovered = false,
 }: BlogItemProps) => {
-  const [isHovered, setIsHovered] = useState(false)
+  // const [isHovered, setIsHovered] = useState(false)
 
   return <>
-    <div
-      className={`${styles.root} ${isHovered ? styles.hovered : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <Link
+      className={`${styles.root}`}
+      href={url}
+      target='_blank'
     >
       <div className={styles.titleContainer}>
         <div className={styles.iconContainer}>
@@ -54,6 +57,6 @@ export const BlogItem = ({
       <div className={styles.date}>
         {date}
       </div>
-    </div>
+    </Link>
   </>
 }
