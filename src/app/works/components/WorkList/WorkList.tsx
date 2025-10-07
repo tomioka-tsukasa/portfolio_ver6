@@ -22,14 +22,31 @@ export const tags = {
     id: 'nextjs',
     name: 'Next.js',
   },
+  lp: {
+    id: 'lp',
+    name: 'LP制作',
+  },
+  gsap: {
+    id: 'gsap',
+    name: 'GSAPアニメーション',
+  },
+  blanding: {
+    id: 'blanding',
+    name: 'ブランディング制作',
+  },
+  webdesign: {
+    id: 'webdesign',
+    name: 'Webデザイン担当',
+  },
 }
 
 export const WorkList = () => {
   const work = [
     {
-      id: '1',
+      id: 'car-show-project',
       title: 'Car Show Project',
       tags: [tags.webgl, tags.threejs, tags.blender, tags.cg3d],
+      desc: '車の3DモデルをWeb上で展示するプロジェクト',
       image: {
         src: '/assets/images/work/work-project-car-show@1.5.jpg',
         alt: 'Work 1',
@@ -37,9 +54,10 @@ export const WorkList = () => {
       date: '2025.07.01',
     },
     {
-      id: '1',
-      title: 'Car Show Project',
+      id: 'branchera-sapporo-lp',
+      title: 'BRANCHERA SAPPORO LP',
       tags: [{ id: '1', name: 'Tag 1' }, { id: '2', name: 'Tag 2' }],
+      desc: '長谷工不動産「BRANCHERA」札幌シリーズ告知LP',
       image: {
         src: '/assets/images/work/work-project-car-show@1.5.jpg',
         alt: 'Work 1',
@@ -47,9 +65,10 @@ export const WorkList = () => {
       date: '2025.07.01',
     },
     {
-      id: '1',
-      title: 'Car Show Project',
-      tags: [{ id: '1', name: 'Tag 1' }, { id: '2', name: 'Tag 2' }],
+      id: 'tosuigei-official-site',
+      title: 'TOSUIGEI OFFICIAL SITE',
+      tags: [tags.webdesign, tags.lp, tags.gsap, tags.blanding],
+      desc: '飲食店「陶酔芸」公式サイト実装',
       image: {
         src: '/assets/images/work/work-project-car-show@1.5.jpg',
         alt: 'Work 1',

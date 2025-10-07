@@ -50,19 +50,44 @@ export const tags = style([
   {
     display: 'flex',
     flexWrap: 'wrap',
+    position: 'relative',
+    selectors: {
+      '&::before': {
+        content: '',
+        display: 'block',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '1px',
+        height: '106%',
+        backgroundColor: colors.text.white_40,
+      },
+    }
   },
   rvw.gap(8, 4),
-  rvw.marginTop(16, 12),
+  rvw.marginTop(24, 20),
+  rvw.padding([0, 0, 0, 13]),
 ])
 
 export const tag = style([
+  {
+    ...zenOldMincho(),
+    color: colors.text.white_80,
+    lineHeight: 1,
+    wordBreak: 'break-word',
+  },
+  rvw.fontSize(14, 12),
+])
+
+export const desc = style([
   {
     ...zenOldMincho(),
     color: colors.text.white_60,
     lineHeight: 1,
     wordBreak: 'break-word',
   },
-  rvw.fontSize(14, 10),
+  rvw.fontSize(12, 10),
+  rvw.marginTop(6, 8),
 ])
 
 export const date = style([

@@ -8,19 +8,21 @@ export interface Tag {
 }
 
 export interface WorkItemProps {
+  id: string
   number: string
   title: string
-  id: string
   tags: Tag[]
+  desc: string
   image: ImageProps
   date: string
 }
 
 export const WorkItem = ({
+  id,
   number,
   title,
-  id,
   tags,
+  desc,
   image,
   date,
 }: WorkItemProps) => {
@@ -32,6 +34,9 @@ export const WorkItem = ({
         </div>
         <div className={styles.title}>
           {title}
+        </div>
+        <div className={styles.desc}>
+          {desc}
         </div>
         <div className={styles.tags}>
           {tags.map((tag, i, arr) => (
