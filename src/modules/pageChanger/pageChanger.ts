@@ -1,14 +1,14 @@
 import { webglCtrl } from '@/app/webgl/setupMember'
 import { cameraAnimation } from '@/app/webgl/animation/cameraAnimation/cameraAnimation'
+import { animateMetaballColor } from '@/app/webgl/animation/metaballColorAnimation/metaballColorAnimation'
 import { cameraWork } from '@/app/webgl/cameraWork'
-import { metaballConfigs, metaballAnimationConfigs, COLOR_PATTERN_VALUES } from '@/app/webgl/metaballMember'
+import { metaballConfigs, metaballAnimationConfigs } from '@/app/webgl/metaballMember'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
 import { setCurrentStatus } from '@/app/store/slice/pageStatus/pageStatus'
 import type { AppDispatch } from '@/app/store/makeStore'
 import gsap from 'gsap'
 import type { PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
 import type { PageTransitionConfig } from '@/modules/pageChanger/pageChangerTypes'
-import * as THREE from 'three'
 
 // ページ履歴管理 - 動的に初期化
 const pageHistory: PageStatus[] = []
@@ -184,32 +184,12 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
       }, duration / 1000)
     }
 
-    // uColorPattern を滑らかにアニメーション
-    if (controller.marchingCubesManager?.marchingCubes?.material) {
-      const material = controller.marchingCubesManager.marchingCubes.material as THREE.ShaderMaterial
-      if (material.uniforms?.uColorPattern) {
-        const targetPattern = COLOR_PATTERN_VALUES[config.metaballAnimationSettings.colorPattern] ?? COLOR_PATTERN_VALUES.blue
-        const animationPattern = {
-          value: material.uniforms.uColorPattern.value
-        }
-
-        configAnimationTimeline.to(animationPattern, {
-          value: targetPattern,
-          duration: duration / 1000,
-          ease: 'power2.inOut',
-          onUpdate: () => {
-            if (material.uniforms?.uColorPattern) {
-              material.uniforms.uColorPattern.value = animationPattern.value
-            }
-          }
-        }, 0)
-
-        // uColorは常に白に保つ
-        if (material.uniforms?.uColor) {
-          material.uniforms.uColor.value.setRGB(1, 1, 1)
-        }
-      }
-    }
+    // uColorPattern を滑らかにアニメーション（共通化した関数を使用）
+    animateMetaballColor(
+      config.metaballAnimationSettings.colorPattern,
+      duration / 1000,
+      'power2.inOut'
+    )
 
     // タイムラインを保存
     controller.configAnimationTimeline = configAnimationTimeline

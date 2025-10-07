@@ -1,5 +1,8 @@
+'use client'
+
 import * as styles from './WorkList.css'
 import { WorkItem } from '../WorkItem/WorkItem'
+import { animateMetaballColor } from '@/app/webgl/animation/metaballColorAnimation/metaballColorAnimation'
 
 export const tags = {
   webgl: {
@@ -41,6 +44,16 @@ export const tags = {
 }
 
 export const WorkList = () => {
+  // workItemホバー時のメタボール色変更
+  const handleWorkItemHover = () => {
+    animateMetaballColor('white', 1.5, 'power2.out')
+  }
+
+  // workItemホバー解除時のメタボール色復元
+  const handleWorkItemLeave = () => {
+    animateMetaballColor('blue', 1.5, 'power2.out') // 戻る時は少し長めのアニメーション
+  }
+
   const work = [
     {
       id: 'car-show-project',
@@ -80,7 +93,12 @@ export const WorkList = () => {
   return <>
     <div className={styles.root}>
       {work.map((work, i) => (
-        <div key={i} className={styles.workItem}>
+        <div
+          key={i}
+          className={styles.workItem}
+          onMouseEnter={handleWorkItemHover}
+          onMouseLeave={handleWorkItemLeave}
+        >
           <WorkItem number={String(i + 1).padStart(3, '0')} {...work} />
         </div>
       ))}
