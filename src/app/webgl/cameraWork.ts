@@ -162,11 +162,11 @@ export const cameraWork = {
   blog: {
     position: {
       x: 0,
-      y: 128,
+      y: 70,
       z: 0,
       mobile: {
         x: 0,
-        y: 90,
+        y: 70,
         z: 0,
       },
     },

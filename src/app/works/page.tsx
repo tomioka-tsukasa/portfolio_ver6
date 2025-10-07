@@ -1,9 +1,11 @@
-// import * as styles from './page.css'
+import * as styles from './page.css'
 import { WorkList } from './components/WorkList/WorkList'
+import { PageTitle } from '../components/PageTitle/PageTitle'
 
 const WorksPage = () => {
   return <>
-    <div>
+    <PageTitle title='Works' />
+    <div className={styles.workList}>
       <WorkList />
     </div>
   </>

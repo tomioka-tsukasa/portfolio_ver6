@@ -53,7 +53,7 @@ export const worksType = style({
 })
 
 export const blogType = style({
-  backdropFilter: 'blur(7px)',
+  backdropFilter: 'blur(12px)',
   backgroundColor: colors.bg.black_70,
 })
 

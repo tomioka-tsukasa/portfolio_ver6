@@ -1,17 +1,17 @@
 'use client'
 
-import * as styles from './PageTitleContainer.css'
-import { PageTitle } from '../PageTitle/PageTitle'
+import * as styles from './AppTitleContainer.css'
+import { AppTitle } from '../AppTitle/AppTitle'
 import { useAppSelector } from '@/app/store/hook'
 
-export const PageTitleContainer = () => {
+export const AppTitleContainer = () => {
   const pageStatus = useAppSelector(selector => selector.pageStatus.currentStatus)
 
   return (
     <div className={`${styles.root} ${pageStatus === 'home' ? styles.unactive : ''}`}>
       <div className={styles.content}>
         <div className={styles.pageTitle}>
-          <PageTitle />
+          <AppTitle />
         </div>
         <div className={styles.console}>
           <p className={styles.consoleText}>

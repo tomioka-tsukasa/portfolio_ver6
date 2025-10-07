@@ -7,7 +7,7 @@ import { GsapManager } from './components/GsapManager/GsapManager'
 import Canvas from './components/Canvas/Canvas'
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen'
 import { Menu } from './components/Menu/Menu'
-import { PageTitleContainer } from './components/PageTitleContainer/PageTitleContainer'
+import { AppTitleContainer } from './components/AppTitleContainer/AppTitleContainer'
 import { MenuTrigger } from './components/MenuTrigger/MenuTrigger'
 import { MainContentProvider } from './components/MainContents/MainContentProvider'
 import { PageInitProvider } from './components/PageInitProvider/PageInitProvider'
@@ -77,7 +77,7 @@ export default function RootLayout({
             <LoadingScreen />
             <MenuTrigger />
             <Menu />
-            <PageTitleContainer />
+            <AppTitleContainer />
             <MainContentProvider>
               {children}
             </MainContentProvider>

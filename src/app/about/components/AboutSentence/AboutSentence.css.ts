@@ -12,10 +12,9 @@ export const root = style([
     width: '100%',
     height: '100vh',
   },
-  rvw.padding([0], ['9vh', 0, 0, 0]),
   sp({
     justifyContent: 'flex-start',
-    height: '82vh',
+    height: '64vh',
   }),
 ])
 

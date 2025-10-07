@@ -6,7 +6,6 @@ export const root = style([
   {
     position: 'relative',
   },
-  rvw.padding([120, 0, 144, 289], [64, 0, 120, 0]),
 ])
 
 export const workItem = style([

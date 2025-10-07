@@ -3,13 +3,6 @@ import { style } from '@vanilla-extract/css'
 
 export const root = style([
   {
-    position: 'relative',
-  },
-  rvw.padding([120, 96, 144, 289], [64, 32, 120]),
-])
-
-export const blogList = style([
-  {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '5%',

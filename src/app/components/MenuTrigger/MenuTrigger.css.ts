@@ -9,8 +9,8 @@ export const root = style([
     transition: 'opacity 0.6s ease-in-out',
     cursor: 'pointer',
   },
-  rvw.right(32, '16px'),
-  rvw.top(24, '20px'),
+  rvw.right(32, 16),
+  rvw.top(24),
 ])
 
 export const open = style({
