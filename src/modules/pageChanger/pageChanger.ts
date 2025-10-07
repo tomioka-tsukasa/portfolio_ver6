@@ -216,22 +216,22 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
   }
 
   // メタボール位置のアニメーション
-  if (webglCtrl.metaballController?.marchingCubesManager.marchingCubes) {
-    const currentPos = webglCtrl.metaballController.marchingCubesManager.marchingCubes.position
+  // if (webglCtrl.metaballController?.marchingCubesManager.marchingCubes) {
+  //   const currentPos = webglCtrl.metaballController.marchingCubesManager.marchingCubes.position
 
-    console.log(`Transitioning to ${pageId}: 現在位置`, currentPos.x, currentPos.y, currentPos.z)
+  //   console.log(`Transitioning to ${pageId}: 現在位置`, currentPos.x, currentPos.y, currentPos.z)
 
-    gsap.to(currentPos, {
-      x: config.metaballAnimation.targetX,
-      y: currentPos.y,
-      z: currentPos.z,
-      duration: config.metaballAnimation.duration,
-      ease: config.metaballAnimation.ease,
-      onComplete: () => {
-        console.log(`Transition to ${pageId} complete: 完了後位置`, currentPos.x, currentPos.y, currentPos.z)
-      }
-    })
-  }
+  //   gsap.to(currentPos, {
+  //     x: config.metaballAnimation.targetX,
+  //     y: currentPos.y,
+  //     z: currentPos.z,
+  //     duration: config.metaballAnimation.duration,
+  //     ease: config.metaballAnimation.ease,
+  //     onComplete: () => {
+  //       console.log(`Transition to ${pageId} complete: 完了後位置`, currentPos.x, currentPos.y, currentPos.z)
+  //     }
+  //   })
+  // }
 }
 
 // Redux dispatchを受け取るバージョン
