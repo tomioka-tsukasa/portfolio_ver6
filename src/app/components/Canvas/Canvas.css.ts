@@ -2,7 +2,7 @@ import { colors } from '@/styles/variables'
 import { style } from '@vanilla-extract/css'
 
 export const root = style({
-  width: '100%',
+  width: '100vw',
   height: '100vh',
   display: 'flex',
   pointerEvents: 'none',
@@ -13,16 +13,16 @@ export const root = style({
 })
 
 export const container = style({
-  width: '100%',
-  height: '100%',
+  width: '100vw',
+  height: '100vh',
   position: 'relative',
   zIndex: 0,
 })
 
 export const canvas = style([
   {
-    width: '100%',
-    height: '100%',
+    width: '100vw',
+    height: '100vh',
     position: 'absolute',
     left: 0,
     top: 0,
@@ -34,8 +34,8 @@ export const canvas = style([
 ])
 
 export const mask = style({
-  width: '100%',
-  height: '100%',
+  width: '100vw',
+  height: '100vh',
   position: 'absolute',
   left: 0,
   top: 0,

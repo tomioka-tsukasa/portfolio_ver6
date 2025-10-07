@@ -286,11 +286,9 @@ const initWebGL: InitWebGL = (
    * リサイズハンドラー - スクロールバーの影響を考慮
    */
   const handleResize = () => {
-    const canvas = renderer.domElement
-
-    // スクロールバーを考慮した実際の表示領域を取得
-    const displayWidth = canvas.clientWidth
-    const displayHeight = canvas.clientHeight
+    // ビューポートサイズを使用（スクロールバーの影響を受けない）
+    const displayWidth = window.innerWidth
+    const displayHeight = window.innerHeight
 
     // カメラのアスペクト比を更新
     if (camera instanceof THREE.PerspectiveCamera) {
