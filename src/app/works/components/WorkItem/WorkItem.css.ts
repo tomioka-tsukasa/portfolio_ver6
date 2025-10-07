@@ -1,5 +1,5 @@
 import { italiana, playfairDisplay, zenOldMincho } from '@/styles/fontUtils'
-import { rvw, sp } from '@/styles/responsive.css'
+import { hover, rvw, sp } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
 import { style } from '@vanilla-extract/css'
 
@@ -10,8 +10,16 @@ export const root = style([
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease-out, backdrop-filter 0.3s ease-out, padding-left 0.3s cubic-bezier(0.0, 0.5, 0.3, 1.0)',
   },
+  hover({
+    backgroundColor: colors.text.white_5,
+    backdropFilter: 'blur(32px) brightness(1.06)',
+    paddingLeft: '1.2%',
+  }),
   rvw.gap(48, 32),
+  rvw.padding([64, 32, 64, 0], [64, 24]),
   sp({
     flexDirection: 'column',
   }),

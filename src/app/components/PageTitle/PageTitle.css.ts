@@ -10,7 +10,8 @@ export const root = style([
     left: 0,
     zIndex: 3,
   },
-  rvw.top(32, '24px'),
+  rvw.width('90%', '76%'),
+  rvw.top(30, '20px'),
   rvw.left(24, 12),
 ])
 

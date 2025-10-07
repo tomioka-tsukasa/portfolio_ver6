@@ -25,8 +25,6 @@ export const colors = {
     gray: '#d7d7d7',
     bg: '#ffffff',
   },
-  sub: {
-  },
   bg: {
     black: '#000000',
     black_90: 'rgba(0, 0, 0, 0.9)',
@@ -41,6 +39,7 @@ export const colors = {
     black_5: 'rgba(0, 0, 0, 0.05)',
   },
   text: {
+    link: '#3ea8ff',
     white: '#ffffff',
     white_90: 'rgba(255, 255, 255, 0.9)',
     white_80: 'rgba(255, 255, 255, 0.8)',

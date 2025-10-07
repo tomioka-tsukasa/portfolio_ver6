@@ -4,6 +4,7 @@ import { ImageProps } from 'next/image'
 import * as styles from './WorkItem.css'
 import { UiImage } from '@/components/ui/Image/UiImage'
 import { useState } from 'react'
+import Link from 'next/link'
 
 export interface Tag {
   name: string
@@ -32,7 +33,8 @@ export const WorkItem = ({
   const [isHovered, setIsHovered] = useState(false)
 
   return <>
-    <div
+    <Link
+      href={`./${id}`}
       className={`${styles.root} ${isHovered ? styles.hovered : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -63,6 +65,6 @@ export const WorkItem = ({
       <div className={styles.imageContainer}>
         <UiImage {...image} width={1512} height={850.5} />
       </div>
-    </div>
+    </Link>
   </>
 }

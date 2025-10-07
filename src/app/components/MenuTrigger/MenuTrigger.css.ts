@@ -10,7 +10,7 @@ export const root = style([
     cursor: 'pointer',
   },
   rvw.right(32, 16),
-  rvw.top(24, '24px'),
+  rvw.top(32, '24px'),
 ])
 
 export const open = style({
