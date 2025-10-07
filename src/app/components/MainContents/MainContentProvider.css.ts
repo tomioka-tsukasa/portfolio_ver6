@@ -6,7 +6,7 @@ export const root = style({
   width: '100%',
   height: '100%',
   opacity: 1,
-  pointerEvents: 'none',
+  pointerEvents: 'visible',
   transition: 'opacity 0.6s ease-in-out, backdrop-filter 1.5s ease-in-out, background-color 1.5s ease-in-out',
 })
 
