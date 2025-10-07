@@ -25,7 +25,7 @@ export const content = style([
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
-    maxHeight: '60%',
+    maxHeight: '57%',
     overflowY: 'scroll',
     overscrollBehavior: 'none',
     scrollbarWidth: 'none', // Firefox
@@ -36,7 +36,7 @@ export const content = style([
       },
     },
   },
-  rvw.padding(['54px', '54px', '54px', '0'], [32, 24]),
+  rvw.padding([48, 48, 48, '0'], [32, 24]),
   sp({
     height: '100%',
     maxHeight: '100%',
@@ -59,12 +59,11 @@ export const text = style([
   {
     color: colors.text.white,
     lineHeight: '200%',
-    fontSize: '14px',
     maxWidth: '540px',
   },
+  rvw.fontSize(14, '12px'),
   rvw.width('100%', '100%'),
   sp({
-    fontSize: '12px',
     maxWidth: '100%',
   }),
   pcOver({
