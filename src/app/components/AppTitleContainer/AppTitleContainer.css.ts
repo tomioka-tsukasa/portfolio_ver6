@@ -61,7 +61,7 @@ export const consoleText = style([
     ...bungeeHairline(),
   },
   rvw.fontSize(12, '8px'),
-  rvw.maxHeight('unset', 32.8),
+  rvw.maxHeight('unset', '32.8px'),
   pcOver({
     fontSize: '12px',
   }),

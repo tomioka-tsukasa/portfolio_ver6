@@ -41,6 +41,6 @@ export const menuContent = style([
   rvw.width('72%', '90%'),
   rvw.left('16%', '5%'),
   rvw.top('46%', 'unset'),
-  rvw.bottom('unset', '24%'),
+  rvw.bottom('unset', '20vh'),
   rvw.transform('translateY(-50%)', 'translateY(0)'),
 ])

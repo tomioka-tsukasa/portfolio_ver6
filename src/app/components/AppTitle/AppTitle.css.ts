@@ -17,7 +17,7 @@ export const title = style([
     letterSpacing: '0.06em',
     ...italiana(),
   },
-  rvw.fontSize(20, 16),
+  rvw.fontSize(20, '16px'),
   sp({
     textAlign: 'right',
   }),
@@ -27,5 +27,5 @@ export const subTitle = style([
   {
     color: colors.text.white_40,
   },
-  rvw.fontSize(10, 8),
+  rvw.fontSize(10, '8px'),
 ])

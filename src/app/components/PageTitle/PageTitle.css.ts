@@ -10,7 +10,7 @@ export const root = style([
     left: 0,
     zIndex: 3,
   },
-  rvw.top(32, 24),
+  rvw.top(32, '24px'),
   rvw.left(24, 12),
 ])
 
@@ -21,5 +21,5 @@ export const title = style([
     letterSpacing: '0.06em',
     ...italiana(),
   },
-  rvw.fontSize(64, 48),
+  rvw.fontSize(64, '32px'),
 ])
