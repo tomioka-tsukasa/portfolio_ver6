@@ -15,7 +15,11 @@ import * as THREE from 'three'
  * URLパスからPageIdを取得
  */
 const getPageIdFromPath = (pathname: string): PageId => {
-  const cleanPath = pathname.replace(/^\/+|\/+$/g, '').toLowerCase()
+  const pathArr = pathname.replace(/^\/+|\/+$/g, '').toLowerCase().split('/')
+  const cleanPath = pathArr[0]
+
+  console.log('PageInitProvider: cleanPath', cleanPath)
+
   switch (cleanPath) {
     case '':
     case 'home':
