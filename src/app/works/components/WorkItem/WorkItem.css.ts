@@ -3,6 +3,8 @@ import { rvw, sp } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
 import { style } from '@vanilla-extract/css'
 
+export const hovered = style({})
+
 export const root = style([
   {
     width: '100%',
@@ -24,6 +26,13 @@ export const content = style([
 export const imageContainer = style([
   {
     flexShrink: '0',
+    filter: 'brightness(0.64)',
+    transition: 'filter 0.3s ease-out',
+    selectors: {
+      [`.${hovered} &`]: {
+        filter: 'brightness(1)',
+      },
+    },
   },
   rvw.width(480, '100%'),
 ])

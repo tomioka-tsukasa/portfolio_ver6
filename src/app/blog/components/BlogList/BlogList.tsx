@@ -103,7 +103,10 @@ export const BlogList = () => {
   return <>
     <div className={styles.root}>
       {blog.map((blog, i) => (
-        <div key={i} className={styles.blogItem}>
+        <div
+          key={i}
+          className={styles.blogItem}
+        >
           <BlogItem {...blog} />
         </div>
       ))}

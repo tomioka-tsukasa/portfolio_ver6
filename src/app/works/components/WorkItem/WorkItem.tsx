@@ -1,6 +1,10 @@
+'use client'
+
 import { ImageProps } from 'next/image'
 import * as styles from './WorkItem.css'
 import { UiImage } from '@/components/ui/Image/UiImage'
+import { animateMetaballColor } from '@/app/webgl/animation/metaballColorAnimation/metaballColorAnimation'
+import { useState } from 'react'
 
 export interface Tag {
   name: string
@@ -26,8 +30,27 @@ export const WorkItem = ({
   image,
   date,
 }: WorkItemProps) => {
+  const [isHovered, setIsHovered] = useState(false)
+
+  // workItemホバー時のメタボール色変更
+  const handleWorkItemHover = () => {
+    animateMetaballColor('yellow', 1.5, 'power2.out')
+    setIsHovered(true)
+  }
+
+  // workItemホバー解除時のメタボール色復元
+  const handleWorkItemLeave = () => {
+    animateMetaballColor('blue', 1.5, 'power2.out')
+    setIsHovered(false)
+  }
+
   return <>
-    <div className={styles.root} data-work-id={id}>
+    <div
+      className={`${styles.root} ${isHovered ? styles.hovered : ''}`}
+      data-work-id={id}
+      onMouseEnter={handleWorkItemHover}
+      onMouseLeave={handleWorkItemLeave}
+    >
       <div className={styles.content}>
         <div className={styles.number}>
           {number}
