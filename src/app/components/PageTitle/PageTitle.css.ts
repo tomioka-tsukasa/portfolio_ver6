@@ -1,4 +1,4 @@
-import { rvw } from '@/styles/responsive.css'
+import { rvw, sp } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
 import { italiana } from '@/styles/fontUtils'
 import { style } from '@vanilla-extract/css'
@@ -18,6 +18,9 @@ export const title = style([
     ...italiana(),
   },
   rvw.fontSize(28, 20),
+  sp({
+    textAlign: 'right',
+  }),
 ])
 
 export const subTitle = style([

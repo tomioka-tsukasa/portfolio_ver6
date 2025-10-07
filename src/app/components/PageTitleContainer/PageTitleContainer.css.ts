@@ -1,12 +1,12 @@
-import { rvw, sp } from '@/styles/responsive.css'
+import { pcOver, rvw, sp } from '@/styles/responsive.css'
 import { bungeeHairline } from '@/styles/fontUtils'
 import { style } from '@vanilla-extract/css'
 
 export const root = style([
   {
     position: 'fixed',
-    width: `calc(100% - (${rvw.left(24, 10).left} * 2))`,
-    height: `calc(100vh - (${rvw.bottom(16, 6).bottom} * 2))`,
+    width: `calc(100% - (${rvw.left(24).left} * 2))`,
+    height: `calc(100vh - (${rvw.bottom(16).bottom} * 2))`,
     zIndex: 3,
     display: 'flex',
     justifyContent: 'flex-start',
@@ -14,8 +14,12 @@ export const root = style([
     transition: 'opacity 0.6s ease-in-out',
     pointerEvents: 'none',
   },
-  rvw.bottom(16, 6),
-  rvw.left(24, 10),
+  rvw.bottom(16, '1.5%'),
+  rvw.left(24, '2.5%'),
+  sp({
+    width: 'calc(100% - (2.5% * 2))',
+    height: 'calc(100vh - (1.5% * 2))',
+  }),
 ])
 
 export const content = style([
@@ -25,17 +29,19 @@ export const content = style([
     alignItems: 'flex-end',
     width: '100%',
   },
-  rvw.gap(120, 6),
+  rvw.gap(120, 16),
   sp({
-    flexDirection: 'column-reverse',
-    ...rvw.gap(24, 24),
+    flexDirection: 'row-reverse',
   }),
 ])
 
-export const pageTitle = style({
-  flexShrink: 0,
-  pointerEvents: 'visible',
-})
+export const pageTitle = style([
+  {
+    flexShrink: 0,
+    pointerEvents: 'visible',
+
+  },
+])
 
 export const console = style({
   display: 'flex',
@@ -51,9 +57,14 @@ export const consoleText = style([
     letterSpacing: '-0.06em',
     wordBreak: 'break-all',
     lineHeight: 1,
+    overflow: 'hidden',
     ...bungeeHairline(),
   },
   rvw.fontSize(12, '8px'),
+  rvw.maxHeight('unset', 32.8),
+  pcOver({
+    fontSize: '12px',
+  }),
 ])
 
 export const unactive = style({

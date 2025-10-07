@@ -1,8 +1,11 @@
 // import * as styles from './page.css'
+import { WorkList } from './components/WorkList/WorkList'
 
 const WorksPage = () => {
   return <>
-    <div style={{ width: '100vw', height: '100vh' }}></div>
+    <div>
+      <WorkList />
+    </div>
   </>
 }
 
