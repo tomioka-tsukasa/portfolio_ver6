@@ -322,7 +322,7 @@ const initWebGL: InitWebGL = (
   }
 
   // リサイズイベントリスナーを追加
-  window.addEventListener('resize', handleResize)
+  // window.addEventListener('resize', handleResize)
 
   // 初回リサイズを実行（初期化時のサイズ調整）
   handleResize()
