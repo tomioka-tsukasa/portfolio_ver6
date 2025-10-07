@@ -67,19 +67,19 @@ export const cameraWork = {
     position: {
       x: 32,
       y: 106.14058902365646,
-      z: 6,
+      z: 0,
       mobile: {
-        x: -29.53605610448507,
-        y: 117.27831515975302,
+        x: 0,
+        y: 120,
         z: 36,
       },
     },
     target: {
       x: 32,
       y: 0,
-      z: 6,
+      z: 0,
       mobile: {
-        x: -29.53605610448507,
+        x: 0,
         y: 0,
         z: 36,
       },
@@ -97,7 +97,7 @@ export const cameraWork = {
   },
   about: {
     position: {
-      x: 20,
+      x: 19,
       y: 48,
       z: 1.3981978440984177,
       mobile: {
@@ -107,8 +107,8 @@ export const cameraWork = {
       },
     },
     target: {
-      x: 20,
-      y: -0.0000010544828656265988,
+      x: 19,
+      y: 0,
       z: 1.3981978440984177,
       mobile: {
         x: 8,
@@ -130,11 +130,11 @@ export const cameraWork = {
   works: {
     position: {
       x: 0,
-      y: 88,
+      y: 80,
       z: 0,
       mobile: {
         x: 0,
-        y: 88,
+        y: 80,
         z: 0,
       },
     },
@@ -162,11 +162,11 @@ export const cameraWork = {
   blog: {
     position: {
       x: 0,
-      y: 49,
+      y: 128,
       z: 0,
       mobile: {
         x: 0,
-        y: 60,
+        y: 90,
         z: 0,
       },
     },

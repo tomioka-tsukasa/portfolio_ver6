@@ -49,7 +49,12 @@ export const aboutType = style({
 
 export const worksType = style({
   backdropFilter: 'blur(12px)',
-  backgroundColor: colors.bg.black_80,
+  backgroundColor: colors.bg.black_70,
+})
+
+export const blogType = style({
+  backdropFilter: 'blur(7px)',
+  backgroundColor: colors.bg.black_70,
 })
 
 export const defaultType = style({

@@ -15,13 +15,15 @@ import { setLoadComplete } from '../../store/slice/loadingStore/loadingStore'
 const OriginalCanvas = () => {
   const dispatch = useAppDispatch()
   const pageStatus = useAppSelector(selector => selector.pageStatus.currentStatus)
-  const [canvasClassName, setCanvasClassName] = useState<'defaultType' | 'aboutType' | 'worksType'>('defaultType')
+  const [canvasClassName, setCanvasClassName] = useState<'defaultType' | 'aboutType' | 'worksType' | 'blogType'>('defaultType')
 
   useEffect(() => {
     if (pageStatus === 'about') {
       setCanvasClassName('aboutType')
     } else if (pageStatus === 'works') {
       setCanvasClassName('worksType')
+    } else if (pageStatus === 'blog') {
+      setCanvasClassName('blogType')
     } else {
       setCanvasClassName('defaultType')
     }

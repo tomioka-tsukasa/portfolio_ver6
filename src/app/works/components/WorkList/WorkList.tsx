@@ -55,7 +55,7 @@ export const WorkList = () => {
     },
     {
       id: 'branchera-sapporo-lp',
-      title: 'BRANCHERA SAPPORO LP',
+      title: 'Branchera Sapporo LP',
       tags: [{ id: '1', name: 'Tag 1' }, { id: '2', name: 'Tag 2' }],
       desc: '長谷工不動産「BRANCHERA」札幌シリーズ告知LP',
       image: {
@@ -66,7 +66,7 @@ export const WorkList = () => {
     },
     {
       id: 'tosuigei-official-site',
-      title: 'TOSUIGEI OFFICIAL SITE',
+      title: 'Tosuigei Official Site',
       tags: [tags.webdesign, tags.lp, tags.gsap, tags.blanding],
       desc: '飲食店「陶酔芸」公式サイト実装',
       image: {
