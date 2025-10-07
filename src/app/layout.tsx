@@ -5,12 +5,14 @@ import '@/styles/global.css'
 import StoreProvider from '@/app/store/provider'
 import { GsapManager } from './components/GsapManager/GsapManager'
 import Canvas from './components/Canvas/Canvas'
+import { CanvasMask } from './components/CanvasMask/CanvasMask'
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen'
 import { Menu } from './components/Menu/Menu'
 import { AppTitleContainer } from './components/AppTitleContainer/AppTitleContainer'
 import { MenuTrigger } from './components/MenuTrigger/MenuTrigger'
 import { MainContentProvider } from './components/MainContents/MainContentProvider'
 import { PageInitProvider } from './components/PageInitProvider/PageInitProvider'
+import * as styles from './layout.css'
 
 const zenOldMincho = Zen_Old_Mincho({
   variable: '--font-zen-old-mincho',
@@ -73,7 +75,14 @@ export default function RootLayout({
       <PageInitProvider>
         <html lang='ja'>
           <body className={`${zenOldMincho.variable} ${playfairDisplay.variable} ${italiana.variable} ${bungeeHairline.variable}`}>
-            <Canvas />
+            <div className={styles.canvasContainer}>
+              <div className={styles.canvasInner}>
+                <Canvas />
+              </div>
+              <div className={styles.canvasMask}>
+                <CanvasMask />
+              </div>
+            </div>
             <LoadingScreen />
             <MenuTrigger />
             <Menu />
