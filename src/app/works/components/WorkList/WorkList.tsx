@@ -4,7 +4,6 @@ import * as styles from './WorkList.css'
 import { WorkItem } from '../WorkItem/WorkItem'
 import { animateMetaballColor } from '@/app/webgl/animation/metaballColorAnimation/metaballColorAnimation'
 import { useAppSelector } from '@/app/store/hook'
-import { useState } from 'react'
 
 export const tags = {
   webgl: {
@@ -46,8 +45,6 @@ export const tags = {
 }
 
 export const WorkList = () => {
-  const [isHovered, setIsHovered] = useState(false)
-
   // 現在のページ状態を監視
   const currentPage = useAppSelector(selector => selector.pageStatus.currentPage)
 
@@ -58,7 +55,6 @@ export const WorkList = () => {
   const handleWorkItemHover = () => {
     if (isHoverEnabled) {
       animateMetaballColor('yellow', 1.2, 'power2.out')
-      setIsHovered(true)
     }
   }
 
@@ -66,7 +62,6 @@ export const WorkList = () => {
   const handleWorkItemLeave = () => {
     if (isHoverEnabled) {
       animateMetaballColor('blue', 1.2, 'power2.out')
-      setIsHovered(false)
     }
   }
 
@@ -115,7 +110,7 @@ export const WorkList = () => {
           onMouseEnter={handleWorkItemHover}
           onMouseLeave={handleWorkItemLeave}
         >
-          <WorkItem number={String(i + 1).padStart(3, '0')} {...work} isHovered={isHovered} />
+          <WorkItem number={String(i + 1).padStart(3, '0')} {...work} />
         </div>
       ))}
     </div>

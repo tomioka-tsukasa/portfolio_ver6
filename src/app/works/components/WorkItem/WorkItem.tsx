@@ -3,6 +3,7 @@
 import { ImageProps } from 'next/image'
 import * as styles from './WorkItem.css'
 import { UiImage } from '@/components/ui/Image/UiImage'
+import { useState } from 'react'
 
 export interface Tag {
   name: string
@@ -17,7 +18,6 @@ export interface WorkItemProps {
   desc: string
   image: ImageProps
   date: string
-  isHovered: boolean
 }
 
 export const WorkItem = ({
@@ -28,11 +28,14 @@ export const WorkItem = ({
   desc,
   image,
   date,
-  isHovered,
 }: WorkItemProps) => {
+  const [isHovered, setIsHovered] = useState(false)
+
   return <>
     <div
       className={`${styles.root} ${isHovered ? styles.hovered : ''}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       data-work-id={id}
     >
       <div className={styles.content}>

@@ -1,6 +1,7 @@
 'use client'
 
 import * as styles from './BlogItem.css'
+import { useState } from 'react'
 
 export interface Tag {
   name: string
@@ -22,11 +23,14 @@ export const BlogItem = ({
   desc,
   icon,
   date,
-  isHovered,
 }: BlogItemProps) => {
+  const [isHovered, setIsHovered] = useState(false)
+
   return <>
     <div
       className={`${styles.root} ${isHovered ? styles.hovered : ''}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className={styles.titleContainer}>
         <div className={styles.iconContainer}>

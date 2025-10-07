@@ -4,7 +4,6 @@ import * as styles from './BlogList.css'
 import { BlogItem } from '../BlogItem/BlogItem'
 import { animateMetaballColor } from '@/app/webgl/animation/metaballColorAnimation/metaballColorAnimation'
 import { useAppSelector } from '@/app/store/hook'
-import { useState } from 'react'
 
 export const tags = {
   webgl: {
@@ -104,7 +103,6 @@ export const BlogList = () => {
       date: '2025.07.01',
     },
   ]
-  const [isHovered, setIsHovered] = useState(false)
 
   // 現在のページ状態を監視
   const currentPage = useAppSelector(selector => selector.pageStatus.currentPage)
@@ -116,7 +114,6 @@ export const BlogList = () => {
   const handleWorkItemHover = () => {
     if (isHoverEnabled) {
       animateMetaballColor('yellow', 1.2, 'power2.out')
-      setIsHovered(true)
     }
   }
 
@@ -124,7 +121,6 @@ export const BlogList = () => {
   const handleWorkItemLeave = () => {
     if (isHoverEnabled) {
       animateMetaballColor('blue', 1.2, 'power2.out')
-      setIsHovered(false)
     }
   }
 
@@ -137,7 +133,7 @@ export const BlogList = () => {
           onMouseEnter={handleWorkItemHover}
           onMouseLeave={handleWorkItemLeave}
         >
-          <BlogItem {...blog} isHovered={isHovered} />
+          <BlogItem {...blog} />
         </div>
       ))}
     </div>
