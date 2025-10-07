@@ -1,5 +1,15 @@
 import { PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
 
+// カラーパターンの数値マッピング
+export const COLOR_PATTERN_VALUES = {
+  blue: 0.0,
+  white: 1.0,
+  red: 2.0,
+  yellow: 3.0,
+} as const
+
+export type ColorPatternKey = keyof typeof COLOR_PATTERN_VALUES
+
 export interface MetaballConfig {
   numBlobs: number
   speed: number
@@ -20,7 +30,7 @@ export interface MetaballAnimationConfig {
     y: number
     z: number
   }
-  colorPattern: 'blue' | 'red' | 'yellow' | 'white'
+  colorPattern: ColorPatternKey
 }
 
 export const metaballConfigs = {
@@ -63,7 +73,7 @@ export const metaballConfigs = {
   works: {
     numBlobs: 4,
     speed: 0.15,
-    strength: 8.0,
+    strength: 6.5,
     subtract: 3,
     enableColors: true,
     showFloor: false,
@@ -104,7 +114,7 @@ export const metaballAnimationConfigs = {
       y: 0.25,
       z: 0.28
     },
-    colorPattern: 'red'
+    colorPattern: 'white'
   },
   about: {
     speed: 0.15,

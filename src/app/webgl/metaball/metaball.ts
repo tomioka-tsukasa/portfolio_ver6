@@ -17,7 +17,7 @@ import { MetaballConfig } from './modules/metaballGenerator/metaballGeneratorTyp
 import { StatsConfig } from './modules/stats/statsTypes'
 import { webglCtrl } from '../setupMember'
 import { MetaballController } from './metaballTypes'
-import { metaballConfigs } from '../metaballMember'
+import { metaballConfigs, COLOR_PATTERN_VALUES } from '../metaballMember'
 
 /**
  * メタボール実装のメイン関数
@@ -53,7 +53,7 @@ export const metaball = (
       uniforms : {
         viewVector: { value: webglCtrl.camera?.position || new THREE.Vector3() },//initial camera.position
         uColor: { value: new THREE.Color(0xffffff)},// Base color multiplier
-        uColorPattern: { value: 0.0 }, // 0.0: blue, 1.0: red, 2.0: green, 3.0: white
+        uColorPattern: { value: COLOR_PATTERN_VALUES.blue },
         uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
         uPos: { value: 0.0 },
       },

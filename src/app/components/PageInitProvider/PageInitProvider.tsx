@@ -4,10 +4,12 @@ import { useEffect } from 'react'
 import { PageId, PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
 import { webglCtrl } from '@/app/webgl/setupMember'
 import { cameraWork as cameraWorkConfig } from '@/app/webgl/cameraWork'
+import { metaballAnimationConfigs, COLOR_PATTERN_VALUES } from '@/app/webgl/metaballMember'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
 import { usePathname } from 'next/navigation'
 import { setCurrentPage, setCurrentStatus } from '@/app/store/slice/pageStatus/pageStatus'
 import { useAppDispatch } from '@/app/store/hook'
+import * as THREE from 'three'
 
 /**
  * URLパスからPageIdを取得
@@ -62,6 +64,24 @@ export const PageInitProvider = ({ children }: { children: React.ReactNode }) =>
       // コントロールのターゲットを更新
       webglCtrl.controls.target.set(cameraWork.target.x, cameraWork.target.y, cameraWork.target.z)
       webglCtrl.controls.update()
+    }
+
+    // メタボールのカラーパターンを更新
+    if (webglCtrl.metaballController?.marchingCubesManager?.marchingCubes?.material) {
+      const material = webglCtrl.metaballController.marchingCubesManager.marchingCubes.material as THREE.ShaderMaterial
+      if (material.uniforms?.uColorPattern) {
+        const currentMetaballAnimationConfig = metaballAnimationConfigs[pageId] || metaballAnimationConfigs.home
+
+        const targetPattern = COLOR_PATTERN_VALUES[currentMetaballAnimationConfig.colorPattern] ?? COLOR_PATTERN_VALUES.blue
+        material.uniforms.uColorPattern.value = targetPattern
+
+        // uColorは常に白に保つ
+        if (material.uniforms?.uColor) {
+          material.uniforms.uColor.value.setRGB(1, 1, 1)
+        }
+
+        console.log('PageInitProvider: Updated color pattern to:', currentMetaballAnimationConfig.colorPattern, '(', targetPattern, ')')
+      }
     }
 
     // Reduxストアを更新

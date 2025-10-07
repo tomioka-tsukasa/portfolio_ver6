@@ -1,7 +1,7 @@
 import { webglCtrl } from '@/app/webgl/setupMember'
 import { cameraAnimation } from '@/app/webgl/animation/cameraAnimation/cameraAnimation'
 import { cameraWork } from '@/app/webgl/cameraWork'
-import { metaballConfigs, metaballAnimationConfigs } from '@/app/webgl/metaballMember'
+import { metaballConfigs, metaballAnimationConfigs, COLOR_PATTERN_VALUES } from '@/app/webgl/metaballMember'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
 import { setCurrentStatus } from '@/app/store/slice/pageStatus/pageStatus'
 import type { AppDispatch } from '@/app/store/makeStore'
@@ -188,18 +188,7 @@ export const pageChanger: PageChanger = ({ pageId, duration = 2000 }) => {
     if (controller.marchingCubesManager?.marchingCubes?.material) {
       const material = controller.marchingCubesManager.marchingCubes.material as THREE.ShaderMaterial
       if (material.uniforms?.uColorPattern) {
-        // 文字列からパターン番号に変換
-        const getColorPatternValue = (pattern: string): number => {
-          switch (pattern) {
-            case 'blue': return 0.0
-            case 'red': return 1.0
-            case 'yellow': return 2.0
-            case 'white': return 3.0
-            default: return 0.0
-          }
-        }
-
-        const targetPattern = getColorPatternValue(config.metaballAnimationSettings.colorPattern)
+        const targetPattern = COLOR_PATTERN_VALUES[config.metaballAnimationSettings.colorPattern] ?? COLOR_PATTERN_VALUES.blue
         const animationPattern = {
           value: material.uniforms.uColorPattern.value
         }
