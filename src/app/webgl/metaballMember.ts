@@ -2,10 +2,10 @@ import { PageStatus } from '@/app/store/slice/pageStatus/pageStatusTypes'
 
 // カラーパターンの数値マッピング
 export const COLOR_PATTERN_VALUES = {
-  blue: 0.0,
-  white: 1.0,
-  red: 2.0,
-  yellow: 3.0,
+  white: 0.0,
+  blue: 1.0,
+  yellow: 2.0,
+  red: 3.0,
 } as const
 
 export type ColorPatternKey = keyof typeof COLOR_PATTERN_VALUES

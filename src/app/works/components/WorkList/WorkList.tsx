@@ -46,12 +46,12 @@ export const tags = {
 export const WorkList = () => {
   // workItemホバー時のメタボール色変更
   const handleWorkItemHover = () => {
-    animateMetaballColor('white', 1.5, 'power2.out')
+    animateMetaballColor('yellow', 1.5, 'power2.out')
   }
 
   // workItemホバー解除時のメタボール色復元
   const handleWorkItemLeave = () => {
-    animateMetaballColor('blue', 1.5, 'power2.out') // 戻る時は少し長めのアニメーション
+    animateMetaballColor('blue', 1.5, 'power2.out')
   }
 
   const work = [

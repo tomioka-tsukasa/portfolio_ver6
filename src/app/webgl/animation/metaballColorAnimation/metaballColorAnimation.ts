@@ -8,7 +8,7 @@ let currentColorAnimation: gsap.core.Tween | null = null
 
 /**
  * メタボールの色を滑らかに変更する関数
- * @param colorPattern - 変更先の色パターン ('blue' | 'white' | 'red' | 'yellow')
+ * @param colorPattern - 変更先の色パターン ('white' | 'blue' | 'yellow' | 'red')
  * @param duration - アニメーション時間（秒）
  * @param ease - イージング関数
  */

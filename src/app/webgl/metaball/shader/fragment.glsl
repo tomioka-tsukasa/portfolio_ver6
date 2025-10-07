@@ -2,7 +2,7 @@
 uniform vec3 uColor;
 uniform vec2 uResolution;
 uniform float uPos;
-uniform float uColorPattern; // 0.0: blue, 1.0: white, 2.0: red, 3.0: yellow
+uniform float uColorPattern; // 0.0: white, 1.0: blue, 2.0: yellow, 3.0: red
 
 varying vec2 vUv;
 varying float opacity;
@@ -25,16 +25,16 @@ void main() {
   float pattern = clamp(uColorPattern, 0.0, 3.0);
 
   if (pattern <= 1.0) {
-    // Blue (0.0) から White (1.0) へのブレンド
-    cc = mix(bluePattern, whitePattern, pattern);
+    // White (0.0) から Blue (1.0) へのブレンド
+    cc = mix(whitePattern, bluePattern, pattern);
   } else if (pattern <= 2.0) {
-    // White (1.0) から Red (2.0) へのブレンド
+    // Blue (1.0) から Yellow (2.0) へのブレンド
     float t = pattern - 1.0;
-    cc = mix(whitePattern, redPattern, t);
+    cc = mix(bluePattern, yellowPattern, t);
   } else {
-    // Red (2.0) から Yellow (3.0) へのブレンド
+    // Yellow (2.0) から Red (3.0) へのブレンド
     float t = pattern - 2.0;
-    cc = mix(redPattern, yellowPattern, t);
+    cc = mix(yellowPattern, redPattern, t);
   }
 
   // 最終色の計算
