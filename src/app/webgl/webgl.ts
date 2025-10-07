@@ -283,6 +283,53 @@ const initWebGL: InitWebGL = (
   webglCtrl.metaballController = metaballController
 
   /**
+   * リサイズハンドラー - スクロールバーの影響を考慮
+   */
+  const handleResize = () => {
+    const canvas = renderer.domElement
+
+    // スクロールバーを考慮した実際の表示領域を取得
+    const displayWidth = canvas.clientWidth
+    const displayHeight = canvas.clientHeight
+
+    // カメラのアスペクト比を更新
+    if (camera instanceof THREE.PerspectiveCamera) {
+      camera.aspect = displayWidth / displayHeight
+      camera.updateProjectionMatrix()
+    }
+
+    // レンダラーのサイズを更新
+    renderer.setSize(displayWidth, displayHeight)
+
+    // ポストプロセッシングがある場合はcomposerも更新
+    if (composer) {
+      composer.setSize(displayWidth, displayHeight)
+
+      // BloomPassのサイズも更新
+      const bloomPass = composer.passes.find(pass => pass instanceof UnrealBloomPass) as UnrealBloomPass
+      if (bloomPass) {
+        bloomPass.setSize(displayWidth, displayHeight)
+      }
+    }
+
+    // メタボールのシェーダーユニフォームも更新
+    if (webglCtrl.metaballController?.marchingCubesManager?.marchingCubes?.material) {
+      const material = webglCtrl.metaballController.marchingCubesManager.marchingCubes.material as THREE.ShaderMaterial
+      if (material.uniforms?.uResolution) {
+        material.uniforms.uResolution.value.set(displayWidth, displayHeight)
+      }
+    }
+
+    console.log('WebGL resized:', { displayWidth, displayHeight })
+  }
+
+  // リサイズイベントリスナーを追加
+  window.addEventListener('resize', handleResize)
+
+  // 初回リサイズを実行（初期化時のサイズ調整）
+  handleResize()
+
+  /**
    * 初期化完了通知
    */
   loadingComplete()

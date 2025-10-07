@@ -141,16 +141,8 @@ export const metaball = (
     endStats(statsManager)
   }
 
-  // ウィンドウリサイズ対応
-  const handleResize = () => {
-    // 必要に応じてメタボール関連の要素をリサイズ
-    // 現在の実装では特別な処理は不要
-  }
-  window.addEventListener('resize', handleResize)
-
   // クリーンアップ関数
   const cleanup = () => {
-    window.removeEventListener('resize', handleResize)
     scene.remove(marchingCubesManager.marchingCubes)
     disposeStats(statsManager)
     gui.destroy()
