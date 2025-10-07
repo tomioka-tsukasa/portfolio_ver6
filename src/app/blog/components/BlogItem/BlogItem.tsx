@@ -1,7 +1,6 @@
 'use client'
 
 import * as styles from './BlogItem.css'
-import { animateMetaballColor } from '@/app/webgl/animation/metaballColorAnimation/metaballColorAnimation'
 
 export interface Tag {
   name: string
@@ -14,6 +13,7 @@ export interface BlogItemProps {
   desc: string
   icon: string
   date: string
+  isHovered: boolean
 }
 
 export const BlogItem = ({
@@ -22,22 +22,11 @@ export const BlogItem = ({
   desc,
   icon,
   date,
+  isHovered,
 }: BlogItemProps) => {
-  // workItemホバー時のメタボール色変更
-  const handleWorkItemHover = () => {
-    animateMetaballColor('yellow', 1.5, 'power2.out')
-  }
-
-  // workItemホバー解除時のメタボール色復元
-  const handleWorkItemLeave = () => {
-    animateMetaballColor('blue', 1.5, 'power2.out')
-  }
-
   return <>
     <div
-      className={styles.root}
-      onMouseEnter={handleWorkItemHover}
-      onMouseLeave={handleWorkItemLeave}
+      className={`${styles.root} ${isHovered ? styles.hovered : ''}`}
     >
       <div className={styles.titleContainer}>
         <div className={styles.iconContainer}>

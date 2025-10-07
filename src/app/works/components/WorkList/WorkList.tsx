@@ -1,5 +1,10 @@
+'use client'
+
 import * as styles from './WorkList.css'
 import { WorkItem } from '../WorkItem/WorkItem'
+import { animateMetaballColor } from '@/app/webgl/animation/metaballColorAnimation/metaballColorAnimation'
+import { useAppSelector } from '@/app/store/hook'
+import { useState } from 'react'
 
 export const tags = {
   webgl: {
@@ -41,6 +46,30 @@ export const tags = {
 }
 
 export const WorkList = () => {
+  const [isHovered, setIsHovered] = useState(false)
+
+  // 現在のページ状態を監視
+  const currentPage = useAppSelector(selector => selector.pageStatus.currentPage)
+
+  // worksページでのみホバーイベントを有効にする
+  const isHoverEnabled = currentPage === 'works'
+
+  // workItemホバー時のメタボール色変更（条件付き）
+  const handleWorkItemHover = () => {
+    if (isHoverEnabled) {
+      animateMetaballColor('yellow', 1.2, 'power2.out')
+      setIsHovered(true)
+    }
+  }
+
+  // workItemホバー解除時のメタボール色復元（条件付き）
+  const handleWorkItemLeave = () => {
+    if (isHoverEnabled) {
+      animateMetaballColor('blue', 1.2, 'power2.out')
+      setIsHovered(false)
+    }
+  }
+
   const work = [
     {
       id: 'car-show-project',
@@ -83,8 +112,10 @@ export const WorkList = () => {
         <div
           key={i}
           className={styles.workItem}
+          onMouseEnter={handleWorkItemHover}
+          onMouseLeave={handleWorkItemLeave}
         >
-          <WorkItem number={String(i + 1).padStart(3, '0')} {...work} />
+          <WorkItem number={String(i + 1).padStart(3, '0')} {...work} isHovered={isHovered} />
         </div>
       ))}
     </div>

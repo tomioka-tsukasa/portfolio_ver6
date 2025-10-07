@@ -1,5 +1,5 @@
 import { italiana, playfairDisplay, zenOldMincho } from '@/styles/fontUtils'
-import { hover, mediaQueries, rvw } from '@/styles/responsive.css'
+import { hover, rvw } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
 import { style } from '@vanilla-extract/css'
 
