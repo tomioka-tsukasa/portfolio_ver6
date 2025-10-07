@@ -12,9 +12,10 @@ export const root = style([
     width: '100%',
     height: '100vh',
   },
-  rvw.padding([0], ['14vh', 0, 0, 0]),
+  rvw.padding([0], ['9vh', 0, 0, 0]),
   sp({
     justifyContent: 'flex-start',
+    height: '82vh',
   }),
 ])
 
@@ -27,6 +28,7 @@ export const content = style([
     alignItems: 'flex-end',
     maxHeight: '60%',
     overflowY: 'scroll',
+    overscrollBehavior: 'none',
     scrollbarWidth: 'none', // Firefox
     msOverflowStyle: 'none', // IE and Edge
     selectors: {
@@ -37,8 +39,8 @@ export const content = style([
   },
   rvw.padding(['54px', '54px', '54px', '0'], [32, 24]),
   sp({
-    height: '480px',
-    maxHeight: '80%',
+    height: '100%',
+    maxHeight: '100%',
     backgroundColor: colors.bg.black_60,
   }),
 ])
@@ -57,7 +59,7 @@ export const textContainer = style({
 export const text = style([
   {
     color: colors.text.white,
-    lineHeight: '170%',
+    lineHeight: '200%',
     fontSize: '14px',
     maxWidth: '540px',
   },

@@ -1,4 +1,4 @@
-import { AboutSentence } from './components/AboutSentence.tsx/AboutSentence.tsx'
+import { AboutSentence } from './components/AboutSentence/AboutSentence'
 // import * as styles from './page.css'
 
 const AboutPage = () => {
