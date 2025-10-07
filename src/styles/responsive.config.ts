@@ -11,8 +11,8 @@ export const SpDesignWidth = 375
 export const PcMqWidthMin = 1024
 export const PcMqWidthMax = 1512
 export const PcOverMqWidthMin = 1512
-export const TabletMqWidthMin = 768
-export const SpMqWidth = 767
+export const TabletMqWidthMin = 769
+export const SpMqWidth = 768
 
 // ピクセル制限設定
 export const usePixelLimit = false
