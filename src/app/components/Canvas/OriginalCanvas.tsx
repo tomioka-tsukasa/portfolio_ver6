@@ -2,7 +2,7 @@
 
 import { createWebGL } from '../../webgl/webgl'
 import { useEffect } from 'react'
-import { destroyGUI } from '../../webgl/gui/gui'
+// import { destroyGUI } from '../../webgl/gui/gui'
 import { memo } from 'react'
 import { useAppDispatch } from '@/app/store/hook'
 import { setLoadComplete } from '../../store/slice/loadingStore/loadingStore'
@@ -31,7 +31,7 @@ const OriginalCanvas = () => {
 
     return () => {
       // アンマウント時はGUIを破棄
-      destroyGUI()
+      // destroyGUI()
     }
   }, [dispatch])
 
