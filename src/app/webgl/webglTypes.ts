@@ -24,6 +24,7 @@ export type InitWebGL = (
  * WebGL管理オブジェクト
  */
 export type WebGLCtrl = {
+  loadComplete: boolean,
   renderer: THREE.WebGLRenderer | null
   camera: THREE.Camera | null
   scene: THREE.Scene | null

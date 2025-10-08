@@ -6,6 +6,7 @@ import { destroyGUI } from '../../webgl/gui/gui'
 import { memo } from 'react'
 import { useAppDispatch } from '@/app/store/hook'
 import { setLoadComplete } from '../../store/slice/loadingStore/loadingStore'
+import { webglCtrl } from '../../webgl/setupMember'
 
 /**
  * キャンバスコンポーネント
@@ -19,8 +20,11 @@ const OriginalCanvas = () => {
    * キャンバスの作成
    */
   useEffect(() => {
+    if (webglCtrl.loadComplete) return
+
     createWebGL(
       () => {
+        webglCtrl.loadComplete = true
         dispatch(setLoadComplete())
       },
     )
