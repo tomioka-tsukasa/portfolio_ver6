@@ -22,9 +22,9 @@ import vertexShader from './metaball/shader/vertex.glsl'
 import fragmentShader from './metaball/shader/fragment.glsl'
 
 // GUI
-import { setSceneGUI } from './gui/setter/scene/setSceneGUI'
-import { setCameraGUI } from './gui/setter/camera/setCameraGUI'
-import { setPostprocessGUI } from './gui/setter/postprocess/setPostprocessGUI'
+// import { setSceneGUI } from './gui/setter/scene/setSceneGUI'
+// import { setCameraGUI } from './gui/setter/camera/setCameraGUI'
+// import { setPostprocessGUI } from './gui/setter/postprocess/setPostprocessGUI'
 import { fixCamerawork } from '@/lib/threejs/fixCamerawork/fixCamerawork'
 import { metaball } from './metaball/metaball'
 import { cameraWork as cameraWorkConfig } from './cameraWork'
@@ -76,14 +76,14 @@ const initWebGL: InitWebGL = (
     scene.environmentIntensity = setupMember.scene.environmentIntensity
 
     // シーンのGUI設定
-    setSceneGUI(
-      scene,
-      loadedAssets.envmaps[setupMember.scene.environment],
-      {
-        environmentIntensity: setupMember.scene.environmentIntensity,
-        background: setupMember.scene.background,
-      },
-    )
+    // setSceneGUI(
+    //   scene,
+    //   loadedAssets.envmaps[setupMember.scene.environment],
+    //   {
+    //     environmentIntensity: setupMember.scene.environmentIntensity,
+    //     background: setupMember.scene.background,
+    //   },
+    // )
   }
 
   /**
@@ -116,7 +116,7 @@ const initWebGL: InitWebGL = (
     cameraWork.target,
   ) : null
 
-  if (setupMember.gui.active) setCameraGUI(camera, cameraWork)
+  // if (setupMember.gui.active) setCameraGUI(camera, cameraWork)
 
   // カメラの動きをログに出力
   if (controls) getCameraInfo(camera, controls)
@@ -197,12 +197,12 @@ const initWebGL: InitWebGL = (
   composer.addPass(bloomPass)
 
   // GUI設定
-  if (setupMember.gui.active) setPostprocessGUI(
-    bloomPass,
-    {
-      bloomPass: setupMember.postprocess.bloomPass
-    },
-  )
+  // if (setupMember.gui.active) setPostprocessGUI(
+  //   bloomPass,
+  //   {
+  //     bloomPass: setupMember.postprocess.bloomPass
+  //   },
+  // )
 
   /**
    * アニメーション
@@ -341,6 +341,8 @@ const initWebGL: InitWebGL = (
 export const createWebGL: CreateWebGL = (
   loadingComplete,
 ) => {
+  if (!window) return
+
   loadingManager(
     (loadedAssets) => {
       initWebGL(

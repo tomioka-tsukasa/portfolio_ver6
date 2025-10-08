@@ -68,6 +68,7 @@ export const lightsMember: Record<string, Required<Parameters<GetSpotLight>[0]>>
  * WebGL管理オブジェクト
  */
 export const webglCtrl: WebGLCtrl = {
+  loadComplete: false,
   renderer: null,
   camera: null,
   scene: null,

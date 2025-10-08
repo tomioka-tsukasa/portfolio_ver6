@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import * as DAT from 'dat.gui'
+// import * as DAT from 'dat.gui'
 
 // シェーダーのインポート
 import vertexShader from './shader/vertex.glsl'
@@ -98,13 +98,13 @@ export const metaball = (
   scene.add(marchingCubesManager.marchingCubes)
 
   // GUI設定（dat.GUI）
-  const gui = new DAT.GUI()
-  gui.domElement.style.display = 'none'
-  setupGUI(gui, {
-    marchingCubesManager,
-    metaballGenerator,
-    statsManager
-  })
+  // const gui = new DAT.GUI()
+  // gui.domElement.style.display = 'none'
+  // setupGUI(gui, {
+  //   marchingCubesManager,
+  //   metaballGenerator,
+  //   statsManager
+  // })
 
   // アニメーション用の時間管理
   let lastTime = 0
@@ -145,7 +145,7 @@ export const metaball = (
   const cleanup = () => {
     scene.remove(marchingCubesManager.marchingCubes)
     disposeStats(statsManager)
-    gui.destroy()
+    // gui.destroy()
   }
 
   // レガシーアニメーション関数（pageChangerに統合済み、互換性のため残存）
@@ -179,63 +179,63 @@ export const metaball = (
 /**
  * GUI設定を行う関数
  */
-function setupGUI(
-  gui: DAT.GUI,
-  managers: {
-    marchingCubesManager: ReturnType<typeof initMarchingCubes>
-    metaballGenerator: MetaballGenerator
-    statsManager: ReturnType<typeof initStats>
-  }
-) {
-  const { marchingCubesManager, metaballGenerator } = managers
+// function setupGUI(
+//   gui: DAT.GUI,
+//   managers: {
+//     marchingCubesManager: ReturnType<typeof initMarchingCubes>
+//     metaballGenerator: MetaballGenerator
+//     statsManager: ReturnType<typeof initStats>
+//   }
+// ) {
+//   const { marchingCubesManager, metaballGenerator } = managers
 
-  // メタボール設定フォルダ
-  const metaballFolder = gui.addFolder('Metaball Settings')
-  gui.close()
-  const config = metaballGenerator.getConfig()
+//   // メタボール設定フォルダ
+//   const metaballFolder = gui.addFolder('Metaball Settings')
+//   gui.close()
+//   const config = metaballGenerator.getConfig()
 
-  metaballFolder.add(config, 'speed', 0.1, 3.0).name('Animation Speed').onChange((value: number) => {
-    metaballGenerator.updateConfig({ speed: value })
-  })
+//   metaballFolder.add(config, 'speed', 0.1, 3.0).name('Animation Speed').onChange((value: number) => {
+//     metaballGenerator.updateConfig({ speed: value })
+//   })
 
-  metaballFolder.add(config, 'numBlobs', 1, 20).step(1).name('Number of Blobs').onChange((value: number) => {
-    metaballGenerator.updateConfig({ numBlobs: value })
-  })
+//   metaballFolder.add(config, 'numBlobs', 1, 20).step(1).name('Number of Blobs').onChange((value: number) => {
+//     metaballGenerator.updateConfig({ numBlobs: value })
+//   })
 
-  metaballFolder.add(config, 'strength', 0.1, 3.0).name('Blob Strength').onChange((value: number) => {
-    metaballGenerator.updateConfig({ strength: value })
-  })
+//   metaballFolder.add(config, 'strength', 0.1, 3.0).name('Blob Strength').onChange((value: number) => {
+//     metaballGenerator.updateConfig({ strength: value })
+//   })
 
-  metaballFolder.add(config, 'subtract', 1, 20).step(1).name('Subtraction').onChange((value: number) => {
-    metaballGenerator.updateConfig({ subtract: value })
-  })
+//   metaballFolder.add(config, 'subtract', 1, 20).step(1).name('Subtraction').onChange((value: number) => {
+//     metaballGenerator.updateConfig({ subtract: value })
+//   })
 
-  metaballFolder.add(config, 'enableColors').name('Enable Colors').onChange((value: boolean) => {
-    metaballGenerator.updateConfig({ enableColors: value })
-  })
+//   metaballFolder.add(config, 'enableColors').name('Enable Colors').onChange((value: boolean) => {
+//     metaballGenerator.updateConfig({ enableColors: value })
+//   })
 
-  metaballFolder.add(config, 'showFloor').name('Show Floor').onChange((value: boolean) => {
-    metaballGenerator.updateConfig({ showFloor: value })
-  })
+//   metaballFolder.add(config, 'showFloor').name('Show Floor').onChange((value: boolean) => {
+//     metaballGenerator.updateConfig({ showFloor: value })
+//   })
 
-  metaballFolder.open()
+//   metaballFolder.open()
 
-  // Marching Cubes設定フォルダ
-  const marchingCubesFolder = gui.addFolder('Marching Cubes Settings')
+//   // Marching Cubes設定フォルダ
+//   const marchingCubesFolder = gui.addFolder('Marching Cubes Settings')
 
-  const materials = Object.keys(getMaterials())
-  const currentMaterial = 'normal'
-  marchingCubesFolder.add({ material: currentMaterial }, 'material', materials).name('Material').onChange((value: string) => {
-    changeMaterial(marchingCubesManager, value)
-  })
+//   const materials = Object.keys(getMaterials())
+//   const currentMaterial = 'normal'
+//   marchingCubesFolder.add({ material: currentMaterial }, 'material', materials).name('Material').onChange((value: string) => {
+//     changeMaterial(marchingCubesManager, value)
+//   })
 
-  marchingCubesFolder.add(marchingCubesManager.config, 'resolution', 10, 100).step(1).name('Resolution').onChange((value: number) => {
-    changeResolution(marchingCubesManager, value)
-  })
+//   marchingCubesFolder.add(marchingCubesManager.config, 'resolution', 10, 100).step(1).name('Resolution').onChange((value: number) => {
+//     changeResolution(marchingCubesManager, value)
+//   })
 
-  marchingCubesFolder.add(marchingCubesManager.config, 'isolation', 10, 300).name('Isolation').onChange((value: number) => {
-    changeIsolation(marchingCubesManager, value)
-  })
+//   marchingCubesFolder.add(marchingCubesManager.config, 'isolation', 10, 300).name('Isolation').onChange((value: number) => {
+//     changeIsolation(marchingCubesManager, value)
+//   })
 
-  marchingCubesFolder.open()
-}
+//   marchingCubesFolder.open()
+// }

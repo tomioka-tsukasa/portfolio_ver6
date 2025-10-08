@@ -1,19 +1,42 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-import { memo } from 'react'
+import { createWebGL } from '../../webgl/webgl'
+import { useEffect } from 'react'
+// import { destroyGUI } from '../../webgl/gui/gui'
+import { useAppDispatch } from '@/app/store/hook'
+import { setLoadComplete } from '../../store/slice/loadingStore/loadingStore'
+import { webglCtrl } from '../../webgl/setupMember'
 
 /**
- * キャンバスダイナミックインポート
- * ・ReferenceError: window is not defined エラーを防ぐためにdynamic importを使用
- * ・リファレンス: https://zenn.dev/hironorioka28/articles/8247133329d64e
+ * キャンバスコンポーネント
+ * ・`./Canvas.tsx` でダイナミックインポートしている
+ * ・マスクは CanvasMask コンポーネントが別途担当
  */
-const OriginalCanvas = dynamic(() => import('./OriginalCanvas'), {
-  ssr: false,
-})
-
 const Canvas = () => {
-  return <OriginalCanvas />
+  const dispatch = useAppDispatch()
+
+  /**
+   * キャンバスの作成
+   */
+  useEffect(() => {
+    if (webglCtrl.loadComplete) return
+
+    createWebGL(
+      () => {
+        webglCtrl.loadComplete = true
+        dispatch(setLoadComplete())
+      },
+    )
+
+    return () => {
+      // アンマウント時はGUIを破棄
+      // destroyGUI()
+    }
+  }, [dispatch])
+
+  return <>
+    <canvas id='canvas' />
+  </>
 }
 
-export default memo(Canvas)
+export default Canvas
