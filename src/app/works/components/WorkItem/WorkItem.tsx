@@ -3,8 +3,11 @@
 import { ImageProps } from 'next/image'
 import * as styles from './WorkItem.css'
 import { UiImage } from '@/components/ui/Image/UiImage'
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
+import { AnimatedText } from '@/lib/AnimatedText/AnimatedText'
+import { useAppSelector } from '@/app/store/hook'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export interface Tag {
   name: string
@@ -31,9 +34,33 @@ export const WorkItem = ({
   date,
 }: WorkItemProps) => {
   const [isHovered, setIsHovered] = useState(false)
+  const [showTitle, setShowTitle] = useState(false)
+  const pageStatus = useAppSelector((state) => state.pageStatus.currentStatus)
+  const itemRef = useRef<HTMLAnchorElement>(null)
+
+  // ScrollTrigger を使用してビューポート検知
+  useEffect(() => {
+    if (pageStatus === 'works' && itemRef.current) {
+      // ScrollTrigger を作成
+      const scrollTrigger = ScrollTrigger.create({
+        trigger: itemRef.current,
+        start: 'top 85%', // 要素の上端がビューポートの85%位置に来たときに発火
+        onEnter: () => {
+          setShowTitle(true)
+        },
+        once: true // 一度だけ実行
+      })
+
+      // クリーンアップ
+      return () => {
+        scrollTrigger.kill()
+      }
+    }
+  }, [pageStatus])
 
   return <>
     <Link
+      ref={itemRef}
       href={`./${id}`}
       className={`${styles.root} ${isHovered ? styles.hovered : ''}`}
       onMouseEnter={() => setIsHovered(true)}
@@ -45,7 +72,12 @@ export const WorkItem = ({
           {number}
         </div>
         <div className={styles.title}>
-          {title}
+          <AnimatedText
+            text={title}
+            show={showTitle}
+            className={styles.title}
+            delay={0.5}
+          />
         </div>
         <div className={styles.desc}>
           {desc}
