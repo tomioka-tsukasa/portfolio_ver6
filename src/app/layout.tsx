@@ -72,17 +72,17 @@ export default function RootLayout({
   return <>
     <StoreProvider>
       <GsapManager />
-      <PageInitProvider>
-        <html lang='ja'>
-          <body className={`${zenOldMincho.variable} ${playfairDisplay.variable} ${italiana.variable} ${bungeeHairline.variable}`}>
-            <div className={styles.canvasContainer}>
-              <div className={styles.canvasInner}>
-                <Canvas />
-              </div>
-              <div className={styles.canvasMask}>
-                <CanvasMask />
-              </div>
+      <html lang='ja'>
+        <body className={`${zenOldMincho.variable} ${playfairDisplay.variable} ${italiana.variable} ${bungeeHairline.variable}`}>
+          <div className={styles.canvasContainer}>
+            <div className={styles.canvasInner}>
+              <Canvas />
             </div>
+            <div className={styles.canvasMask}>
+              <CanvasMask />
+            </div>
+          </div>
+          <PageInitProvider>
             <LoadingScreen />
             <MenuTrigger />
             <Menu />
@@ -90,9 +90,9 @@ export default function RootLayout({
             <MainContentProvider>
               {children}
             </MainContentProvider>
-          </body>
-        </html>
-      </PageInitProvider>
+          </PageInitProvider>
+        </body>
+      </html>
     </StoreProvider>
   </>
 }
