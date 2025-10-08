@@ -5,7 +5,6 @@ const withVanillaExtract = createVanillaExtractPlugin()
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  output: 'export',
   trailingSlash: true,
   reactStrictMode: false,
   images: {
