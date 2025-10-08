@@ -24,11 +24,18 @@ export const AnimatedText = ({
 }: AnimatedTextProps) => {
   const containerRef = useRef<HTMLElement>(null)
   const isInitialRender = useRef(true)
+  const prevShow = useRef(show)
 
   useEffect(() => {
     if (!containerRef.current) return
 
     const container = containerRef.current
+
+    // show が false から true に変わった時、初期表示として扱う
+    if (!prevShow.current && show) {
+      isInitialRender.current = true
+    }
+    prevShow.current = show
 
     // テキストを1文字ずつspanで囲む
     const chars = text.split('').map((char) => {

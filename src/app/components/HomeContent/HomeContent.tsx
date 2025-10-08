@@ -11,6 +11,7 @@ import gsap from 'gsap'
 export const HomeContent = () => {
   const dispatch = useAppDispatch()
   const pageStatus = useAppSelector(state => state.pageStatus.currentStatus)
+  const loadComplete = useAppSelector(state => state.loadingStore.loadComplete)
   const scrollUiRef = useRef<HTMLDivElement>(null)
   const pageChanger = createPageChanger(dispatch)
 
@@ -46,17 +47,17 @@ export const HomeContent = () => {
           opacity: 0,
           duration: 0.5,
           ease: 'power2.out'
-        }, '+=0.5')
+        }, '+=0.7')
         .call(() => {
           pageChanger({ pageId: 'menu' })
         }, [], '-=0.2')
     }
   }
 
-  // ページ状態による表示制御
+  // ページ状態とローディング完了による表示制御
   useEffect(() => {
-    if (pageStatus === 'home') {
-      // homeページの場合、アニメーションテキストを表示（delayはAnimatedTextで制御）
+    if (pageStatus === 'home' && loadComplete) {
+      // homeページでローディング完了時、アニメーションテキストを表示（delayはAnimatedTextで制御）
       setShowTitle(true)
       setShowSubTitle(true)
 
@@ -69,25 +70,31 @@ export const HomeContent = () => {
           delay: 1.3
         })
       }
+    } else if (pageStatus !== 'home') {
+      // homeページ以外の場合、アニメーション状態をリセット
+      setShowTitle(false)
+      setShowSubTitle(false)
     }
-  }, [pageStatus])
+  }, [pageStatus, loadComplete])
 
   // 初期表示時のアニメーション
   useEffect(() => {
-    // アニメーションテキストを表示（delayはAnimatedTextで制御）
-    setShowTitle(true)
-    setShowSubTitle(true)
+    if (loadComplete) {
+      // ローディング完了時、アニメーションテキストを表示（delayはAnimatedTextで制御）
+      setShowTitle(true)
+      setShowSubTitle(true)
 
-    if (scrollUiRef.current) {
-      gsap.set(scrollUiRef.current, { opacity: 0 })
-      gsap.to(scrollUiRef.current, {
-        opacity: 1,
-        duration: 0.5,
-        ease: 'power2.out',
-        delay: 1.6
-      })
+      if (scrollUiRef.current) {
+        gsap.set(scrollUiRef.current, { opacity: 0 })
+        gsap.to(scrollUiRef.current, {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          delay: 1.6
+        })
+      }
     }
-  }, [])
+  }, [loadComplete])
 
   return <>
     <div className={styles.root}>
@@ -97,7 +104,7 @@ export const HomeContent = () => {
           show={showTitle}
           className={styles.title}
           tag='h1'
-          delay={1}
+          delay={1.0}
           duration={0.2}
         />
         <AnimatedText
