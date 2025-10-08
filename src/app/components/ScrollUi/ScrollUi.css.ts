@@ -1,11 +1,11 @@
-import { rvw } from '@/styles/responsive.css'
+import { hover, rvw } from '@/styles/responsive.css'
 import { colors } from '@/styles/variables'
 import { style, keyframes } from '@vanilla-extract/css'
-import { zenOldMincho } from '@/styles/fontUtils'
+import { playfairDisplay } from '@/styles/fontUtils'
 
 const lineAnimation = keyframes({
   '0%': {
-    height: rvw.height(110, 100).height,
+    height: rvw.height(160).height,
     bottom: '100%',
   },
   '80%': {
@@ -45,10 +45,10 @@ export const root = style([
   {
     position: 'fixed',
     left: '50%',
-    bottom: '0',
     transform: 'translateX(-50%)',
   },
-  rvw.height(150, 100),
+  rvw.bottom('15%', '12%'),
+  rvw.height(160),
 ])
 
 export const container = style({
@@ -60,9 +60,23 @@ export const container = style({
 export const text = style([
   {
     color: colors.text.white,
-    ...zenOldMincho(),
+    backgroundColor: colors.bg.black_30,
+    backdropFilter: 'blur(12px)',
+    textAlign: 'center',
+    textWrap: 'nowrap',
+    border: `1px solid ${colors.text.white_10}`,
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, border-color 0.3s ease-in-out',
+    ...playfairDisplay(),
   },
-  rvw.fontSize(18, 12),
+  hover({
+    backgroundColor: colors.bg.black_50,
+    backdropFilter: 'blur(24px)',
+    borderColor: colors.text.white_20,
+  }),
+  rvw.fontSize(14, 12),
+  rvw.padding([5, 32, 6]),
+  rvw.borderRadius(24, 24),
 ])
 
 export const lineContainer = style([
@@ -74,7 +88,7 @@ export const lineContainer = style([
     width: '1px',
     overflow: 'hidden',
   },
-  rvw.height(110, 70),
+  rvw.height(160, 70),
 ])
 
 export const line = style([
@@ -85,7 +99,7 @@ export const line = style([
     transform: 'translateX(-50%)',
     width: '100%',
     height: '100%',
-    backgroundColor: colors.text.white_70,
+    backgroundColor: colors.text.white_50,
     animation: `${lineAnimation} 2.4s ease-in-out infinite`,
   },
   rvw.height(110, 70),
@@ -106,6 +120,9 @@ export const markerInner = style({
   position: 'relative',
   width: '100%',
   height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 })
 
 export const markerItemOuter = style({
