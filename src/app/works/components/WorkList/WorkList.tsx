@@ -30,6 +30,18 @@ export const tags = {
     id: 'lp',
     name: 'LP制作',
   },
+  webapp: {
+    id: 'webapp',
+    name: 'Webアプリ開発',
+  },
+  director: {
+    id: 'director',
+    name: 'Webディレクター',
+  },
+  developDesign: {
+    id: 'develop-design',
+    name: '設計担当',
+  },
   gsap: {
     id: 'gsap',
     name: 'GSAPアニメーション',
@@ -80,7 +92,7 @@ export const WorkList = () => {
     {
       id: 'branchera-sapporo-lp',
       title: 'Branchera Sapporo LP',
-      tags: [{ id: '1', name: 'Tag 1' }, { id: '2', name: 'Tag 2' }],
+      tags: [tags.lp, tags.gsap, tags.blanding],
       desc: '長谷工不動産「BRANCHERA」札幌シリーズ告知LP',
       image: {
         src: '/assets/images/work/work-branchera-sapporo-lp@1.5.jpg',
@@ -102,7 +114,7 @@ export const WorkList = () => {
     {
       id: 'wms-web-app',
       title: 'WMS Web App',
-      tags: [tags.webdesign, tags.lp, tags.gsap, tags.blanding],
+      tags: [tags.webapp, tags.developDesign, tags.director, tags.nextjs],
       desc: '在庫管理Webアプリ(WMS)開発支援',
       image: {
         src: '/assets/images/work/work-wms-web-app@1.5.jpg',
