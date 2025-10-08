@@ -21,7 +21,7 @@ export const root = style({
   justifyContent: 'center',
   alignItems: 'center',
   zIndex: 1000,
-  transition: 'opacity 1.1s cubic-bezier(0.0, 0.5, 0.3, 1.0) 0s',
+  transition: 'opacity 0.7s cubic-bezier(0.0, 0.5, 0.3, 1.0) 0s',
 })
 
 export const text = style([

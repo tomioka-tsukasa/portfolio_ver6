@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useAppDispatch } from '@/app/store/hook'
 import { setLoadComplete } from '../../store/slice/loadingStore/loadingStore'
 import { webglCtrl } from '../../webgl/setupMember'
+import * as styles from './Canvas.css'
 
 /**
  * キャンバスコンポーネント
@@ -35,7 +36,7 @@ const Canvas = () => {
   }, [dispatch])
 
   return <>
-    <canvas id='canvas' />
+    <canvas id='canvas' className={styles.root} />
   </>
 }
 
