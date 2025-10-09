@@ -36,6 +36,7 @@ export const imageContainer = style([
     flexShrink: '0',
     filter: 'brightness(0.64)',
     transition: 'filter 0.3s ease-out',
+    overflow: 'hidden',
     selectors: {
       [`.${hovered} &`]: {
         filter: 'brightness(1)',
@@ -122,3 +123,43 @@ export const date = style([
     textAlign: 'right',
   }),
 ])
+
+// インタラクション
+
+export const fadeIn = style([
+  {
+    opacity: 0,
+    transform: 'translateY(10px)',
+    transition: 'opacity 1s cubic-bezier(0.0, 0.5, 0.3, 1.0), transform 1s cubic-bezier(0.0, 0.5, 0.3, 1.0)',
+  },
+])
+
+export const fadeInImage = style([
+  {
+    opacity: 0,
+    transform: 'translateY(30px)',
+    filter: 'grayscale(100%) brightness(0%)',
+    transition: 'opacity 1.2s cubic-bezier(0.0, 0.5, 0.3, 1.0), transform 1.2s cubic-bezier(0.0, 0.5, 0.3, 1.0), filter 2s cubic-bezier(0.0, 0.5, 0.3, 1.0)',
+  },
+])
+
+export const fadeInActive = style([
+  {
+    opacity: 1,
+    transform: 'translateY(0)',
+    filter: 'grayscale(0%) brightness(100%)',
+  },
+])
+
+export const fadeInActiveDelay = (() => {
+  const styles: Record<string, string> = {}
+  for (let i = 0; i < 10; i++) {
+    styles[`${i + 1}`] = style([
+      {
+        transitionDelay: `${(i + 1) * 0.1}s`,
+      },
+    ])
+  }
+
+  return styles
+})()

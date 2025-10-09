@@ -37,6 +37,7 @@ export const WorkItem = ({
   const [showTitle, setShowTitle] = useState(false)
   const pageStatus = useAppSelector((state) => state.pageStatus.currentStatus)
   const itemRef = useRef<HTMLAnchorElement>(null)
+  const fadeInActiveRef = useRef(false)
 
   // ScrollTrigger を使用してビューポート検知
   useEffect(() => {
@@ -44,9 +45,10 @@ export const WorkItem = ({
       // ScrollTrigger を作成
       const scrollTrigger = ScrollTrigger.create({
         trigger: itemRef.current,
-        start: 'top 85%', // 要素の上端がビューポートの85%位置に来たときに発火
+        start: 'top 80%', // 要素の上端がビューポートの80%位置に来たときに発火
         onEnter: () => {
           setShowTitle(true)
+          fadeInActiveRef.current = true
         },
         once: true // 一度だけ実行
       })
@@ -76,13 +78,13 @@ export const WorkItem = ({
             text={title}
             show={showTitle}
             className={styles.title}
-            delay={0.5}
+            delay={0.2}
           />
         </div>
-        <div className={styles.desc}>
+        <div className={`${styles.desc} ${styles.fadeIn} ${fadeInActiveRef.current ? styles.fadeInActive : ''} ${styles.fadeInActiveDelay[4]}`}>
           {desc}
         </div>
-        <div className={styles.tags}>
+        <div className={`${styles.tags} ${styles.fadeIn} ${fadeInActiveRef.current ? styles.fadeInActive : ''} ${styles.fadeInActiveDelay[6]}`}>
           {tags.map((tag, i, arr) => (
             <div className={styles.tag} key={i}>
               {tag.name}
@@ -90,12 +92,17 @@ export const WorkItem = ({
             </div>
           ))}
         </div>
-        <div className={styles.date}>
+        <div className={`${styles.date} ${styles.fadeIn} ${fadeInActiveRef.current ? styles.fadeInActive : ''} ${styles.fadeInActiveDelay[8]}`}>
           {date}
         </div>
       </div>
       <div className={styles.imageContainer}>
-        <UiImage {...image} width={1512} height={850.5} />
+        <UiImage
+          className={`${styles.fadeInImage} ${fadeInActiveRef.current ? styles.fadeInActive : ''} ${styles.fadeInActiveDelay[8]}`}
+          {...image}
+          width={1512}
+          height={850.5}
+        />
       </div>
     </Link>
   </>
