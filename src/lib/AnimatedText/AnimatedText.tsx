@@ -12,6 +12,7 @@ interface AnimatedTextProps {
   tag?: 'h1' | 'h2' | 'h3' | 'p' | 'span'
   delay?: number
   duration?: number
+  progressiveDuration?: boolean
 }
 
 export const AnimatedText = ({
@@ -20,7 +21,8 @@ export const AnimatedText = ({
   className,
   tag: Tag = 'span',
   delay = 0,
-  duration = 0.2
+  duration = 0.2,
+  progressiveDuration = true
 }: AnimatedTextProps) => {
   const containerRef = useRef<HTMLElement>(null)
   const isInitialRender = useRef(true)
@@ -37,8 +39,15 @@ export const AnimatedText = ({
     }
     prevShow.current = show
 
-    // テキストを1文字ずつspanで囲む
+    // テキストを1文字ずつspanで囲む（改行文字も考慮）
     const chars = text.split('').map((char) => {
+      if (char === '\n') {
+        // 改行文字の場合はbrタグを作成
+        const brElement = document.createElement('br')
+
+        return { outerSpan: brElement, innerSpan: null, char, isBreak: true }
+      }
+
       const outerSpan = document.createElement('span')
       const innerSpan = document.createElement('span')
 
@@ -49,7 +58,7 @@ export const AnimatedText = ({
 
       outerSpan.appendChild(innerSpan)
 
-      return { outerSpan, innerSpan, char }
+      return { outerSpan, innerSpan, char, isBreak: false }
     })
 
     // コンテナをクリアして新しい要素を追加
@@ -61,8 +70,11 @@ export const AnimatedText = ({
     const timeline = gsap.timeline()
 
     if (show) {
+      // 改行文字以外の要素のみでアニメーション対象を絞り込み
+      const animatableChars = chars.filter(({ isBreak }) => !isBreak)
+
       // 初期状態
-      gsap.set(chars.map(({ innerSpan }) => innerSpan), {
+      gsap.set(animatableChars.map(({ innerSpan }) => innerSpan), {
         x: '-100%',
         opacity: 0,
       })
@@ -70,11 +82,15 @@ export const AnimatedText = ({
       // 表示アニメーション（初期表示のみdelayを適用、文字ごとにdurationを調整）
       const animationDelay = isInitialRender.current ? delay : 0
 
-      // 各文字に個別にアニメーションを適用（最後に向けてdurationを長く）
-      chars.forEach(({ innerSpan }, index) => {
-        // 文字の位置に応じてdurationを調整（最後の文字ほど長く）
-        const progress = index / (chars.length - 1) // 0から1の進行度
-        const adjustedDuration = duration * (1 + progress * 3) // 最後の文字は3倍のduration
+      // 各文字に個別にアニメーションを適用
+      animatableChars.forEach(({ innerSpan }, index) => {
+        let adjustedDuration = duration
+
+        if (progressiveDuration) {
+          // 文字の位置に応じてdurationを調整（最後の文字ほど長く）
+          const progress = index / (animatableChars.length - 1) // 0から1の進行度
+          adjustedDuration = duration * (1 + progress * 3) // 最後の文字は3倍のduration
+        }
 
         timeline.to(innerSpan, {
           x: '0%',
@@ -88,11 +104,18 @@ export const AnimatedText = ({
       // 初期表示フラグをfalseに設定
       isInitialRender.current = false
     } else {
-      // 非表示アニメーション（delayなし、最初の文字から早く消える）
-      chars.forEach(({ innerSpan }, index) => {
-        // 最初の文字ほど早く消える（逆順）
-        const progress = (chars.length - 1 - index) / (chars.length - 1) // 1から0の進行度
-        const adjustedDuration = duration * (1 + progress * 3) // 最初の文字は3倍のduration
+      // 改行文字以外の要素のみでアニメーション対象を絞り込み
+      const animatableChars = chars.filter(({ isBreak }) => !isBreak)
+
+      // 非表示アニメーション（delayなし）
+      animatableChars.forEach(({ innerSpan }, index) => {
+        let adjustedDuration = duration
+
+        if (progressiveDuration) {
+          // 最初の文字ほど早く消える（逆順）
+          const progress = (animatableChars.length - 1 - index) / (animatableChars.length - 1) // 1から0の進行度
+          adjustedDuration = duration * (1 + progress * 3) // 最初の文字は3倍のduration
+        }
 
         timeline.to(innerSpan, {
           x: '-100%',
@@ -107,7 +130,7 @@ export const AnimatedText = ({
     return () => {
       timeline.kill()
     }
-  }, [text, show, delay, duration])
+  }, [text, show, delay, duration, progressiveDuration])
 
   return React.createElement(Tag, {
     ref: containerRef,
