@@ -288,7 +288,7 @@ const initWebGL: InitWebGL = (
   const handleResize = () => {
     // ビューポートサイズを使用（スクロールバーの影響を受けない）
     const displayWidth = window.innerWidth
-    const displayHeight = window.innerHeight
+    const displayHeight = window.outerHeight
 
     // カメラのアスペクト比を更新
     if (camera instanceof THREE.PerspectiveCamera) {

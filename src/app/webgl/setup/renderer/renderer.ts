@@ -15,7 +15,7 @@ export const getRenderer: GetRenderer = (
     antialias: parameters?.antialias ?? true,
     ...parameters,
   })
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setSize(window.innerWidth, window.outerHeight)
 
   /**
    * カラー設定
