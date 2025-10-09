@@ -40,7 +40,7 @@ export const initScene = (canvas: HTMLCanvasElement, config: SceneConfig): Scene
     antialias: true,
     alpha: true
   })
-  renderer.setSize(window.innerWidth, window.outerHeight)
+  renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
   // ライトを設定
