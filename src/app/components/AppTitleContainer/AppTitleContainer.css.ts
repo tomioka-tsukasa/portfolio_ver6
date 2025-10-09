@@ -1,6 +1,7 @@
 import { pcOver, rvw, sp } from '@/styles/responsive.css'
 import { bungeeHairline } from '@/styles/fontUtils'
 import { style } from '@vanilla-extract/css'
+import { colors } from '@/styles/variables'
 
 export const root = style([
   {
@@ -58,6 +59,8 @@ export const consoleText = style([
     wordBreak: 'break-all',
     lineHeight: 1,
     overflow: 'hidden',
+    backgroundColor: colors.bg.black_30,
+    backdropFilter: 'blur(12px)',
     ...bungeeHairline(),
   },
   rvw.fontSize(12, '8px'),

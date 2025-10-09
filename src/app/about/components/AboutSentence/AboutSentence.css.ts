@@ -10,64 +10,44 @@ export const root = style([
     position: 'relative',
     zIndex: 1,
     width: '100%',
-    height: '100vh',
   },
   sp({
     justifyContent: 'flex-start',
-    height: '64vh',
   }),
 ])
 
-export const content = style([
+
+export const textContainer = style([
   {
-    backgroundColor: colors.bg.black_50,
-    width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-end',
-    maxHeight: '57%',
-    overflowY: 'scroll',
-    overscrollBehavior: 'none',
-    scrollbarWidth: 'none', // Firefox
-    msOverflowStyle: 'none', // IE and Edge
-    selectors: {
-      '&::-webkit-scrollbar': {
-        display: 'none', // Chrome, Safari, Opera
-      },
-    },
+    width: '50%',
   },
-  rvw.padding([48, 48, 48, '0'], [32, 24]),
+  rvw.padding([120, 0, 140, '50%'], [64, 24, 96]),
   sp({
-    height: '100%',
-    maxHeight: '100%',
-    backgroundColor: colors.bg.black_60,
-  }),
-])
-
-export const textContainer = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '32px',
-  width: '48%',
-  ...sp({
-    gap: '24px',
     width: '100%',
   }),
-})
+])
 
 export const text = style([
   {
-    color: colors.text.white,
-    lineHeight: '200%',
-    maxWidth: '540px',
+    color: colors.text.white_60,
+    lineHeight: '180%',
+    // maxWidth: '540px',
+    fontWeight: '600',
+    width: '100%',
+    whiteSpace: 'pre',
   },
-  rvw.fontSize(14, '12px'),
-  rvw.width('100%', '100%'),
+  rvw.fontSize(24, 14),
   sp({
-    maxWidth: '100%',
+    lineHeight: '160%',
   }),
   pcOver({
-    ...rvw.fontSize(14),
-    ...rvw.maxWidth(540),
+    // ...rvw.fontSize(14),
+    // ...rvw.maxWidth(540),
   }),
+])
+
+export const paragraphSpacing = style([
+  rvw.marginTop(54, 32),
 ])

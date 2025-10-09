@@ -105,7 +105,8 @@ export const HomeContent = () => {
           className={styles.title}
           tag='h1'
           delay={0.8}
-          duration={0.2}
+          duration={0.32}
+          progressiveDuration={true}
         />
         <AnimatedText
           text='Portfolio Site.'
@@ -113,7 +114,8 @@ export const HomeContent = () => {
           className={styles.subTitle}
           tag='p'
           delay={0.7}
-          duration={0.2}
+          duration={0.24}
+          progressiveDuration={true}
         />
       </main>
       <div onClick={entryHandler} ref={scrollUiRef}>

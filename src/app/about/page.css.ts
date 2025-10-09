@@ -9,5 +9,5 @@ export const root = style([
 ])
 
 export const aboutSentence = style([
-  rvw.padding([0], [APP_PADDING_TOP, 0, 0, 0]),
+  rvw.padding([0], [`calc(${APP_PADDING_TOP} - 5vh)`, 0, 0, 0]),
 ])
