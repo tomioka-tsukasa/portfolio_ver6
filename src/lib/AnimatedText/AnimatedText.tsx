@@ -73,7 +73,7 @@ export const AnimatedText = ({
         x: '0%',
         opacity: 1,
         duration: duration,
-        ease: 'power2.out',
+        ease: 'power4.out',
         stagger: 0.05,
         delay: animationDelay
       })
