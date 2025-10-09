@@ -6,7 +6,7 @@ export const root = style([
   {
     position: 'fixed',
     zIndex: 3,
-    transition: 'opacity 0.6s ease-in-out',
+    transition: 'opacity 0.6s cubic-bezier(0, 0.5, 0.5, 1)',
     cursor: 'pointer',
   },
   rvw.right(32, 16),
@@ -38,11 +38,11 @@ export const triggerLine = style([
     backgroundColor: colors.text.white_80,
     selectors: {
       ['&:nth-child(1)']: {
-        transition: 'all 0.4s cubic-bezier(0, 0.5, 0.5, 1) 0.1s',
+        transition: 'all 0.9s cubic-bezier(0.25, 0, 0.1, 1) 0.1s',
         transformOrigin: 'left bottom',
       },
       ['&:nth-child(2)']: {
-        transition: 'all 0.3s cubic-bezier(0, 0.5, 0.5, 1) 0s',
+        transition: 'all 0.7s cubic-bezier(0.6, 0, 0.2, 1) 0s',
       },
       [`${open} &:nth-child(1)`]: {
         transform: 'rotate(32deg)',

@@ -11,7 +11,7 @@ export const root = style([
     display: 'flex',
     justifyContent: 'space-between',
     cursor: 'pointer',
-    transition: 'background-color 0.3s ease-out, backdrop-filter 0.3s ease-out, padding-left 0.3s cubic-bezier(0.0, 0.5, 0.3, 1.0)',
+    transition: 'background-color 0.3s ease-out, backdrop-filter 0.3s ease-out, padding-left 0.3s cubic-bezier(0.6, 0, 0.2, 1)',
   },
   hover({
     backgroundColor: colors.text.white_5,
@@ -130,7 +130,7 @@ export const fadeIn = style([
   {
     opacity: 0,
     transform: 'translateY(10px)',
-    transition: 'opacity 1s cubic-bezier(0.0, 0.5, 0.3, 1.0), transform 1s cubic-bezier(0.0, 0.5, 0.3, 1.0)',
+    transition: 'opacity 1s cubic-bezier(0.6, 0, 0.2, 1), transform 1s cubic-bezier(0.6, 0, 0.2, 1)',
   },
 ])
 
@@ -139,7 +139,7 @@ export const fadeInImage = style([
     opacity: 0,
     transform: 'translateY(30px)',
     filter: 'grayscale(100%) brightness(0%)',
-    transition: 'opacity 1.2s cubic-bezier(0.0, 0.5, 0.3, 1.0), transform 1.2s cubic-bezier(0.0, 0.5, 0.3, 1.0), filter 2s cubic-bezier(0.0, 0.5, 0.3, 1.0)',
+    transition: 'opacity 0.9s cubic-bezier(0.6, 0, 0.2, 1), transform 0.9s cubic-bezier(0.6, 0, 0.2, 1), filter 2s cubic-bezier(0.6, 0, 0.2, 1)',
   },
 ])
 

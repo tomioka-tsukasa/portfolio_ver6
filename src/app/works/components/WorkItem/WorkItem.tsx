@@ -98,7 +98,7 @@ export const WorkItem = ({
       </div>
       <div className={styles.imageContainer}>
         <UiImage
-          className={`${styles.fadeInImage} ${fadeInActiveRef.current ? styles.fadeInActive : ''} ${styles.fadeInActiveDelay[8]}`}
+          className={`${styles.fadeInImage} ${fadeInActiveRef.current ? styles.fadeInActive : ''} ${styles.fadeInActiveDelay[6]}`}
           {...image}
           width={1512}
           height={850.5}
