@@ -3,8 +3,10 @@
 import Link from 'next/link'
 import { useAppDispatch } from '@/app/store/hook'
 import { setCurrentPage } from '@/app/store/slice/pageStatus/pageStatus'
+import { setTransitioning } from '@/app/store/slice/transitionState/transitionState'
 import type { PageId } from '@/app/store/slice/pageStatus/pageStatusTypes'
 import { ComponentProps, MouseEvent, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 interface AppLinkProps extends Omit<ComponentProps<typeof Link>, 'href' | 'onClick'> {
   href: string
@@ -21,6 +23,7 @@ export const AppLink = ({
   ...linkProps
 }: AppLinkProps) => {
   const dispatch = useAppDispatch()
+  const pathname = usePathname()
 
   // hrefからpageIdを自動推定する関数
   const inferPageIdFromHref = (href: string): PageId | null => {
@@ -40,6 +43,12 @@ export const AppLink = ({
       onClick(event)
     }
 
+    // 現在のページと異なる場合のみ遷移処理を実行
+    if (pathname !== href) {
+      // 遷移開始フラグを立てる
+      dispatch(setTransitioning(true))
+    }
+
     // pageIdが明示的に指定されている場合はそれを使用、なければhrefから推定
     const targetPageId = pageId || inferPageIdFromHref(href)
 
@@ -53,9 +62,11 @@ export const AppLink = ({
     }
   }
 
+  // パス変更を監視して遷移完了を検知
   useEffect(() => {
-    console.log(`AppLink: Navigating to ${href}, pageId: ${pageId}`)
-  }, [href, pageId])
+    // 遷移完了フラグを立てる（少し遅延させてアニメーション時間を確保）
+    dispatch(setTransitioning(false))
+  }, [pathname, dispatch])
 
   return (
     <Link

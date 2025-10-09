@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loadingStore from './slice/loadingStore/loadingStore'
 import pageStatus from './slice/pageStatus/pageStatus'
+import transitionState from './slice/transitionState/transitionState'
 
 export const makeStore = () => {
 
@@ -8,6 +9,7 @@ export const makeStore = () => {
     reducer: {
       loadingStore,
       pageStatus,
+      transitionState,
     },
   })
 }
