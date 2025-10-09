@@ -47,7 +47,3 @@ globalStyle('img', {
   width: '100%',
   height: 'auto',
 })
-
-globalStyle('::selection', {
-  backgroundColor: 'rgba(0, 0, 0, 0.1)',
-})
