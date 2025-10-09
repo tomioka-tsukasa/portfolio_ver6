@@ -67,27 +67,40 @@ export const AnimatedText = ({
         opacity: 0,
       })
 
-      // 表示アニメーション（初期表示のみdelayを適用）
+      // 表示アニメーション（初期表示のみdelayを適用、文字ごとにdurationを調整）
       const animationDelay = isInitialRender.current ? delay : 0
-      timeline.to(chars.map(({ innerSpan }) => innerSpan), {
-        x: '0%',
-        opacity: 1,
-        duration: duration,
-        ease: 'power4.out',
-        stagger: 0.05,
-        delay: animationDelay
+
+      // 各文字に個別にアニメーションを適用（最後に向けてdurationを長く）
+      chars.forEach(({ innerSpan }, index) => {
+        // 文字の位置に応じてdurationを調整（最後の文字ほど長く）
+        const progress = index / (chars.length - 1) // 0から1の進行度
+        const adjustedDuration = duration * (1 + progress * 3) // 最後の文字は3倍のduration
+
+        timeline.to(innerSpan, {
+          x: '0%',
+          opacity: 1,
+          duration: adjustedDuration,
+          ease: 'power4.out',
+          delay: animationDelay + (index * 0.05)
+        }, 0) // 全て同じ開始タイミングから
       })
 
       // 初期表示フラグをfalseに設定
       isInitialRender.current = false
     } else {
-      // 非表示アニメーション（delayなし）
-      timeline.to(chars.map(({ innerSpan }) => innerSpan), {
-        x: '-100%',
-        opacity: 0,
-        duration: duration,
-        ease: 'power2.in',
-        stagger: 0.05
+      // 非表示アニメーション（delayなし、最初の文字から早く消える）
+      chars.forEach(({ innerSpan }, index) => {
+        // 最初の文字ほど早く消える（逆順）
+        const progress = (chars.length - 1 - index) / (chars.length - 1) // 1から0の進行度
+        const adjustedDuration = duration * (1 + progress * 3) // 最初の文字は3倍のduration
+
+        timeline.to(innerSpan, {
+          x: '-100%',
+          opacity: 0,
+          duration: adjustedDuration,
+          ease: 'power2.in',
+          delay: index * 0.03
+        }, 0)
       })
     }
 
