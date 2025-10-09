@@ -50,7 +50,7 @@ export const HomeContent = () => {
         }, '+=0.7')
         .call(() => {
           pageChanger({ pageId: 'menu' })
-        }, [], '-=0.2')
+        }, [], '-=0.5')
     }
   }
 
@@ -104,7 +104,7 @@ export const HomeContent = () => {
           show={showTitle}
           className={styles.title}
           tag='h1'
-          delay={1.0}
+          delay={0.8}
           duration={0.2}
         />
         <AnimatedText

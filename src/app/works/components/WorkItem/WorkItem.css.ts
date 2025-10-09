@@ -139,7 +139,7 @@ export const fadeInImage = style([
     opacity: 0,
     transform: 'translateY(30px)',
     filter: 'grayscale(100%) brightness(0%)',
-    transition: 'opacity 1.2s cubic-bezier(0.0, 0.5, 0.3, 1.0), transform 1.2s cubic-bezier(0.0, 0.5, 0.3, 1.0), filter 2s cubic-bezier(0.0, 0.5, 0.3, 1.0)',
+    transition: 'opacity 0.9s cubic-bezier(0.0, 0.5, 0.3, 1.0), transform 0.9s cubic-bezier(0.0, 0.5, 0.3, 1.0), filter 2s cubic-bezier(0.0, 0.5, 0.3, 1.0)',
   },
 ])
 
