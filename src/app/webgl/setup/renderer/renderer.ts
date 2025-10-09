@@ -10,6 +10,9 @@ export const getRenderer: GetRenderer = (
   options,
   parameters,
 ) => {
+  canvas.style.width = `${window.innerWidth}px`
+  canvas.style.height = `${window.outerHeight}px`
+
   const renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: parameters?.antialias ?? true,
