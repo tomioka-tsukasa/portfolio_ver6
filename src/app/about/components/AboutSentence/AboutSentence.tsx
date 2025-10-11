@@ -16,7 +16,7 @@ export const AboutSentence = () => {
         />
         <div className={styles.paragraphSpacing}>
           <ScrollTriggeredText
-            text={'ユーザーに驚きや感動を届ける\nWebサイトの制作が大好きです。\n日々レベルアップしながら励んでいます。'}
+            text={'ユーザーに驚きや感動を届けるために\n\n日々レベルアップしながら\nWeb制作に励んでいます。'}
             className={styles.text}
             tag='p'
             delay={0}
