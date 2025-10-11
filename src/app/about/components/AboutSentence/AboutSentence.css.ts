@@ -41,6 +41,7 @@ export const text = style([
   rvw.fontSize(24, 14),
   sp({
     lineHeight: '160%',
+    color: colors.text.white_70,
   }),
   pcOver({
     // ...rvw.fontSize(14),
